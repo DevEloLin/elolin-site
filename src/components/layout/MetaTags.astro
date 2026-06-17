@@ -11,13 +11,15 @@ const { title, description, locale, path, ogImage = "/og-default.png" } = Astro.
 const fullTitle = title === SITE.name ? SITE.name : `${title} · ${SITE.name}`;
 const desc = description ?? SITE.description[locale];
 const canonical = `${SITE.url}${path}`;
+const enPart = path.replace(/^\/zh\/?/, "/") || "/";
+const zhPart = enPart === "/" ? "/zh/" : `/zh${enPart}`;
 ---
 <title>{fullTitle}</title>
 <meta name="description" content={desc} />
 <link rel="canonical" href={canonical} />
-<link rel="alternate" hreflang="en" href={`${SITE.url}${path.replace(/^\/zh/, "")}` || `${SITE.url}/`} />
-<link rel="alternate" hreflang="zh" href={`${SITE.url}/zh${path.replace(/^\/zh/, "")}`} />
-<link rel="alternate" hreflang="x-default" href={`${SITE.url}${path.replace(/^\/zh/, "")}` || `${SITE.url}/`} />
+<link rel="alternate" hreflang="en" href={`${SITE.url}${enPart}`} />
+<link rel="alternate" hreflang="zh" href={`${SITE.url}${zhPart}`} />
+<link rel="alternate" hreflang="x-default" href={`${SITE.url}${enPart}`} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={desc} />
 <meta property="og:type" content="website" />
