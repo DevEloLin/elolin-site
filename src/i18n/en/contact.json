@@ -1,1 +1,10 @@
-{}
+{
+  "title": "Let's talk",
+  "subtitle": "For collaboration, sponsorship, or just hi.",
+  "channels": {
+    "email": { "label": "Email", "copy": "Copy" },
+    "github": { "label": "GitHub" },
+    "twitter": { "label": "X" }
+  },
+  "response": "Response time: usually within 48h."
+}

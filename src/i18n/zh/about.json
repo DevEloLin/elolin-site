@@ -1,1 +1,25 @@
-{}
+{
+  "title": "一座一人工作室",
+  "sections": {
+    "building": {
+      "label": "在做什么",
+      "body": "扎根在你设备上的 AI agent。一家人真的会用的健康工具。默认开源,优先本地。"
+    },
+    "how": {
+      "label": "怎么做",
+      "items": ["单兵作业", "多产品并行", "公开构建", "默认开源"]
+    },
+    "timeline": {
+      "label": "时间线",
+      "items": [
+        "2026 — 启动 EvoClaw",
+        "2026 — 发布 KinMate"
+      ]
+    },
+    "uses": {
+      "label": "用什么",
+      "items": ["Rust", "TypeScript", "Astro", "Cloudflare", "Tauri", "Supabase"]
+    }
+  },
+  "cta": "联系我"
+}

@@ -1,1 +1,15 @@
-{ "greeting": "Hello", "onlyEn": "only en" }
+{
+  "greeting": "Hello",
+  "onlyEn": "only en",
+  "nav": {
+    "products": "Products",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "switchLang": "中文",
+  "footer": {
+    "rights": "© 2026 EloLin",
+    "tagline": "Built solo in Astro on Cloudflare"
+  }
+}

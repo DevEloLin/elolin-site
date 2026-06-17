@@ -1,1 +1,25 @@
-{}
+{
+  "title": "A studio of one",
+  "sections": {
+    "building": {
+      "label": "What I'm building",
+      "body": "AI agents that live where you do. Healthcare tools families actually use. Open source by default. Local first by conviction."
+    },
+    "how": {
+      "label": "How I work",
+      "items": ["Solo", "Multi-product", "Build in public", "Open source first"]
+    },
+    "timeline": {
+      "label": "Timeline",
+      "items": [
+        "2026 — Started EvoClaw",
+        "2026 — Launched KinMate"
+      ]
+    },
+    "uses": {
+      "label": "What I use",
+      "items": ["Rust", "TypeScript", "Astro", "Cloudflare", "Tauri", "Supabase"]
+    }
+  },
+  "cta": "Get in touch"
+}

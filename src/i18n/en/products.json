@@ -1,1 +1,6 @@
-{}
+{
+  "title": "Products",
+  "subtitle": "Things I built to ship to real users.",
+  "comingNext": "Coming next",
+  "links": { "site": "Visit site", "github": "GitHub", "homebrew": "Homebrew" }
+}

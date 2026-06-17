@@ -1,1 +1,6 @@
-{}
+{
+  "title": "产品",
+  "subtitle": "为真实用户打造、已经上线的东西。",
+  "comingNext": "下一个",
+  "links": { "site": "访问站点", "github": "源码", "homebrew": "Homebrew" }
+}

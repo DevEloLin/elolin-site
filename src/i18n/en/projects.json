@@ -1,1 +1,7 @@
-{}
+{
+  "title": "Projects",
+  "subtitle": "Open source by a one-person studio.",
+  "chips": { "all": "All", "ai": "AI", "product": "Products", "tool": "Tools", "skill": "Skills", "site": "Sites" },
+  "loadMore": "Load more",
+  "detail": { "readme": "README", "tech": "Tech stack", "links": "Links" }
+}

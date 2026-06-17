@@ -30,3 +30,15 @@ describe("t", () => {
     expect(t("common.nope" as any, "en")).toBe("common.nope");
   });
 });
+
+import { describe as d2, it as i2, expect as e2 } from "vitest";
+d2("real dictionaries load", () => {
+  i2("nav products is translated", () => {
+    e2(t("common.nav.products", "en")).toBe("Products");
+    e2(t("common.nav.products", "zh")).toBe("产品");
+  });
+  i2("hero title differs", () => {
+    e2(t("home.hero.title", "en")).toBe("One person. Many products.");
+    e2(t("home.hero.title", "zh")).toBe("一个人 · 一座工作室 · 多个产品");
+  });
+});
