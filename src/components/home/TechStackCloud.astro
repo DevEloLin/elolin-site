@@ -1,0 +1,23 @@
+---
+import { t, type Locale } from "@/lib/i18n";
+import projects from "@/data/projects.json";
+import type { Project } from "@/lib/github";
+import { langColor } from "@/lib/languages";
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const langs = Array.from(new Set((projects as Project[])
+  .map((p) => p.language).filter(Boolean) as string[])).sort();
+---
+<section class="py-16">
+  <div class="container mx-auto px-6">
+    <p class="text-caption text-fg-2 uppercase">{t("home.techStack.label", locale)}</p>
+    <div class="mt-6 flex flex-wrap gap-3">
+      {langs.map((l) => (
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-bg-1 text-body-sm">
+          <span class="inline-block w-2 h-2 rounded-full" style={`background:${langColor(l)}`}></span>
+          {l}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
