@@ -1,0 +1,55 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
+import GlassCard from "@/components/ui/GlassCard.astro";
+import TechBadge from "@/components/ui/TechBadge.astro";
+import AiBadge from "@/components/ui/AiBadge.astro";
+import Button from "@/components/ui/Button.astro";
+import type { Project } from "@/lib/github";
+import { projectDescription, t } from "@/lib/i18n";
+import { Github, ExternalLink, ArrowLeft } from "lucide-astro";
+
+export async function getStaticPaths() {
+  const data = (await import("@/data/projects.json")).default as unknown as Project[];
+  return data.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+const { project } = Astro.props as { project: Project };
+const locale = "zh" as const;
+const isAi = project.tags.includes("ai");
+const desc = projectDescription(project.slug, project.description, locale);
+---
+<Layout title={project.name} locale={locale} {...(desc ? { description: desc } : {})}>
+  <Header slot="header" />
+  <main class="pt-32 pb-24 container mx-auto px-6 max-w-3xl">
+    <a href="/zh/projects" class="inline-flex items-center gap-1 text-body-sm text-fg-1 hover:text-fg-0">
+      <ArrowLeft size={14} /> {t("projects.title", locale)}
+    </a>
+    <div class="mt-6 flex items-start justify-between gap-4">
+      <h1 class="text-display-2 font-semibold">{project.name}</h1>
+      {isAi && <AiBadge />}
+    </div>
+    <div class="flex items-center gap-4 mt-3 text-fg-2 text-body-sm">
+      <TechBadge lang={project.language} />
+      {project.stars > 0 && <span>⭐ {project.stars}</span>}
+      <span class="capitalize">· {project.category}</span>
+    </div>
+    <p class="mt-6 text-body-lg text-fg-1">{desc}</p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <Button href={project.url} external><Github size={16} /> GitHub</Button>
+      {project.homepage && (
+        <Button href={project.homepage} variant="ghost" external>
+          <ExternalLink size={16} /> Site
+        </Button>
+      )}
+    </div>
+    <GlassCard class="mt-10">
+      <p class="text-caption text-fg-2 uppercase">{t("projects.detail.tech", locale)}</p>
+      <div class="mt-3 flex flex-wrap gap-3">
+        <TechBadge lang={project.language} />
+        {isAi && <AiBadge />}
+      </div>
+    </GlassCard>
+  </main>
+  <Footer slot="footer" />
+</Layout>
