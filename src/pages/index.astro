@@ -1,21 +1,11 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
-import GlassCard from "@/components/ui/GlassCard.astro";
-import Button from "@/components/ui/Button.astro";
-import TechBadge from "@/components/ui/TechBadge.astro";
-import AiBadge from "@/components/ui/AiBadge.astro";
+import Header from "@/components/layout/Header.astro";
 ---
 <Layout title="EloLin" locale="en">
-  <main class="container mx-auto px-6 py-16 flex flex-col gap-8">
-    <h1 class="text-display-2 bg-grad-brand bg-clip-text text-transparent">UI smoke</h1>
-    <GlassCard interactive class="max-w-md">
-      <div class="flex items-center justify-between">
-        <h3 class="text-h3">evoclaw</h3>
-        <AiBadge />
-      </div>
-      <div class="flex gap-3 mt-3"><TechBadge lang="Rust" /><AiBadge /></div>
-      <p class="text-fg-1 mt-3">A local-first self-evolving AI agent runtime…</p>
-    </GlassCard>
-    <Button href="/products">Explore Products</Button>
+  <Header />
+  <main class="pt-32 container mx-auto px-6">
+    <h1 class="text-display-2">Header smoke</h1>
+    <div class="h-[200vh]"></div>
   </main>
 </Layout>
