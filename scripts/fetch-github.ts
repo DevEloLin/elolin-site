@@ -27,7 +27,7 @@ async function fetchGitHub(): Promise<GhRepoRaw[]> {
     "X-GitHub-Api-Version": "2022-11-28",
   };
   if (token) headers.Authorization = `Bearer ${token}`;
-  const res = await fetch(API, { headers });
+  const res = await fetch(API, { headers, signal: AbortSignal.timeout(15_000) });
   if (!res.ok) throw new Error(`GitHub API ${res.status} ${res.statusText}`);
   const raw = (await res.json()) as unknown[];
   return raw.map((r) => GhRepoRawSchema.parse(r));
