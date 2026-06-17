@@ -1,0 +1,24 @@
+---
+import { t, localizePath, type Locale } from "@/lib/i18n";
+import { ArrowRight } from "lucide-astro";
+import enHome from "@/i18n/en/home.json";
+import zhHome from "@/i18n/zh/home.json";
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const manifestoLines = ((locale === "zh" ? zhHome : enHome) as any).manifesto.lines as string[];
+const aboutHref = localizePath("/about", locale);
+---
+<section class="py-32 border-t border-white/5">
+  <div class="container mx-auto px-6 max-w-4xl">
+    <p class="text-caption text-fg-2 uppercase">{t("home.manifesto.label", locale)}</p>
+    <div class="mt-8 space-y-4">
+      {manifestoLines.map((line) => (
+        <p class="text-h2 font-semibold">{line}</p>
+      ))}
+    </div>
+    <a href={aboutHref}
+       class="mt-8 inline-flex items-center gap-2 text-body-lg text-fg-1 hover:text-fg-0">
+      {t("home.manifesto.cta", locale)} <ArrowRight size={18} />
+    </a>
+  </div>
+</section>

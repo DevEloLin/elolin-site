@@ -3,11 +3,19 @@ import Layout from "@/components/layout/Layout.astro";
 import Header from "@/components/layout/Header.astro";
 import Footer from "@/components/layout/Footer.astro";
 import Hero from "@/components/home/Hero.astro";
+import FlagshipProducts from "@/components/home/FlagshipProducts.astro";
+import ProjectsPreview from "@/components/home/ProjectsPreview.astro";
+import TechStackCloud from "@/components/home/TechStackCloud.astro";
+import Manifesto from "@/components/home/Manifesto.astro";
 import { t } from "@/lib/i18n";
 const locale = "en" as const;
 ---
 <Layout title={t("home.hero.title", locale)} locale={locale}>
   <Header slot="header" />
   <Hero {locale} />
+  <FlagshipProducts {locale} />
+  <ProjectsPreview {locale} />
+  <TechStackCloud {locale} />
+  <Manifesto {locale} />
   <Footer slot="footer" />
 </Layout>

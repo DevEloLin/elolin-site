@@ -1,0 +1,22 @@
+---
+import { t, type Locale } from "@/lib/i18n";
+import projects from "@/data/projects.json";
+import type { Project } from "@/lib/github";
+import ProjectCard from "@/components/projects/ProjectCard.astro";
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const all = projects as Project[];
+const flagship = ["evoclaw", "kinmate-site"]
+  .map((s) => all.find((p) => p.slug === s))
+  .filter(Boolean) as Project[];
+---
+<section class="py-32">
+  <div class="container mx-auto px-6">
+    <p class="text-caption text-fg-2 uppercase">{t("home.flagship.label", locale)}</p>
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+      {flagship.map((p) => (
+        <ProjectCard project={p} locale={locale} href={`${locale === "zh" ? "/zh" : ""}/projects/${p.slug}`} />
+      ))}
+    </div>
+  </div>
+</section>
