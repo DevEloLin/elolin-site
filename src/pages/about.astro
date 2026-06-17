@@ -1,0 +1,45 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
+import HexLogo from "@/components/ui/HexLogo.astro";
+import Button from "@/components/ui/Button.astro";
+import Timeline from "@/components/about/Timeline.astro";
+import UsesGrid from "@/components/about/UsesGrid.astro";
+import enAbout from "@/i18n/en/about.json";
+import { t } from "@/lib/i18n";
+import { ArrowRight } from "lucide-astro";
+const locale = "en" as const;
+const a = enAbout;
+---
+<Layout title={a.title} locale={locale}>
+  <Header slot="header" />
+  <main class="pt-32 pb-24 container mx-auto px-6 max-w-3xl">
+    <div class="flex flex-col items-center text-center">
+      <HexLogo size={80} />
+      <h1 class="mt-8 text-display-2 font-semibold">{a.title}</h1>
+    </div>
+    <section class="mt-16">
+      <p class="text-caption text-fg-2 uppercase">{a.sections.building.label}</p>
+      <p class="mt-3 text-body-lg text-fg-1">{a.sections.building.body}</p>
+    </section>
+    <section class="mt-16">
+      <p class="text-caption text-fg-2 uppercase">{a.sections.how.label}</p>
+      <ul class="mt-4 grid grid-cols-2 gap-3 text-body text-fg-1">
+        {a.sections.how.items.map((i) => (<li class="px-4 py-2 rounded-lg border border-white/10">{i}</li>))}
+      </ul>
+    </section>
+    <section class="mt-16">
+      <p class="text-caption text-fg-2 uppercase">{a.sections.timeline.label}</p>
+      <div class="mt-4"><Timeline items={a.sections.timeline.items} /></div>
+    </section>
+    <section class="mt-16">
+      <p class="text-caption text-fg-2 uppercase">{a.sections.uses.label}</p>
+      <div class="mt-4"><UsesGrid items={a.sections.uses.items} /></div>
+    </section>
+    <div class="mt-16 flex justify-center">
+      <Button href="/contact">{a.cta} <ArrowRight size={16} /></Button>
+    </div>
+  </main>
+  <Footer slot="footer" />
+</Layout>
