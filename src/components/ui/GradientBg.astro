@@ -1,0 +1,35 @@
+---
+type Props = { class?: string };
+const { class: cls = "" } = Astro.props;
+---
+<div class={`absolute inset-0 -z-10 overflow-hidden ${cls}`} aria-hidden="true">
+  <div class="absolute inset-0 bg-bg-0"></div>
+  <div class="absolute inset-0 hero-glow"></div>
+  <div class="absolute inset-0 hero-grid"></div>
+  <div class="absolute inset-0 hero-noise"></div>
+</div>
+<style>
+  .hero-glow {
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(124,58,237,0.18), transparent 70%);
+    animation: drift 8s linear infinite alternate;
+  }
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 30%, transparent 80%);
+  }
+  .hero-noise {
+    background-image: url("/noise.png");
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+  }
+  @keyframes drift {
+    from { transform: translate3d(-4%, 0, 0); }
+    to   { transform: translate3d(4%, 0, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-glow { animation: none; }
+  }
+</style>
