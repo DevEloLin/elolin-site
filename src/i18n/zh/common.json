@@ -1,1 +1,14 @@
-{ "greeting": "你好" }
+{
+  "greeting": "你好",
+  "nav": {
+    "products": "产品",
+    "projects": "项目",
+    "about": "关于",
+    "contact": "联系"
+  },
+  "switchLang": "EN",
+  "footer": {
+    "rights": "© 2026 EloLin",
+    "tagline": "Astro 单兵打造,Cloudflare 上线"
+  }
+}

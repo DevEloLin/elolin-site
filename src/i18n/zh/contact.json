@@ -1,1 +1,10 @@
-{}
+{
+  "title": "聊聊",
+  "subtitle": "合作、赞助,或者打个招呼。",
+  "channels": {
+    "email": { "label": "邮件", "copy": "复制" },
+    "github": { "label": "GitHub" },
+    "twitter": { "label": "X" }
+  },
+  "response": "通常 48 小时内回复。"
+}

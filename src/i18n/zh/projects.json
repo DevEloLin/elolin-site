@@ -1,1 +1,7 @@
-{}
+{
+  "title": "项目",
+  "subtitle": "一人工作室的开源仓库。",
+  "chips": { "all": "全部", "ai": "AI", "product": "产品", "tool": "工具", "skill": "技能", "site": "站点" },
+  "loadMore": "加载更多",
+  "detail": { "readme": "说明", "tech": "技术栈", "links": "链接" }
+}
