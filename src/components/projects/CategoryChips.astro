@@ -1,0 +1,25 @@
+---
+import { t, type Locale } from "@/lib/i18n";
+type Props = { locale: Locale; active: string };
+const { locale, active } = Astro.props;
+const chips = ["all", "ai", "product", "tool", "skill", "site"] as const;
+---
+<div class="flex flex-wrap gap-2" role="tablist">
+  {chips.map((c) => {
+    const isAi = c === "ai";
+    const isActive = active === c;
+    const base = "px-4 py-1.5 rounded-full text-caption uppercase border transition";
+    const aiActive  = "bg-grad-brand text-white border-transparent shadow-glow-brand";
+    const aiIdle    = "bg-grad-brand/30 text-white border-transparent";
+    const normalActive = "bg-bg-2 text-fg-0 border-white/20";
+    const normalIdle   = "bg-bg-1 text-fg-1 border-white/10 hover:border-white/20";
+    const styles = isAi
+      ? (isActive ? aiActive : aiIdle)
+      : (isActive ? normalActive : normalIdle);
+    return (
+      <button data-cat={c} class={`chip-btn ${base} ${styles}`}>
+        {isAi && "✦ "}{t(`projects.chips.${c}`, locale)}
+      </button>
+    );
+  })}
+</div>
