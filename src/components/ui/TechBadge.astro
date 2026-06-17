@@ -1,0 +1,10 @@
+---
+import { langColor } from "@/lib/languages";
+type Props = { lang: string | null };
+const { lang } = Astro.props;
+const color = langColor(lang);
+---
+<span class="inline-flex items-center gap-2 text-caption text-fg-1">
+  <span class="inline-block w-2 h-2 rounded-full" style={`background:${color}`}></span>
+  <span>{lang ?? "—"}</span>
+</span>
