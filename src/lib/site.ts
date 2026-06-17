@@ -14,3 +14,24 @@ export const SITE = {
 } as const;
 
 export type Locale = (typeof SITE.locales)[number];
+
+export const FLAGSHIP_PRODUCTS = [
+  {
+    slug: "evoclaw",
+    name: "EvoClaw",
+    repo: "evoclaw",
+    homepage: "https://evoclaw.com",
+    tags: ["Rust", "Tauri", "MCP", "Local-first"],
+    extraLinks: [
+      { label: "Homebrew", href: "https://github.com/DevEloLin/homebrew-tap" },
+    ],
+  },
+  {
+    slug: "kinmate",
+    name: "KinMate",
+    repo: "kinmate-site",
+    homepage: "https://kinmate.app",
+    tags: ["TypeScript", "Supabase", "AI"],
+    extraLinks: [],
+  },
+] as const;
