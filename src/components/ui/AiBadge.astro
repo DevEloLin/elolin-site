@@ -1,0 +1,9 @@
+---
+import { Sparkles } from "lucide-astro";
+type Props = { class?: string };
+const { class: cls = "" } = Astro.props;
+---
+<span class={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-grad-brand text-white text-[11px] font-semibold uppercase tracking-wider ${cls}`}>
+  <Sparkles size={10} strokeWidth={2.5} class="opacity-90" />
+  <span>AI</span>
+</span>
