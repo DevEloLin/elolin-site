@@ -1,0 +1,55 @@
+---
+import HexLogo from "@/components/ui/HexLogo.astro";
+import LangSwitch from "@/components/ui/LangSwitch.astro";
+import { t, getLocaleFromPath, localizePath } from "@/lib/i18n";
+import { Github } from "lucide-astro";
+import { SITE } from "@/lib/site";
+const path = Astro.url.pathname;
+const locale = getLocaleFromPath(path);
+const nav = [
+  { href: localizePath("/products", locale), key: "common.nav.products" },
+  { href: localizePath("/projects", locale), key: "common.nav.projects" },
+  { href: localizePath("/about",   locale), key: "common.nav.about" },
+  { href: localizePath("/contact", locale), key: "common.nav.contact" },
+];
+const homeHref = localizePath("/", locale);
+---
+<header id="site-header"
+        class="fixed top-0 inset-x-0 z-50 transition-all duration-300 ease-out">
+  <div class="container mx-auto px-6 h-16 flex items-center justify-between">
+    <a href={homeHref} class="flex items-center gap-2">
+      <HexLogo size={28} />
+      <span class="text-body font-semibold">EloLin</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-1">
+      {nav.map((n) => (
+        <a href={n.href} class="px-3 py-2 text-body-sm text-fg-1 hover:text-fg-0 transition rounded-md hover:bg-bg-1">
+          {t(n.key, locale)}
+        </a>
+      ))}
+    </nav>
+    <div class="flex items-center gap-1">
+      <LangSwitch current={locale} {path} />
+      <a href={SITE.github} target="_blank" rel="noopener"
+         class="p-2 text-fg-1 hover:text-fg-0 rounded-md hover:bg-bg-1 transition"
+         aria-label="GitHub">
+        <Github size={18} />
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const h = document.getElementById("site-header");
+  if (h) {
+    const onScroll = () => {
+      if (window.scrollY > 8) {
+        h.classList.add("bg-bg-0/70", "backdrop-blur-xl", "border-b", "border-white/10");
+      } else {
+        h.classList.remove("bg-bg-0/70", "backdrop-blur-xl", "border-b", "border-white/10");
+      }
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+</script>
