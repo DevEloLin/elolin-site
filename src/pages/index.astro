@@ -1,11 +1,12 @@
 ---
 import Layout from "@/components/layout/Layout.astro";
 import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
 ---
 <Layout title="EloLin" locale="en">
-  <Header />
+  <Header slot="header" />
   <main class="pt-32 container mx-auto px-6">
-    <h1 class="text-display-2">Header smoke</h1>
-    <div class="h-[200vh]"></div>
+    <h1 class="text-display-2">Layout smoke</h1>
   </main>
+  <Footer slot="footer" />
 </Layout>
