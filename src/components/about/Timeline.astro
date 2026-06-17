@@ -1,0 +1,12 @@
+---
+type Props = { items: string[] };
+const { items } = Astro.props;
+---
+<ol class="relative border-l border-white/10 pl-6 space-y-4">
+  {items.map((line) => (
+    <li class="relative">
+      <span class="absolute -left-[7px] top-2 w-2.5 h-2.5 rounded-full bg-grad-brand shadow-glow-brand"></span>
+      <p class="text-body text-fg-1">{line}</p>
+    </li>
+  ))}
+</ol>
