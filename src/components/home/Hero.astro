@@ -1,0 +1,28 @@
+---
+import { t, type Locale } from "@/lib/i18n";
+import GradientBg from "@/components/ui/GradientBg.astro";
+import Button from "@/components/ui/Button.astro";
+import { ArrowRight } from "lucide-astro";
+import { SITE } from "@/lib/site";
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+---
+<section class="relative isolate min-h-screen flex items-center pt-16">
+  <GradientBg />
+  <div class="container mx-auto px-6 max-w-5xl">
+    <h1 class="text-display-2 md:text-display-1 font-semibold bg-grad-brand bg-clip-text text-transparent leading-tight">
+      {t("home.hero.title", locale)}
+    </h1>
+    <p class="mt-6 text-body-lg md:text-h3 text-fg-1 max-w-2xl">
+      {t("home.hero.subtitle", locale)}
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <Button href={locale === "en" ? "/products" : "/zh/products"}>
+        {t("home.hero.ctaPrimary", locale)} <ArrowRight size={18} />
+      </Button>
+      <Button href={SITE.github} variant="ghost" external>
+        {t("home.hero.ctaSecondary", locale)}
+      </Button>
+    </div>
+  </div>
+</section>
