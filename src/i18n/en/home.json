@@ -1,1 +1,20 @@
-{}
+{
+  "hero": {
+    "title": "One person. Many products.",
+    "subtitle": "A studio of one, building EvoClaw, KinMate, and more.",
+    "ctaPrimary": "Explore Products",
+    "ctaSecondary": "View Code"
+  },
+  "flagship": { "label": "Flagship" },
+  "projectsPreview": { "label": "All projects", "viewAll": "View all" },
+  "techStack": { "label": "What I build with" },
+  "manifesto": {
+    "label": "The one-person company",
+    "lines": [
+      "Lean. Solo. Shipping.",
+      "Three products. One brain.",
+      "Open source by default."
+    ],
+    "cta": "Read the story"
+  }
+}
