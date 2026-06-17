@@ -1,0 +1,172 @@
+[
+  {
+    "id": 1260059575,
+    "slug": "kinmate-site",
+    "name": "kinmate-site",
+    "description": "KinMate is a private family health vault for reports, AI explanations, care check-ins, medication reminders, pet records, and BYOC backups.",
+    "language": "TypeScript",
+    "stars": 0,
+    "homepage": null,
+    "url": "https://github.com/DevEloLin/kinmate-site",
+    "pushedAt": "2026-06-13T13:46:28Z",
+    "category": "product",
+    "tags": [
+      "ai"
+    ],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1225830127,
+    "slug": "dashboards-rich-filters-site",
+    "name": "dashboards-rich-filters-site",
+    "description": "dashboards-rich-filters-site",
+    "language": "HTML",
+    "stars": 0,
+    "homepage": null,
+    "url": "https://github.com/DevEloLin/dashboards-rich-filters-site",
+    "pushedAt": "2026-05-20T17:37:15Z",
+    "category": "site",
+    "tags": [],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1240555121,
+    "slug": "evoclaw-plugin-wechat",
+    "name": "evoclaw-plugin-wechat",
+    "description": "WeChat Official Account passive-reply bridge for the EvoClaw agent runtime",
+    "language": "Rust",
+    "stars": 0,
+    "homepage": null,
+    "url": "https://github.com/DevEloLin/evoclaw-plugin-wechat",
+    "pushedAt": "2026-05-16T12:43:42Z",
+    "category": "product",
+    "tags": [
+      "ai"
+    ],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1227285217,
+    "slug": "evoclaw",
+    "name": "evoclaw",
+    "description": "A local-first self-evolving AI agent runtime that learns from every task and grows its own skill tree.",
+    "language": "Rust",
+    "stars": 1,
+    "homepage": "https://develolin.github.io/EvoClawSite/",
+    "url": "https://github.com/DevEloLin/evoclaw",
+    "pushedAt": "2026-05-16T12:03:13Z",
+    "category": "product",
+    "tags": [
+      "ai"
+    ],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1240563802,
+    "slug": "homebrew-tap",
+    "name": "homebrew-tap",
+    "description": "Homebrew tap for EvoClaw",
+    "language": "Ruby",
+    "stars": 0,
+    "homepage": null,
+    "url": "https://github.com/DevEloLin/homebrew-tap",
+    "pushedAt": "2026-05-16T09:36:42Z",
+    "category": "tool",
+    "tags": [],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1227383669,
+    "slug": "evoclawsite",
+    "name": "EvoClawSite",
+    "description": "Official website for EvoClaw — a self-evolving local-first AI agent runtime.",
+    "language": "HTML",
+    "stars": 0,
+    "homepage": "https://develolin.github.io/EvoClawSite/",
+    "url": "https://github.com/DevEloLin/EvoClawSite",
+    "pushedAt": "2026-05-16T09:16:29Z",
+    "category": "site",
+    "tags": [
+      "ai"
+    ],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1231659993,
+    "slug": "gitflowgraph",
+    "name": "GitFlowGraph",
+    "description": "",
+    "language": "Rust",
+    "stars": 0,
+    "homepage": null,
+    "url": "https://github.com/DevEloLin/GitFlowGraph",
+    "pushedAt": "2026-05-12T14:01:45Z",
+    "category": "tool",
+    "tags": [],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1195910375,
+    "slug": "skill-xiaoshuo",
+    "name": "skill-xiaoshuo",
+    "description": "skill-xiaoshuo",
+    "language": null,
+    "stars": 1,
+    "homepage": null,
+    "url": "https://github.com/DevEloLin/skill-xiaoshuo",
+    "pushedAt": "2026-05-01T20:17:43Z",
+    "category": "skill",
+    "tags": [],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1223892608,
+    "slug": "work-assistant-skill",
+    "name": "Work-assistant-skill",
+    "description": "",
+    "language": "Shell",
+    "stars": 0,
+    "homepage": null,
+    "url": "https://github.com/DevEloLin/Work-assistant-skill",
+    "pushedAt": "2026-05-01T08:17:39Z",
+    "category": "tool",
+    "tags": [],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1223807520,
+    "slug": "atlassian-rovo-agent-mcp",
+    "name": "atlassian-rovo-agent-mcp",
+    "description": "atlassian-rovo-agent-mcp",
+    "language": "Python",
+    "stars": 0,
+    "homepage": null,
+    "url": "https://github.com/DevEloLin/atlassian-rovo-agent-mcp",
+    "pushedAt": "2026-04-28T17:41:07Z",
+    "category": "skill",
+    "tags": [
+      "ai"
+    ],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  }
+]
