@@ -65,7 +65,6 @@ export function sanitizeRepo(r: GhRepoRaw): Project {
   const cat = categorize(r);
   const tags: string[] = [];
   if (hasAiTag(r)) tags.push("ai");
-  if (r.language) tags.push(`lang:${r.language.toLowerCase()}`);
   return {
     id: r.id,
     slug: r.name.toLowerCase(),
