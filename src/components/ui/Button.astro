@@ -1,0 +1,19 @@
+---
+import { cn } from "@/lib/cn";
+type Props = {
+  href?: string;
+  variant?: "primary" | "ghost";
+  class?: string;
+  external?: boolean;
+};
+const { href, variant = "primary", class: cls = "", external = false } = Astro.props;
+const base = "inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-body font-medium transition duration-200 ease-out";
+const styles = variant === "primary"
+  ? "text-white bg-grad-brand shadow-glow-brand hover:brightness-110 hover:scale-[1.02]"
+  : "text-fg-0 border border-[var(--border-1)] hover:border-[var(--border-2)] hover:bg-bg-1";
+const Tag = href ? "a" : "button";
+const extra = external ? { target: "_blank", rel: "noopener" } : {};
+---
+<Tag class={cn(base, styles, cls)} {...(href ? { href } : {})} {...extra}>
+  <slot />
+</Tag>
