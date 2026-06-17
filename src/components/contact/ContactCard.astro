@@ -1,0 +1,31 @@
+---
+import GlassCard from "@/components/ui/GlassCard.astro";
+type Props = { icon: any; label: string; value: string; href: string; copy?: boolean };
+const { label, value, href, copy = false } = Astro.props as any;
+const Icon = (Astro.props as any).icon;
+---
+<GlassCard interactive>
+  <div class="flex items-center gap-3">
+    <Icon size={20} class="text-fg-1" />
+    <p class="text-caption text-fg-2 uppercase">{label}</p>
+  </div>
+  <p class="mt-3 text-h3 font-medium break-all">{value}</p>
+  <div class="mt-6 flex items-center gap-3 text-body-sm">
+    <a href={href} target={href.startsWith("mailto") ? "_self" : "_blank"} rel="noopener" class="text-fg-1 hover:text-fg-0">↗ Open</a>
+    {copy && (
+      <button class="copy-btn text-fg-1 hover:text-fg-0" data-copy={value}>Copy</button>
+    )}
+  </div>
+</GlassCard>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>(".copy-btn").forEach((b) => {
+    b.addEventListener("click", () => {
+      navigator.clipboard.writeText(b.dataset.copy ?? "").then(() => {
+        const orig = b.textContent;
+        b.textContent = "Copied";
+        setTimeout(() => (b.textContent = orig), 1200);
+      });
+    });
+  });
+</script>
