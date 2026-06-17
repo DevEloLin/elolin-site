@@ -1,0 +1,22 @@
+---
+import HexLogo from "@/components/ui/HexLogo.astro";
+import { Github, Twitter, Mail } from "lucide-astro";
+import { t, getLocaleFromPath } from "@/lib/i18n";
+import { SITE } from "@/lib/site";
+const locale = getLocaleFromPath(Astro.url.pathname);
+---
+<footer class="border-t border-white/5 mt-24">
+  <div class="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6 text-fg-2 text-body-sm">
+    <div class="flex items-center gap-3">
+      <HexLogo size={20} />
+      <span>{t("common.footer.rights", locale)}</span>
+      <span class="hidden md:inline">·</span>
+      <span class="hidden md:inline">{t("common.footer.tagline", locale)}</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href={`mailto:${SITE.email}`} aria-label="Email" class="hover:text-fg-0 transition"><Mail size={18} /></a>
+      <a href={SITE.github} target="_blank" rel="noopener" aria-label="GitHub" class="hover:text-fg-0 transition"><Github size={18} /></a>
+      <a href={SITE.twitter} target="_blank" rel="noopener" aria-label="X" class="hover:text-fg-0 transition"><Twitter size={18} /></a>
+    </div>
+  </div>
+</footer>
