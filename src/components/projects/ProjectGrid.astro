@@ -1,0 +1,43 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import type { Project } from "@/lib/github";
+import { type Locale } from "@/lib/i18n";
+type Props = { projects: Project[]; locale: Locale };
+const { projects, locale } = Astro.props;
+---
+<div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+  {projects.map((p) => (
+    <div
+      class="project-item"
+      data-cat={p.category}
+      data-ai={p.tags.includes("ai") ? "1" : "0"}
+    >
+      <ProjectCard project={p} locale={locale} href={`${locale === "zh" ? "/zh" : ""}/projects/${p.slug}`} />
+    </div>
+  ))}
+</div>
+
+<script>
+  const items = Array.from(document.querySelectorAll<HTMLElement>(".project-item"));
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>(".chip-btn"));
+  let active = "all";
+  const apply = () => {
+    items.forEach((el) => {
+      const cat = el.dataset.cat ?? "";
+      const ai  = el.dataset.ai === "1";
+      const visible =
+        active === "all" ? true :
+        active === "ai"  ? ai :
+        cat === active;
+      el.style.display = visible ? "" : "none";
+    });
+    buttons.forEach((b) => {
+      const isActive = b.dataset.cat === active;
+      b.setAttribute("aria-selected", String(isActive));
+    });
+  };
+  buttons.forEach((b) => {
+    b.addEventListener("click", () => { active = b.dataset.cat ?? "all"; apply(); });
+  });
+  apply();
+</script>
