@@ -1,0 +1,35 @@
+@font-face { font-family: "Geist"; font-style: normal; font-weight: 400;
+  font-display: swap; src: url("/fonts/Geist-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Geist"; font-style: normal; font-weight: 600;
+  font-display: swap; src: url("/fonts/Geist-SemiBold.woff2") format("woff2"); }
+@font-face { font-family: "Geist"; font-style: normal; font-weight: 700;
+  font-display: swap; src: url("/fonts/Geist-Bold.woff2") format("woff2"); }
+@font-face { font-family: "Geist Mono"; font-style: normal; font-weight: 400;
+  font-display: swap; src: url("/fonts/GeistMono-Regular.woff2") format("woff2"); }
+
+:root {
+  --bg-0: #0A0A0F;  --bg-1: #13131A;  --bg-2: #1C1C26;  --bg-3: #252533;
+  --fg-0: #FFFFFF;  --fg-1: #A8A8B3;  --fg-2: #6E6E7A;  --fg-3: #3A3A47;
+  --border-0: rgba(255,255,255,0.06);
+  --border-1: rgba(255,255,255,0.10);
+  --border-2: rgba(255,255,255,0.16);
+  --brand-from: #7C3AED;  --brand-to: #3B82F6;
+  --brand-glow: rgba(124,58,237,0.32);
+  --success: #10B981;  --warning: #F59E0B;  --danger: #EF4444;
+  --grad-brand: linear-gradient(135deg, var(--brand-from) 0%, var(--brand-to) 100%);
+  --glow-brand: 0 0 40px rgba(124,58,237,0.24);
+  --glow-hover: 0 0 60px rgba(124,58,237,0.16), 0 0 30px rgba(59,130,246,0.12);
+  --elevation-1: 0 1px 2px rgba(0,0,0,0.2);
+  --elevation-2: 0 4px 12px rgba(0,0,0,0.3);
+  color-scheme: dark;
+}
+
+html, body {
+  background: var(--bg-0);
+  color: var(--fg-0);
+  font-family: "Geist", "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-feature-settings: "ss01", "ss02", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--brand-glow); color: var(--fg-0); }
