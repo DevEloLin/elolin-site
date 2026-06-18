@@ -10,7 +10,7 @@ const flagship = ["evoclaw", "kinmate-site"]
   .map((s) => all.find((p) => p.slug === s))
   .filter(Boolean) as Project[];
 ---
-<section class="py-32">
+<section class="py-32" data-reveal>
   <div class="container mx-auto px-6">
     <p class="text-caption text-fg-2 uppercase">{t("home.flagship.label", locale)}</p>
     <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">

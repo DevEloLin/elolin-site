@@ -37,5 +37,10 @@ const path = Astro.url.pathname;
       <slot />
     </div>
     <slot name="footer" />
+    <script>
+      import { setupReveal } from "@/lib/motion";
+      if (document.readyState === "complete") setupReveal();
+      else window.addEventListener("DOMContentLoaded", () => setupReveal());
+    </script>
   </body>
 </html>

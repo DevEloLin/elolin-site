@@ -8,7 +8,7 @@ const { locale } = Astro.props;
 const manifestoLines = ((locale === "zh" ? zhHome : enHome) as any).manifesto.lines as string[];
 const aboutHref = localizePath("/about", locale);
 ---
-<section class="py-32 border-t border-white/5">
+<section class="py-32 border-t border-white/5" data-reveal>
   <div class="container mx-auto px-6 max-w-4xl">
     <p class="text-caption text-fg-2 uppercase">{t("home.manifesto.label", locale)}</p>
     <div class="mt-8 space-y-4">

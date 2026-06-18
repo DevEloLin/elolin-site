@@ -11,7 +11,7 @@ const flagshipSet = new Set(["evoclaw", "kinmate-site"]);
 const sample = all.filter((p) => !flagshipSet.has(p.slug)).slice(0, 6);
 const allHref = localizePath("/projects", locale);
 ---
-<section class="py-16">
+<section class="py-16" data-reveal>
   <div class="container mx-auto px-6">
     <div class="flex items-baseline justify-between">
       <p class="text-caption text-fg-2 uppercase">{t("home.projectsPreview.label", locale)}</p>

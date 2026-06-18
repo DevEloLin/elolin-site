@@ -8,7 +8,7 @@ const { locale } = Astro.props;
 const langs = Array.from(new Set((projects as Project[])
   .map((p) => p.language).filter(Boolean) as string[])).sort();
 ---
-<section class="py-16">
+<section class="py-16" data-reveal>
   <div class="container mx-auto px-6">
     <p class="text-caption text-fg-2 uppercase">{t("home.techStack.label", locale)}</p>
     <div class="mt-6 flex flex-wrap gap-3">
