@@ -11,9 +11,11 @@ const { project: p, locale, href } = Astro.props;
 const isAi = p.tags.includes("ai");
 const desc = projectDescription(p.slug, p.description, locale);
 ---
-<GlassCard interactive as={href ? "a" : "div"} href={href}>
+<GlassCard interactive>
   <div class="flex items-start justify-between gap-3">
-    <h3 class="text-h3 font-semibold">{p.name}</h3>
+    <h3 class="text-h3 font-semibold">
+      {href ? <a href={href} class="hover:text-fg-0 transition before:absolute before:inset-0 before:content-['']">{p.name}</a> : p.name}
+    </h3>
     {isAi && <AiBadge />}
   </div>
   <div class="flex items-center gap-4 mt-2 text-fg-2 text-caption">
@@ -23,7 +25,7 @@ const desc = projectDescription(p.slug, p.description, locale);
     )}
   </div>
   <p class="text-fg-1 text-body-sm mt-3 line-clamp-2">{desc || "—"}</p>
-  <div class="flex items-center gap-3 mt-4 text-fg-2">
+  <div class="flex items-center gap-3 mt-4 text-fg-2 relative z-10">
     <a href={p.url} target="_blank" rel="noopener" aria-label="GitHub" class="hover:text-fg-0 transition"><GhIcon size={16} /></a>
     {p.homepage && (
       <a href={p.homepage} target="_blank" rel="noopener" aria-label="Site" class="hover:text-fg-0 transition"><ExternalLink size={16} /></a>
