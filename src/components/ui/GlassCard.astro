@@ -2,7 +2,7 @@
 import { cn } from "@/lib/cn";
 type Props = { class?: string; interactive?: boolean; as?: "div" | "a"; href?: string };
 const { class: cls = "", interactive = false, as: Tag = "div", href } = Astro.props;
-const base = "rounded-2xl bg-bg-2/60 border border-[var(--border-1)] backdrop-blur-xl p-6";
+const base = "relative rounded-2xl bg-bg-2/60 border border-[var(--border-1)] backdrop-blur-xl p-6";
 const inter = interactive
   ? "transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-[var(--border-2)] hover:shadow-glow-hover"
   : "";
