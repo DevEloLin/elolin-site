@@ -1,0 +1,10 @@
+name = "elolin-rebuild"
+main = "workers/rebuild.ts"
+compatibility_date = "2026-06-17"
+compatibility_flags = ["nodejs_compat"]
+
+[triggers]
+crons = ["0 6 * * *"]
+
+[vars]
+# PAGES_DEPLOY_HOOK is set via: wrangler secret put PAGES_DEPLOY_HOOK
