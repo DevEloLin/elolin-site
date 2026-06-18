@@ -9,11 +9,24 @@ import UsesGrid from "@/components/about/UsesGrid.astro";
 import zhAbout from "@/i18n/zh/about.json";
 import { t } from "@/lib/i18n";
 import { ArrowRight } from "lucide-astro";
+import JsonLd from "@/components/seo/JsonLd.astro";
 const locale = "zh" as const;
 const a = zhAbout;
 ---
 <Layout title={a.title} locale={locale}>
   <Header slot="header" />
+  <JsonLd data={{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "EloLin",
+    "url": "https://elolin.com",
+    "sameAs": [
+      "https://github.com/DevEloLin",
+      "https://x.com/DevEloLin"
+    ],
+    "jobTitle": "创始人 · 独立开发者",
+    "knowsAbout": ["Rust", "TypeScript", "AI", "Healthcare", "Astro"]
+  }} />
   <main class="pt-32 pb-24 container mx-auto px-6 max-w-3xl">
     <div class="flex flex-col items-center text-center">
       <HexLogo size={80} />

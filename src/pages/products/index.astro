@@ -5,11 +5,27 @@ import Footer from "@/components/layout/Footer.astro";
 import ProductCard from "@/components/products/ProductCard.astro";
 import { FLAGSHIP_PRODUCTS } from "@/lib/site";
 import { t } from "@/lib/i18n";
+import JsonLd from "@/components/seo/JsonLd.astro";
 
 const locale = "en" as const;
 ---
 <Layout title={t("products.title", locale)} locale={locale}>
   <Header slot="header" />
+  <JsonLd data={{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "EvoClaw",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "macOS, Linux, Windows",
+    "url": "https://evoclaw.com"
+  }} />
+  <JsonLd data={{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "KinMate",
+    "applicationCategory": "HealthApplication",
+    "url": "https://kinmate.app"
+  }} />
   <main class="pt-32 pb-24 container mx-auto px-6 max-w-4xl">
     <h1 class="text-display-2 font-semibold">{t("products.title", locale)}</h1>
     <p class="mt-4 text-fg-1 text-body-lg">{t("products.subtitle", locale)}</p>
