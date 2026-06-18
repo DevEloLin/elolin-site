@@ -45,6 +45,9 @@ importers:
         specifier: ^4.4.3
         version: 4.4.3
     devDependencies:
+      '@cloudflare/workers-types':
+        specifier: ^4.20260617.1
+        version: 4.20260617.1
       '@playwright/test':
         specifier: ^1.61.0
         version: 1.61.0
@@ -222,6 +225,9 @@ packages:
 
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
+
+  '@cloudflare/workers-types@4.20260617.1':
+    resolution: {integrity: sha512-HdbP3CNcdMZBwegitFDjWvzv+6wPkFXvV9gBXMnf6RjV2Cy3W8TJL3IhSEGul0S6F1DHjnucP7lrpIsvkzNEjA==}
 
   '@emmetio/abbreviation@2.3.3':
     resolution: {integrity: sha512-mgv58UrU3rh4YgbE/TzgLQwJ3pFsHHhCLqY20aJq+9comytTXUDNGG/SMtSeMJdkpxgXSXunBGLD8Boka3JyVA==}
@@ -3150,6 +3156,8 @@ snapshots:
       '@babel/helper-validator-identifier': 7.29.7
 
   '@bcoe/v8-coverage@0.2.3': {}
+
+  '@cloudflare/workers-types@4.20260617.1': {}
 
   '@emmetio/abbreviation@2.3.3':
     dependencies:
