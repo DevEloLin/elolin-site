@@ -1,5 +1,5 @@
 ---
-import HexLogo from "@/components/ui/HexLogo.astro";
+import EloLogo from "@/components/ui/EloLogo.astro";
 import LangSwitch from "@/components/ui/LangSwitch.astro";
 import { t, getLocaleFromPath, localizePath } from "@/lib/i18n";
 import { Github } from "lucide-astro";
@@ -18,7 +18,7 @@ const homeHref = localizePath("/", locale);
         class="fixed top-0 inset-x-0 z-50 transition-all duration-300 ease-out">
   <div class="container mx-auto px-6 h-16 flex items-center justify-between">
     <a href={homeHref} class="flex items-center gap-2">
-      <HexLogo size={28} />
+      <EloLogo size={28} />
       <span class="text-body font-semibold">EloLin</span>
     </a>
     <nav class="hidden md:flex items-center gap-1">

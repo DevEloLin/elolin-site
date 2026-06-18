@@ -8,3 +8,4 @@ test-results
 coverage
 .DS_Store
 lighthouse.json
+brand-work/image*.png
