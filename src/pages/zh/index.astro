@@ -10,10 +10,11 @@ import TechStackCloud from "@/components/home/TechStackCloud.astro";
 import Manifesto from "@/components/home/Manifesto.astro";
 import JsonLd from "@/components/seo/JsonLd.astro";
 import { t } from "@/lib/i18n";
-import { ELOLIN_CATALOG, productItemList, softwareApplication } from "@/lib/seo";
+import { ELOLIN_CATALOG, breadcrumb, productItemList, softwareApplication } from "@/lib/seo";
 const locale = "zh" as const;
 ---
 <Layout title={t("home.hero.title", locale)} locale={locale}>
+  <JsonLd slot="head" data={breadcrumb([{ name: "首页", url: "https://elolin.com/zh/" }])} />
   <JsonLd slot="head" data={productItemList(ELOLIN_CATALOG, locale, "https://elolin.com/zh/")} />
   {ELOLIN_CATALOG.map((p) => (
     <JsonLd slot="head" data={softwareApplication(p, locale)} />
