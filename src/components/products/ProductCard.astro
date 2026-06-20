@@ -6,23 +6,22 @@ import { ExternalLink, Github } from "lucide-astro";
 import projects from "@/data/projects.json";
 import { projectDescription, t, type Locale } from "@/lib/i18n";
 import type { Project } from "@/lib/github";
+import type { ProductEntry } from "@/lib/site";
 
-type ProductMeta = {
-  slug: string;
-  name: string;
-  repo: string;
-  homepage: string;
-  tags: readonly string[];
-  extraLinks: readonly { label: string; href: string }[];
-};
-
-type Props = { product: ProductMeta; locale: Locale };
+type Props = { product: ProductEntry; locale: Locale };
 
 const { product, locale } = Astro.props;
 const all = projects as Project[];
-const repo = all.find((p) => p.slug === product.repo);
-const isAi = repo?.tags.includes("ai") ?? true;
-const desc = repo ? projectDescription(repo.slug, repo.description, locale) : "";
+const repo = product.repo ? all.find((p) => p.slug === product.repo) : undefined;
+const isAi = repo?.tags.includes("ai") ?? false;
+
+// Description priority:
+//   1. product.tagline (always present on ProductEntry) — single source of truth
+//   2. projectDescription(repo, ...) — legacy GitHub-based fallback only if tagline missing
+//      (kept as defensive fallback; current shape guarantees tagline exists)
+const desc =
+  product.tagline?.[locale] ??
+  (repo ? projectDescription(repo.slug, repo.description, locale) : "");
 ---
 <GlassCard>
   <div class="flex items-start justify-between gap-4">
@@ -38,7 +37,7 @@ const desc = repo ? projectDescription(repo.slug, repo.description, locale) : ""
     ))}
   </div>
   <div class="mt-8 flex flex-wrap items-center gap-3">
-    <Button href={product.homepage} external>
+    <Button href={product.url} external>
       {t("products.links.site", locale)} <ExternalLink size={16} />
     </Button>
     {repo && (
@@ -46,7 +45,7 @@ const desc = repo ? projectDescription(repo.slug, repo.description, locale) : ""
         <Github size={16} /> {t("products.links.github", locale)}
       </Button>
     )}
-    {product.extraLinks.map((l) => (
+    {product.extraLinks?.map((l) => (
       <Button href={l.href} variant="ghost" external>{l.label}</Button>
     ))}
   </div>

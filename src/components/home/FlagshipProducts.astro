@@ -1,21 +1,47 @@
 ---
+import GlassCard from "@/components/ui/GlassCard.astro";
+import { ArrowUpRight } from "lucide-astro";
 import { t, type Locale } from "@/lib/i18n";
-import projects from "@/data/projects.json";
-import type { Project } from "@/lib/github";
-import ProjectCard from "@/components/projects/ProjectCard.astro";
+import { FLAGSHIP_PRODUCTS } from "@/lib/site";
+
 type Props = { locale: Locale };
 const { locale } = Astro.props;
-const all = projects as Project[];
-const flagship = ["evoclaw", "kinmate-site"]
-  .map((s) => all.find((p) => p.slug === s))
-  .filter(Boolean) as Project[];
 ---
-<section class="py-32" data-reveal>
+<section class="py-24 sm:py-32" data-reveal>
   <div class="container mx-auto px-6">
-    <p class="text-caption text-fg-2 uppercase">{t("home.flagship.label", locale)}</p>
-    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-      {flagship.map((p) => (
-        <ProjectCard project={p} locale={locale} href={`${locale === "zh" ? "/zh" : ""}/projects/${p.slug}`} />
+    <header class="mb-10 max-w-2xl">
+      <p class="text-caption text-fg-2 uppercase">{t("home.products.heading", locale)}</p>
+      <h2 class="mt-3 text-h2 sm:text-display-2 font-semibold">{t("home.products.heading", locale)}</h2>
+      <p class="mt-3 text-fg-1 text-body-lg">{t("home.products.subhead", locale)}</p>
+    </header>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {FLAGSHIP_PRODUCTS.map((p) => (
+        <GlassCard interactive class="group">
+          <a
+            href={p.url}
+            target="_blank"
+            rel="noopener"
+            aria-label={p.name}
+            class="absolute inset-0 z-10"
+          ></a>
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="text-h3 font-semibold">{p.name}</h3>
+            <ArrowUpRight
+              size={18}
+              class="text-fg-2 transition-all group-hover:text-fg-0 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </div>
+          <p class="mt-3 text-fg-1 text-body-sm line-clamp-3 min-h-[3.75rem]">
+            {p.tagline[locale]}
+          </p>
+          <div class="mt-5 flex flex-wrap gap-1.5">
+            {p.tags.map((tag) => (
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] text-fg-2 bg-bg-1 border border-white/10">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </GlassCard>
       ))}
     </div>
   </div>

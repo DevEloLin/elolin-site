@@ -15,13 +15,32 @@ export const SITE = {
 
 export type Locale = (typeof SITE.locales)[number];
 
-export const FLAGSHIP_PRODUCTS = [
+// ProductEntry — homepage-grade showcase data.
+//   url:     real customer-facing landing URL (verified reachable)
+//   tagline: short WHO+WHAT one-liner per locale · ≤ 60 char EN
+//   repo:    OPTIONAL GitHub repo slug · enables "GitHub" link on /products page
+//            via projects.json lookup. Omit for products without a public repo.
+export type ProductEntry = {
+  slug: string;
+  name: string;
+  url: string;
+  tagline: { en: string; zh: string };
+  tags: readonly string[];
+  repo?: string;
+  extraLinks?: readonly { label: string; href: string }[];
+};
+
+export const FLAGSHIP_PRODUCTS: readonly ProductEntry[] = [
   {
     slug: "evoclaw",
     name: "EvoClaw",
+    url: "https://develolin.github.io/EvoClawSite/",
+    tagline: {
+      en: "Local-first self-evolving AI agent runtime.",
+      zh: "本地优先 · 自我进化的 AI agent 运行时",
+    },
+    tags: ["Rust", "Tauri", "Local-first"],
     repo: "evoclaw",
-    homepage: "https://evoclaw.com",
-    tags: ["Rust", "Tauri", "MCP", "Local-first"],
     extraLinks: [
       { label: "Homebrew", href: "https://github.com/DevEloLin/homebrew-tap" },
     ],
@@ -29,9 +48,55 @@ export const FLAGSHIP_PRODUCTS = [
   {
     slug: "kinmate",
     name: "KinMate",
-    repo: "kinmate-site",
-    homepage: "https://kinmate.app",
+    url: "https://kinmate.elolin.com",
+    tagline: {
+      en: "Private family health vault with AI explanations.",
+      zh: "私密的家庭健康保险库 · AI 解读报告",
+    },
     tags: ["TypeScript", "Supabase", "AI"],
-    extraLinks: [],
+    repo: "kinmate-site",
+  },
+  {
+    slug: "testhive",
+    name: "TestHive",
+    url: "https://testhive.elolin.com",
+    tagline: {
+      en: "Real testers for your Google Play Closed Testing.",
+      zh: "真实测试者 · 真实反馈 · 真实报告",
+    },
+    tags: ["Indie Dev", "Beta"],
+  },
+  {
+    slug: "games",
+    name: "EloGames",
+    url: "https://games.elolin.com",
+    tagline: {
+      en: "Indie games · play in your browser.",
+      zh: "浏览器秒玩独立游戏",
+    },
+    tags: ["Gaming"],
+  },
+] as const;
+
+export const PLATFORM_SERVICES: readonly ProductEntry[] = [
+  {
+    slug: "accounts",
+    name: "Accounts",
+    url: "https://accounts.elolin.com",
+    tagline: {
+      en: "One sign-in for every EloLin product.",
+      zh: "一次登录 · 通行所有 EloLin 产品",
+    },
+    tags: ["Identity", "SSO"],
+  },
+  {
+    slug: "domains",
+    name: "Domains",
+    url: "https://domains.elolin.com",
+    tagline: {
+      en: "Sub-domain hosting, ready in 30 seconds.",
+      zh: "30 秒上线你的子域名",
+    },
+    tags: ["Hosting"],
   },
 ] as const;
