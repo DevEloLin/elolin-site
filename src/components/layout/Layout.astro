@@ -2,6 +2,7 @@
 import "../../styles/global.css";
 import MetaTags from "./MetaTags.astro";
 import { type Locale } from "@/lib/site";
+import { organization, website } from "@/lib/seo";
 type Props = {
   title: string;
   description?: string;
@@ -10,6 +11,8 @@ type Props = {
 };
 const { title, description, locale, ogImage } = Astro.props;
 const path = Astro.url.pathname;
+const orgJson = JSON.stringify(organization());
+const siteJson = JSON.stringify(website(locale));
 ---
 <!doctype html>
 <html lang={locale === "zh" ? "zh-CN" : "en"}>
@@ -29,6 +32,10 @@ const path = Astro.url.pathname;
       {...(description !== undefined ? { description } : {})}
       {...(ogImage !== undefined ? { ogImage } : {})}
     />
+    {/* Sitewide JSON-LD · Organization + WebSite (the brand entity graph that
+        every EloLin sub-product references via @id="https://elolin.com/#org") */}
+    <script type="application/ld+json" set:html={orgJson} />
+    <script type="application/ld+json" set:html={siteJson} />
     {/* Google AdSense · 仅 verify 站点所有权所需 · 主站不放广告位 ·
         publisher ID 与 testhive / domains 子站共用 ca-pub-3142706921372874 */}
     <script
