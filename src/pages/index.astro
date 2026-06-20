@@ -11,12 +11,21 @@ import Manifesto from "@/components/home/Manifesto.astro";
 import Faq from "@/components/home/Faq.astro";
 import JsonLd from "@/components/seo/JsonLd.astro";
 import { t } from "@/lib/i18n";
-import { ELOLIN_CATALOG, breadcrumb, productItemList, softwareApplication } from "@/lib/seo";
+import { ELOLIN_CATALOG, breadcrumb, howTo, productItemList, softwareApplication } from "@/lib/seo";
 const locale = "en" as const;
+
+const SHIP_SOLO_STEPS = [
+  { name: "One person · many products", text: "EloLin is operated by Wei Li alone. Six live products (EvoClaw · KinMate · TestHive · EloGames · Accounts · Domains) without a team, without external investors, without enterprise process." },
+  { name: "Shared identity", text: "Every product reuses EloLin Accounts SSO. One sign-in unlocks the entire family. Saves duplicate auth code across products and gives users seamless cross-product flow." },
+  { name: "Shared platform services", text: "Sub-domain hosting (EloLin Domains) and the games CDN are shared infrastructure. New products plug into the existing platform instead of rebuilding identity / DNS / billing each time." },
+  { name: "Boring stack on purpose", text: "Same stack across products (Next.js · Astro · Supabase · Cloudflare). Lets one person debug any product end-to-end without switching mental models." },
+  { name: "Ship early · iterate publicly", text: "Every product is launched even when small. Open-source where possible (github.com/DevEloLin). Feedback drives the next 6-product line-up." },
+];
 ---
 <Layout title={t("home.hero.title", locale)} locale={locale}>
   <JsonLd slot="head" data={breadcrumb([{ name: "Home", url: "https://elolin.com/" }])} />
   <JsonLd slot="head" data={productItemList(ELOLIN_CATALOG, locale, "https://elolin.com/")} />
+  <JsonLd slot="head" data={howTo("How EloLin ships six products solo", "Five operating principles that let a single developer maintain and ship a six-product family.", SHIP_SOLO_STEPS)} />
   {ELOLIN_CATALOG.map((p) => (
     <JsonLd slot="head" data={softwareApplication(p, locale)} />
   ))}

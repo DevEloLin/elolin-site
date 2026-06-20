@@ -254,6 +254,25 @@ export function breadcrumb(
   };
 }
 
+export function howTo(
+  name: string,
+  description: string,
+  steps: readonly { name: string; text: string }[],
+): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name,
+    description,
+    step: steps.map((s, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: s.name,
+      text: s.text,
+    })),
+  };
+}
+
 export function faqPage(
   qa: readonly { q: string; a: string }[],
 ): Record<string, unknown> {
