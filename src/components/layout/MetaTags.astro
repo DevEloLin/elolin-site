@@ -6,16 +6,35 @@ type Props = {
   locale: Locale;
   path: string;
   ogImage?: string;
+  keywords?: string[];
 };
-const { title, description, locale, path, ogImage = "/og-default.png" } = Astro.props;
+const { title, description, locale, path, ogImage = "/og-default.png", keywords } = Astro.props;
 const fullTitle = title === SITE.name ? SITE.name : `${title} · ${SITE.name}`;
 const desc = description ?? SITE.description[locale];
 const canonical = `${SITE.url}${path}`;
 const enPart = path.replace(/^\/zh\/?/, "/") || "/";
 const zhPart = enPart === "/" ? "/zh/" : `/zh${enPart}`;
+
+// Default keywords — broad EloLin family terms · per-page can override via prop.
+const DEFAULT_KEYWORDS = locale === "zh"
+  ? [
+      "EloLin", "独立开发者", "一人公司", "AI 产品",
+      "EvoClaw", "KinMate", "TestHive", "EloGames",
+      "免费子域名托管", "Google Play Closed Testing",
+      "本地 AI agent", "家庭健康应用", "浏览器游戏",
+    ]
+  : [
+      "EloLin", "solo developer", "indie products", "AI products",
+      "EvoClaw", "KinMate", "TestHive", "EloGames",
+      "free subdomain hosting", "Google Play Closed Testing",
+      "local AI agent", "family health app", "browser games",
+      "one-person company", "indie SaaS",
+    ];
+const kwList = keywords && keywords.length > 0 ? keywords : DEFAULT_KEYWORDS;
 ---
 <title>{fullTitle}</title>
 <meta name="description" content={desc} />
+<meta name="keywords" content={kwList.join(", ")} />
 <link rel="canonical" href={canonical} />
 <link rel="alternate" hreflang="en" href={`${SITE.url}${enPart}`} />
 <link rel="alternate" hreflang="zh" href={`${SITE.url}${zhPart}`} />
