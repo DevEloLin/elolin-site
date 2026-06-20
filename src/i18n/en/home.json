@@ -6,6 +6,14 @@
     "ctaSecondary": "View Code"
   },
   "flagship": { "label": "Flagship" },
+  "products": {
+    "heading": "Products",
+    "subhead": "Tools shipped solo — built simple, made to last."
+  },
+  "platform": {
+    "heading": "Platform",
+    "subhead": "The infrastructure powering every EloLin product."
+  },
   "projectsPreview": { "label": "All projects", "viewAll": "View all" },
   "techStack": { "label": "What I build with" },
   "manifesto": {
