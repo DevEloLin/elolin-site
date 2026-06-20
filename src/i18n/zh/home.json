@@ -6,6 +6,14 @@
     "ctaSecondary": "查看源码"
   },
   "flagship": { "label": "旗舰" },
+  "products": {
+    "heading": "产品",
+    "subhead": "一个人也能跑通的产品 · 简单 · 稳 · 久用"
+  },
+  "platform": {
+    "heading": "平台",
+    "subhead": "支撑所有 EloLin 产品的底层服务"
+  },
   "projectsPreview": { "label": "全部项目", "viewAll": "查看全部" },
   "techStack": { "label": "我用什么搭" },
   "manifesto": {

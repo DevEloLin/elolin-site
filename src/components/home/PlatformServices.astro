@@ -2,40 +2,38 @@
 import GlassCard from "@/components/ui/GlassCard.astro";
 import { ArrowUpRight } from "lucide-astro";
 import { t, type Locale } from "@/lib/i18n";
-import { FLAGSHIP_PRODUCTS } from "@/lib/site";
+import { PLATFORM_SERVICES } from "@/lib/site";
 
 type Props = { locale: Locale };
 const { locale } = Astro.props;
 ---
-<section class="py-24 sm:py-32" data-reveal>
+<section class="py-20 sm:py-24" data-reveal>
   <div class="container mx-auto px-6">
     <header class="mb-10 max-w-2xl">
-      <p class="text-caption text-fg-2 uppercase">{t("home.products.heading", locale)}</p>
-      <h2 class="mt-3 text-h2 sm:text-display-2 font-semibold">{t("home.products.heading", locale)}</h2>
-      <p class="mt-3 text-fg-1 text-body-lg">{t("home.products.subhead", locale)}</p>
+      <p class="text-caption text-fg-2 uppercase">{t("home.platform.heading", locale)}</p>
+      <h2 class="mt-3 text-h2 font-semibold">{t("home.platform.heading", locale)}</h2>
+      <p class="mt-3 text-fg-1 text-body-lg">{t("home.platform.subhead", locale)}</p>
     </header>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {FLAGSHIP_PRODUCTS.map((p) => (
-        <GlassCard interactive class="group">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {PLATFORM_SERVICES.map((s) => (
+        <GlassCard interactive class="group bg-bg-1/40">
           <a
-            href={p.url}
+            href={s.url}
             target="_blank"
             rel="noopener"
-            aria-label={p.name}
+            aria-label={s.name}
             class="absolute inset-0 z-10"
           ></a>
           <div class="flex items-start justify-between gap-3">
-            <h3 class="text-h3 font-semibold">{p.name}</h3>
+            <h3 class="text-h3 font-semibold">{s.name}</h3>
             <ArrowUpRight
               size={18}
               class="text-fg-2 transition-all group-hover:text-fg-0 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             />
           </div>
-          <p class="mt-3 text-fg-1 text-body-sm line-clamp-3 min-h-[3.75rem]">
-            {p.tagline[locale]}
-          </p>
+          <p class="mt-3 text-fg-1 text-body-sm">{s.tagline[locale]}</p>
           <div class="mt-5 flex flex-wrap gap-1.5">
-            {p.tags.map((tag) => (
+            {s.tags.map((tag) => (
               <span class="px-2.5 py-0.5 rounded-full text-[11px] text-fg-2 bg-bg-1 border border-white/10">
                 {tag}
               </span>
