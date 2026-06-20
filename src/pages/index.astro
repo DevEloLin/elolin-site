@@ -8,6 +8,7 @@ import PlatformServices from "@/components/home/PlatformServices.astro";
 import ProjectsPreview from "@/components/home/ProjectsPreview.astro";
 import TechStackCloud from "@/components/home/TechStackCloud.astro";
 import Manifesto from "@/components/home/Manifesto.astro";
+import Faq from "@/components/home/Faq.astro";
 import JsonLd from "@/components/seo/JsonLd.astro";
 import { t } from "@/lib/i18n";
 import { ELOLIN_CATALOG, breadcrumb, productItemList, softwareApplication } from "@/lib/seo";
@@ -25,6 +26,7 @@ const locale = "en" as const;
   <PlatformServices {locale} />
   <ProjectsPreview {locale} />
   <TechStackCloud {locale} />
+  <Faq {locale} />
   <Manifesto {locale} />
   <Footer slot="footer" />
 </Layout>
