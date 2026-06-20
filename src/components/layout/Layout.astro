@@ -29,6 +29,13 @@ const path = Astro.url.pathname;
       {...(description !== undefined ? { description } : {})}
       {...(ogImage !== undefined ? { ogImage } : {})}
     />
+    {/* Google AdSense · 仅 verify 站点所有权所需 · 主站不放广告位 ·
+        publisher ID 与 testhive / domains 子站共用 ca-pub-3142706921372874 */}
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3142706921372874"
+      crossorigin="anonymous"
+    ></script>
     <slot name="head" />
   </head>
   <body class="bg-bg-0 text-fg-0 font-sans antialiased min-h-screen flex flex-col">
