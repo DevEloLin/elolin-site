@@ -1,0 +1,59 @@
+---
+import { t, type Locale } from "@/lib/i18n";
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+
+const QA = locale === "zh" ? [
+  { q: "EloLin 是什么?",
+    a: "EloLin 是一家一人独立工作室,旗下包含 6 个产品(EvoClaw · KinMate · TestHive · EloGames · Accounts · Domains),覆盖 AI · 健康 · 开发者工具 · 游戏 · 身份 · 托管六个领域。所有产品由 Wei Li 独自打造和运营。" },
+  { q: "EloLin 的产品收费吗?",
+    a: "全部 6 个产品当前都免费。Accounts 单点登录免费、Domains 子域名托管免费、EloGames 免费玩、TestHive 免费门槛和 Karma 经济、EvoClaw 开源、KinMate 基础功能免费。" },
+  { q: "EloLin 的产品之间是怎么打通的?",
+    a: "所有产品共用 EloLin Accounts(accounts.elolin.com)的单点登录 · 注册一次即可访问全部 6 个产品 · session 自动跨 .elolin.com 子域名同步。" },
+  { q: "EloLin 开源吗?",
+    a: "默认开源。EvoClaw 和大部分项目源码都在 https://github.com/DevEloLin 公开。商业产品的客户端代码也尽量开源。" },
+  { q: "EloLin 是一个人做的吗?",
+    a: "是。EloLin 是一家一人公司(One person. Many products.)· 创始人是 Wei Li(@DevEloLin)· 所有产品的设计 · 开发 · 运营都由一个人完成。" },
+] : [
+  { q: "What is EloLin?",
+    a: "EloLin is a one-person indie studio shipping six products: EvoClaw (AI), KinMate (health), TestHive (developer tools), EloGames (games), Accounts (identity), and Domains (hosting). Everything is built and operated solo by Wei Li." },
+  { q: "Are EloLin products free?",
+    a: "Yes — all 6 products are currently free to use. Accounts SSO is free, Domains gives a free sub-domain, EloGames are free to play, TestHive has a free Karma economy, EvoClaw is open-source, and KinMate has a free tier." },
+  { q: "How are the EloLin products connected?",
+    a: "All products share EloLin Accounts SSO at accounts.elolin.com — sign up once and you're signed into every product. Session cookies are scoped to .elolin.com so the experience is seamless across sub-domains." },
+  { q: "Is EloLin open-source?",
+    a: "Open-source by default. EvoClaw and most projects live at https://github.com/DevEloLin. Even commercial product front-ends are open where it makes sense." },
+  { q: "Is EloLin really run by one person?",
+    a: "Yes — One person. Many products. Founder Wei Li (@DevEloLin) handles design, engineering, and operations for the whole product family." },
+];
+---
+<section class="py-20 sm:py-24" data-reveal>
+  <div class="container mx-auto px-6 max-w-3xl">
+    <header class="mb-8">
+      <p class="text-caption text-fg-2 uppercase tracking-widest">FAQ</p>
+      <h2 class="mt-2 text-h2 font-semibold">
+        {locale === "zh" ? "常见问题" : "Common questions"}
+      </h2>
+    </header>
+    <dl class="divide-y divide-[var(--border-1)] rounded-2xl border border-[var(--border-1)] bg-bg-2/40 backdrop-blur-sm">
+      {QA.map((it) => (
+        <details class="group p-5">
+          <summary class="flex items-center justify-between cursor-pointer list-none font-medium">
+            <dt>{it.q}</dt>
+            <span class="text-fg-2 transition-transform group-open:rotate-180">▾</span>
+          </summary>
+          <dd class="mt-3 text-fg-1 text-body-sm leading-relaxed">{it.a}</dd>
+        </details>
+      ))}
+    </dl>
+  </div>
+</section>
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: QA.map(it => ({
+    "@type": "Question",
+    name: it.q,
+    acceptedAnswer: { "@type": "Answer", text: it.a },
+  })),
+})} />
