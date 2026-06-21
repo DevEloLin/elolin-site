@@ -6,17 +6,38 @@ import { SITE } from "@/lib/site";
 const locale = getLocaleFromPath(Astro.url.pathname);
 ---
 <footer class="border-t border-white/5 mt-24">
-  <div class="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6 text-fg-2 text-body-sm">
-    <div class="flex items-center gap-3">
-      <EloLogo size={20} />
-      <span>{t("common.footer.rights", locale)}</span>
-      <span class="hidden md:inline">·</span>
-      <span class="hidden md:inline">{t("common.footer.tagline", locale)}</span>
+  <div class="container mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-12 text-fg-2 text-body-sm">
+    <div class="md:col-span-2 space-y-4">
+      <div class="flex items-center gap-3 text-fg-0">
+        <EloLogo size={24} />
+        <span class="font-semibold">{t("common.footer.rights", locale)}</span>
+      </div>
+      <p class="max-w-sm">{t("common.footer.tagline", locale)}</p>
+      <div class="flex items-center gap-4 pt-4">
+        <a href={`mailto:${SITE.email}`} aria-label="Email" class="hover:text-fg-0 transition"><Mail size={20} /></a>
+        <a href={SITE.github} target="_blank" rel="noopener" aria-label="GitHub" class="hover:text-fg-0 transition"><Github size={20} /></a>
+        <a href={SITE.twitter} target="_blank" rel="noopener" aria-label="X" class="hover:text-fg-0 transition"><Twitter size={20} /></a>
+      </div>
     </div>
-    <div class="flex items-center gap-4">
-      <a href={`mailto:${SITE.email}`} aria-label="Email" class="hover:text-fg-0 transition"><Mail size={18} /></a>
-      <a href={SITE.github} target="_blank" rel="noopener" aria-label="GitHub" class="hover:text-fg-0 transition"><Github size={18} /></a>
-      <a href={SITE.twitter} target="_blank" rel="noopener" aria-label="X" class="hover:text-fg-0 transition"><Twitter size={18} /></a>
+    
+    <div>
+      <h3 class="font-semibold text-fg-0 uppercase tracking-wider mb-4">EloLin Ecosystem</h3>
+      <ul class="space-y-3">
+        <li><a href="https://testhive.elolin.com" target="_blank" rel="noopener" class="hover:text-fg-0 transition">TestHive</a></li>
+        <li><a href="https://kinmate.elolin.com" target="_blank" rel="noopener" class="hover:text-fg-0 transition">KinMate</a></li>
+        <li><a href="https://domains.elolin.com" target="_blank" rel="noopener" class="hover:text-fg-0 transition">EloLin Domains</a></li>
+        <li><a href="https://games.elolin.com" target="_blank" rel="noopener" class="hover:text-fg-0 transition">EloGames</a></li>
+        <li><a href="https://accounts.elolin.com" target="_blank" rel="noopener" class="hover:text-fg-0 transition">EloLin Accounts</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-fg-0 uppercase tracking-wider mb-4">Legal</h3>
+      <ul class="space-y-3">
+        <li><a href="https://testhive.elolin.com/en/legal/terms" class="hover:text-fg-0 transition">Terms of Service</a></li>
+        <li><a href="https://testhive.elolin.com/en/legal/privacy" class="hover:text-fg-0 transition">Privacy Policy</a></li>
+        <li><a href="mailto:support@elolin.com" class="hover:text-fg-0 transition">Contact Support</a></li>
+      </ul>
     </div>
   </div>
 </footer>
