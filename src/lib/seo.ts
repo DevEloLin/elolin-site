@@ -153,6 +153,25 @@ export const ELOLIN_CATALOG: readonly ProductSpec[] = [
       "free hosting",
     ],
   },
+  {
+    slug: "mv3migrate",
+    name: "mv3migrate",
+    url: "https://mv3migrate.elolin.com",
+    tagline: {
+      en: "Chrome MV2 → MV3 migration CLI · scans, codemods, reports.",
+      zh: "Chrome MV2 → MV3 迁移 CLI · 扫描 · 修补 · 报告",
+    },
+    category: "Developer Tools",
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "macOS, Linux, Windows",
+    keywords: [
+      "Chrome MV3 migration",
+      "Manifest V3 codemod",
+      "Chrome extension migration",
+      "MV2 to MV3 CLI",
+      "Chrome extension tooling",
+    ],
+  },
 ] as const;
 
 // ─── Schema.org builders ────────────────────────────────────────────────
