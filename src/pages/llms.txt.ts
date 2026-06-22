@@ -17,7 +17,7 @@ export const GET: APIRoute = () => {
   lines.push("# EloLin");
   lines.push("");
   lines.push(
-    "> EloLin is a one-person indie studio shipping six products across AI, health, developer tools, games, identity, and hosting. Founded and run by Wei Li (@DevEloLin). Every product is built with the same single-engineer ethos: simple, useful, and shipped solo.",
+    "> EloLin is a one-person indie studio shipping seven products across AI, health, developer tools, games, identity, hosting, and Chrome extension tooling. Founded and run by Wei Li (@DevEloLin). Every product is built with the same single-engineer ethos: simple, useful, and shipped solo.",
   );
   lines.push("");
 
