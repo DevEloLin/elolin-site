@@ -76,6 +76,16 @@ export const FLAGSHIP_PRODUCTS: readonly ProductEntry[] = [
     },
     tags: ["Gaming"],
   },
+  {
+    slug: "mv3migrate",
+    name: "mv3migrate",
+    url: "https://mv3migrate.elolin.com",
+    tagline: {
+      en: "Chrome MV2 → MV3 migration CLI · scans, codemods, reports.",
+      zh: "Chrome MV2 → MV3 迁移 CLI · 扫描 · 修补 · 报告",
+    },
+    tags: ["Developer Tools", "CLI"],
+  },
 ] as const;
 
 export const PLATFORM_SERVICES: readonly ProductEntry[] = [
