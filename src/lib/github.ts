@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { visualPreviewFor } from "./visuals";
 
 export const Category = z.enum(["product", "skill", "site", "tool"]);
 export type Category = z.infer<typeof Category>;
@@ -33,6 +34,7 @@ export const ProjectSchema = z.object({
   language: z.string().nullable(),
   stars: z.number(),
   homepage: z.string().nullable(),
+  coverImage: z.string().nullable().optional(),
   url: z.string(),
   pushedAt: z.string(),
   category: Category,
@@ -73,6 +75,7 @@ export function sanitizeRepo(r: GhRepoRaw): Project {
     language: r.language ?? null,
     stars: r.stargazers_count,
     homepage: r.homepage && r.homepage.length > 0 ? r.homepage : null,
+    coverImage: visualPreviewFor(r.name.toLowerCase()) ?? visualPreviewFor(r.name.toLowerCase().replace(/-site$/, "")) ?? null,
     url: r.html_url,
     pushedAt: r.pushed_at,
     category: cat,

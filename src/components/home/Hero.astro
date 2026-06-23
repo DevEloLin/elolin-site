@@ -1,28 +1,663 @@
 ---
-import { t, type Locale } from "@/lib/i18n";
-import GradientBg from "@/components/ui/GradientBg.astro";
 import Button from "@/components/ui/Button.astro";
-import { ArrowRight } from "lucide-astro";
+import { localizePath, t, type Locale } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
+import { ArrowRight, Sparkles } from "lucide-astro";
+
 type Props = { locale: Locale };
 const { locale } = Astro.props;
+
+const projectsHref = localizePath("/projects", locale);
+const codeHref = SITE.github;
+
+const rings = [
+  { size: "20rem", tilt: "-68deg", duration: "18s", opacity: "0.42" },
+  { size: "27rem", tilt: "24deg", duration: "28s", opacity: "0.22" },
+  { size: "33rem", tilt: "82deg", duration: "38s", opacity: "0.16" },
+];
+
+const particles = Array.from({ length: 10 }, (_, i) => ({
+  start: `${i * 36}deg`,
+  radius: `${8.8 + (i % 3) * 1.2}rem`,
+  size: `${4 + (i % 4)}px`,
+  duration: `${10 + (i % 5) * 1.5}s`,
+  delay: `${i * -0.8}s`,
+  opacity: `${0.45 + (i % 4) * 0.12}`,
+}));
 ---
-<section class="relative isolate min-h-screen flex items-center pt-16">
-  <GradientBg />
-  <div class="container mx-auto px-6 max-w-5xl">
-    <h1 class="text-display-2 md:text-display-1 font-semibold bg-grad-brand bg-clip-text text-transparent leading-tight">
-      {t("home.hero.title", locale)}
-    </h1>
-    <p class="mt-6 text-body-lg md:text-h3 text-fg-1 max-w-2xl">
-      {t("home.hero.subtitle", locale)}
-    </p>
-    <div class="mt-10 flex flex-wrap gap-4">
-      <Button href={locale === "en" ? "/products" : "/zh/products"}>
-        {t("home.hero.ctaPrimary", locale)} <ArrowRight size={18} />
-      </Button>
-      <Button href={SITE.github} variant="ghost" external>
-        {t("home.hero.ctaSecondary", locale)}
-      </Button>
+
+<section class="hero-shell relative isolate overflow-hidden pt-16" data-hero>
+  <div class="absolute inset-0 hero-backdrop" aria-hidden="true"></div>
+  <div class="absolute inset-0 hero-grid" aria-hidden="true"></div>
+  <div class="absolute inset-0 hero-vignette" aria-hidden="true"></div>
+
+  <div class="relative min-h-[calc(100svh-4rem)]">
+    <div class="hero-stage" data-stage>
+      <video
+        class="hero-video"
+        src="/media/elolin-hero.mp4"
+        poster="/media/elolin-hero-poster.jpg"
+        autoplay
+        muted
+        loop
+        playsinline
+        data-bg-video
+        preload="metadata"
+        aria-hidden="true"
+      ></video>
+      <div class="hero-video-overlay" aria-hidden="true"></div>
+
+      <div class="hero-content-shell">
+        <div class="hero-content pointer-events-auto" data-reveal>
+          <p class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/6 px-4 py-2 text-caption uppercase tracking-[0.26em] text-fg-1 shadow-[0_0_0_1px_rgba(255,255,255,0.03)_inset] backdrop-blur-md">
+            <Sparkles size={14} />
+            {locale === "zh" ? "EloLin 官方网站" : "EloLin official site"}
+          </p>
+
+          <h1 class="hero-title mt-6 text-display-2 md:text-display-1 font-semibold leading-[0.96] tracking-[-0.045em] text-white">
+            {t("home.hero.title", locale)}
+          </h1>
+
+          <p class="hero-subtitle mt-6 max-w-3xl text-body-lg md:text-h3 text-fg-1">
+            {t("home.hero.subtitle", locale)}
+          </p>
+
+          <div class="mt-10 flex flex-wrap gap-4">
+            <Button href={projectsHref}>
+              {t("home.hero.ctaPrimary", locale)} <ArrowRight size={18} />
+            </Button>
+            <Button href={codeHref} variant="ghost" external>
+              {t("home.hero.ctaSecondary", locale)}
+            </Button>
+          </div>
+
+          <div class="mt-10 flex flex-wrap gap-3 text-caption uppercase tracking-[0.22em] text-fg-2">
+            <span class="rounded-full border border-white/8 bg-white/4 px-3 py-2">60 FPS motion</span>
+            <span class="rounded-full border border-white/8 bg-white/4 px-3 py-2">Blue neon lighting</span>
+            <span class="rounded-full border border-white/8 bg-white/4 px-3 py-2">Mouse-reactive 3D</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-rings" aria-hidden="true">
+        {rings.map((ring) => (
+          <span
+            class="hero-ring"
+            style={`--ring-size:${ring.size}; --ring-tilt:${ring.tilt}; --ring-duration:${ring.duration}; --ring-opacity:${ring.opacity};`}
+          ></span>
+        ))}
+      </div>
+
+      <div class="hero-particles" aria-hidden="true">
+        {particles.map((particle) => (
+          <span
+            class="hero-particle"
+            style={`--particle-start:${particle.start}; --particle-radius:${particle.radius}; --particle-size:${particle.size}; --particle-duration:${particle.duration}; --particle-delay:${particle.delay}; --particle-opacity:${particle.opacity};`}
+          >
+            <span class="hero-particle-dot"></span>
+          </span>
+        ))}
+      </div>
+
+      <a
+        class="hero-sphere"
+        href={projectsHref}
+        data-sphere
+        aria-label={locale === "zh" ? "打开作品集项目" : "Open portfolio projects"}
+      >
+        <span class="hero-sphere-core"></span>
+        <span class="hero-sphere-glow"></span>
+        <span class="hero-sphere-ring"></span>
+        <span class="hero-sphere-ring hero-sphere-ring--inner"></span>
+        <span class="hero-sphere-label">
+          {locale === "zh" ? "项目入口" : "Projects"}
+        </span>
+      </a>
+
+      <div class="hero-caption">
+        <span class="hero-caption-pill">{locale === "zh" ? "EloLin / 官方网站" : "EloLin / Official website"}</span>
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+  const hero = document.querySelector<HTMLElement>("[data-hero]");
+  const stage = hero?.querySelector<HTMLElement>("[data-stage]");
+  const sphere = hero?.querySelector<HTMLElement>("[data-sphere]");
+  const bgVideo = hero?.querySelector<HTMLVideoElement>("[data-bg-video]");
+
+  if (bgVideo) {
+    const slowRate = 0.45;
+    const syncRate = () => {
+      bgVideo.playbackRate = slowRate;
+      bgVideo.defaultPlaybackRate = slowRate;
+    };
+
+    syncRate();
+    bgVideo.addEventListener("loadedmetadata", syncRate);
+    bgVideo.addEventListener("play", syncRate);
+  }
+
+  if (hero && stage && sphere) {
+    const finePointer = window.matchMedia("(pointer: fine)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const hoverable = window.matchMedia("(hover: hover)");
+
+    const prefersMotion = finePointer.matches && !reducedMotion.matches;
+    stage.dataset.motion = prefersMotion ? "on" : "off";
+
+    const state = {
+      x: 0,
+      y: 0,
+      tx: 0,
+      ty: 0,
+      sx: 0,
+      sy: 0,
+      hover: false,
+      active: false,
+    };
+
+    const baseSphere = { x: 60, y: 46 };
+    let raf = 0;
+
+    const apply = () => {
+      raf = 0;
+      state.x += (state.tx - state.x) * 0.08;
+      state.y += (state.ty - state.y) * 0.08;
+      state.sx += (state.tx * 0.36 - state.sx) * 0.1;
+      state.sy += (state.ty * 0.36 - state.sy) * 0.1;
+
+      stage.style.setProperty("--hero-rot-x", `${state.x}deg`);
+      stage.style.setProperty("--hero-rot-y", `${state.y}deg`);
+      stage.style.setProperty("--hero-shift-x", `${state.sx}px`);
+      stage.style.setProperty("--hero-shift-y", `${state.sy}px`);
+      stage.style.setProperty("--hero-depth", state.hover ? "1.15" : "1");
+      stage.style.setProperty("--hero-fade", state.active ? "1" : "0.82");
+
+      const sphereX = baseSphere.x + state.tx * 0.18;
+      const sphereY = baseSphere.y + state.ty * 0.18;
+      stage.style.setProperty("--sphere-x", `${sphereX}%`);
+      stage.style.setProperty("--sphere-y", `${sphereY}%`);
+      stage.style.setProperty("--sphere-offset-x", `${state.sx * 0.45}px`);
+      stage.style.setProperty("--sphere-offset-y", `${state.sy * 0.45}px`);
+      stage.style.setProperty("--sphere-scale", state.hover ? "1.08" : "1");
+      stage.style.setProperty("--glow-strength", state.hover ? "1.2" : "1");
+
+      if (prefersMotion || state.active) {
+        raf = window.requestAnimationFrame(apply);
+      }
+    };
+
+    const setPointer = (clientX: number, clientY: number) => {
+      const rect = hero.getBoundingClientRect();
+      const px = Math.min(Math.max((clientX - rect.left) / rect.width, 0), 1);
+      const py = Math.min(Math.max((clientY - rect.top) / rect.height, 0), 1);
+      state.tx = (px - 0.5) * 18;
+      state.ty = (0.5 - py) * 12;
+      state.active = true;
+
+      if (!raf) {
+        raf = window.requestAnimationFrame(apply);
+      }
+    };
+
+    const resetPointer = () => {
+      state.tx = 0;
+      state.ty = 0;
+      state.active = false;
+      if (!raf && prefersMotion) {
+        raf = window.requestAnimationFrame(apply);
+      }
+    };
+
+    const enableHover = () => {
+      state.hover = true;
+      stage.dataset.hover = "true";
+      if (!raf) {
+        raf = window.requestAnimationFrame(apply);
+      }
+    };
+
+    const disableHover = () => {
+      state.hover = false;
+      delete stage.dataset.hover;
+      if (!raf && prefersMotion) {
+        raf = window.requestAnimationFrame(apply);
+      }
+    };
+
+    hero.addEventListener("pointermove", (event) => {
+      if (!hoverable.matches && event.pointerType !== "mouse") return;
+      setPointer(event.clientX, event.clientY);
+    }, { passive: true });
+
+    hero.addEventListener("pointerenter", (event) => {
+      if (!hoverable.matches && event.pointerType !== "mouse") return;
+      setPointer(event.clientX, event.clientY);
+    });
+
+    hero.addEventListener("pointerleave", () => {
+      resetPointer();
+      disableHover();
+    });
+
+    sphere.addEventListener("pointerenter", enableHover);
+    sphere.addEventListener("pointerleave", disableHover);
+    sphere.addEventListener("focus", enableHover);
+    sphere.addEventListener("blur", disableHover);
+
+    if (!prefersMotion) {
+      stage.style.setProperty("--hero-rot-x", "0deg");
+      stage.style.setProperty("--hero-rot-y", "0deg");
+      stage.style.setProperty("--hero-shift-x", "0px");
+      stage.style.setProperty("--hero-shift-y", "0px");
+      stage.style.setProperty("--sphere-offset-x", "0px");
+      stage.style.setProperty("--sphere-offset-y", "0px");
+      stage.style.setProperty("--sphere-scale", "1");
+      stage.style.setProperty("--glow-strength", "1");
+    } else {
+      apply();
+    }
+  }
+</script>
+
+<style>
+  .hero-shell {
+    background:
+      radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.18), transparent 34%),
+      radial-gradient(circle at 18% 10%, rgba(124, 58, 237, 0.14), transparent 24%),
+      linear-gradient(180deg, #05050a 0%, #070710 45%, #05050a 100%);
+  }
+
+  .hero-backdrop {
+    background:
+      radial-gradient(circle at 58% 44%, rgba(59, 130, 246, 0.22), transparent 16%),
+      radial-gradient(circle at 62% 54%, rgba(96, 165, 250, 0.08), transparent 32%),
+      radial-gradient(circle at 50% 62%, rgba(255, 255, 255, 0.05), transparent 42%);
+    filter: blur(10px);
+    opacity: 0.95;
+  }
+
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(circle at 52% 40%, #000 22%, transparent 76%);
+    opacity: 0.22;
+  }
+
+  .hero-vignette {
+    background:
+      radial-gradient(ellipse 80% 55% at 50% 42%, transparent 24%, rgba(5, 5, 10, 0.1) 60%, rgba(5, 5, 10, 0.92) 100%),
+      linear-gradient(90deg, rgba(5, 5, 10, 0.34), transparent 28%, transparent 72%, rgba(5, 5, 10, 0.42));
+  }
+
+  .hero-content-shell {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    align-items: flex-start;
+    padding: clamp(1rem, 4vw, 3rem);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 5;
+    max-width: 52rem;
+    padding-top: clamp(1rem, 4vw, 3.5rem);
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.38);
+    pointer-events: auto;
+  }
+
+  .hero-title {
+    max-width: 12ch;
+  }
+
+  .hero-subtitle {
+    text-wrap: balance;
+  }
+
+  .hero-stage {
+    position: absolute;
+    inset: 0;
+    isolation: isolate;
+    min-height: calc(100svh - 4rem);
+    border: 0;
+    border-radius: 0;
+    overflow: hidden;
+    background: #040509;
+    transform-style: preserve-3d;
+    perspective: 1400px;
+    box-shadow: none;
+    --hero-rot-x: 0deg;
+    --hero-rot-y: 0deg;
+    --hero-shift-x: 0px;
+    --hero-shift-y: 0px;
+    --sphere-x: 60%;
+    --sphere-y: 46%;
+    --sphere-offset-x: 0px;
+    --sphere-offset-y: 0px;
+    --sphere-scale: 1;
+    --glow-strength: 1;
+    --hero-fade: 1;
+  }
+
+  .hero-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at var(--sphere-x) var(--sphere-y), rgba(59, 130, 246, calc(0.32 * var(--glow-strength))) 0%, transparent 28%),
+      linear-gradient(180deg, rgba(3, 6, 15, 0.08), rgba(3, 6, 15, 0.38));
+    pointer-events: none;
+    z-index: 1;
+    opacity: var(--hero-fade);
+    mix-blend-mode: screen;
+  }
+
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0) scale(1.16) rotateX(var(--hero-rot-x)) rotateY(var(--hero-rot-y));
+    filter: saturate(1.08) contrast(1.12) brightness(0.84);
+    will-change: transform;
+  }
+
+  .hero-video-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 58% 42%, rgba(96, 165, 250, 0.18), transparent 16%),
+      radial-gradient(circle at 30% 25%, rgba(59, 130, 246, 0.08), transparent 25%),
+      linear-gradient(180deg, transparent 0%, rgba(3, 6, 15, 0.18) 55%, rgba(3, 6, 15, 0.72) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-rings,
+  .hero-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    transform-style: preserve-3d;
+  }
+
+  .hero-ring {
+    position: absolute;
+    left: var(--sphere-x);
+    top: var(--sphere-y);
+    width: var(--ring-size);
+    height: var(--ring-size);
+    border-radius: 9999px;
+    border: 1px solid rgba(96, 165, 250, var(--ring-opacity));
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+      0 0 32px rgba(59, 130, 246, 0.14);
+    transform:
+      translate3d(-50%, -50%, 0)
+      rotateX(var(--ring-tilt))
+      rotateZ(0deg);
+    animation: ring-spin var(--ring-duration) linear infinite;
+    mix-blend-mode: screen;
+  }
+
+  .hero-ring::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    opacity: 0.45;
+    filter: blur(0.2px);
+  }
+
+  .hero-particle {
+    position: absolute;
+    left: var(--sphere-x);
+    top: var(--sphere-y);
+    width: 0;
+    height: 0;
+    transform: translate3d(-50%, -50%, 0);
+    animation: particle-orbit var(--particle-duration) linear infinite;
+    animation-delay: var(--particle-delay);
+    transform-style: preserve-3d;
+  }
+
+  .hero-particle-dot {
+    display: block;
+    width: var(--particle-size);
+    height: var(--particle-size);
+    border-radius: 9999px;
+    background: rgba(148, 210, 255, var(--particle-opacity));
+    box-shadow:
+      0 0 10px rgba(96, 165, 250, 0.95),
+      0 0 24px rgba(59, 130, 246, 0.45);
+    filter: blur(0.15px);
+    transform: translateX(var(--particle-radius));
+  }
+
+  .hero-sphere {
+    position: absolute;
+    left: var(--sphere-x);
+    top: var(--sphere-y);
+    z-index: 4;
+    display: grid;
+    place-items: center;
+    width: clamp(7rem, 12vw, 10rem);
+    aspect-ratio: 1;
+    transform:
+      translate3d(calc(-50% + var(--sphere-offset-x)), calc(-50% + var(--sphere-offset-y)), 120px)
+      scale(var(--sphere-scale));
+    transition:
+      transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 240ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+    pointer-events: auto;
+  }
+
+  .hero-sphere:focus-visible {
+    outline: 2px solid rgba(96, 165, 250, 0.8);
+    outline-offset: 8px;
+    border-radius: 9999px;
+  }
+
+  .hero-sphere-core {
+    position: absolute;
+    inset: 14%;
+    border-radius: 9999px;
+    background:
+      radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 1), rgba(191, 219, 254, 0.92) 24%, rgba(59, 130, 246, 0.88) 60%, rgba(15, 23, 42, 0.96) 100%);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.18) inset,
+      0 0 24px rgba(96, 165, 250, 0.65),
+      0 0 90px rgba(59, 130, 246, 0.35);
+    filter: saturate(1.16);
+  }
+
+  .hero-sphere-glow {
+    position: absolute;
+    inset: -28%;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.6), transparent 64%);
+    filter: blur(14px);
+    opacity: 0.78;
+  }
+
+  .hero-sphere-ring {
+    position: absolute;
+    inset: -8%;
+    border-radius: 9999px;
+    border: 1px solid rgba(191, 219, 254, 0.48);
+    box-shadow: 0 0 18px rgba(96, 165, 250, 0.24);
+    transform: rotate(14deg);
+    animation: sphere-pulse 6s ease-in-out infinite;
+  }
+
+  .hero-sphere-ring--inner {
+    inset: 8%;
+    opacity: 0.6;
+    border-color: rgba(191, 219, 254, 0.24);
+    animation-direction: reverse;
+  }
+
+  .hero-sphere-label {
+    position: relative;
+    z-index: 1;
+    padding: 0.65rem 0.9rem;
+    border-radius: 9999px;
+    background: rgba(3, 6, 15, 0.5);
+    border: 1px solid rgba(191, 219, 254, 0.24);
+    color: white;
+    font-size: 0.7rem;
+    line-height: 1;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 22px rgba(59, 130, 246, 0.18);
+  }
+
+  .hero-sphere:hover .hero-sphere-core,
+  .hero-sphere:focus-visible .hero-sphere-core {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.22) inset,
+      0 0 32px rgba(96, 165, 250, 0.85),
+      0 0 120px rgba(59, 130, 246, 0.56);
+  }
+
+  .hero-sphere:hover .hero-sphere-glow,
+  .hero-sphere:focus-visible .hero-sphere-glow {
+    opacity: 1;
+    filter: blur(18px);
+  }
+
+  .hero-caption {
+    position: absolute;
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 4;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .hero-caption-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(3, 6, 15, 0.42);
+    padding: 0.75rem 1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px);
+  }
+
+  .hero-stage[data-motion="off"] .hero-video,
+  .hero-stage[data-motion="off"] .hero-ring,
+  .hero-stage[data-motion="off"] .hero-particle,
+  .hero-stage[data-motion="off"] .hero-sphere-ring {
+    animation: none;
+  }
+
+  .hero-stage[data-motion="off"] .hero-video {
+    transform: none;
+  }
+
+  @keyframes ring-spin {
+    from {
+      transform: translate3d(-50%, -50%, 0) rotateX(var(--ring-tilt)) rotateZ(0deg);
+    }
+    to {
+      transform: translate3d(-50%, -50%, 0) rotateX(var(--ring-tilt)) rotateZ(360deg);
+    }
+  }
+
+  @keyframes particle-orbit {
+    from {
+      transform: translate3d(-50%, -50%, 0) rotate(var(--particle-start));
+    }
+    to {
+      transform: translate3d(-50%, -50%, 0) rotate(calc(var(--particle-start) + 360deg));
+    }
+  }
+
+  @keyframes sphere-pulse {
+    0%,
+    100% {
+      transform: rotate(14deg) scale(0.98);
+      opacity: 0.82;
+    }
+    50% {
+      transform: rotate(18deg) scale(1.04);
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .hero-stage {
+      min-height: calc(100svh - 4rem);
+    }
+
+    .hero-content {
+      max-width: 44rem;
+    }
+
+    .hero-caption {
+      bottom: 1rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-shell {
+      padding-top: 4rem;
+    }
+
+    .hero-stage {
+      min-height: calc(100svh - 4rem);
+    }
+
+    .hero-content {
+      padding-top: 0.5rem;
+    }
+
+    .hero-title {
+      max-width: 10ch;
+    }
+
+    .hero-sphere {
+      width: 5.5rem;
+    }
+
+    .hero-caption {
+      left: 0.875rem;
+      right: 0.875rem;
+      bottom: 0.875rem;
+    }
+
+    .hero-caption-pill {
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video,
+    .hero-ring,
+    .hero-particle,
+    .hero-sphere-ring {
+      animation: none !important;
+    }
+  }
+</style>

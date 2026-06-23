@@ -1,8 +1,8 @@
 {
   "hero": {
-    "title": "One person. Many products.",
-    "subtitle": "A studio of one, building EvoClaw, KinMate, and more.",
-    "ctaPrimary": "Explore Products",
+    "title": "EloLin Official Website",
+    "subtitle": "The official website for EloLin products, projects, and portfolio work.",
+    "ctaPrimary": "Open Projects",
     "ctaSecondary": "View Code"
   },
   "flagship": { "label": "Flagship" },
@@ -17,11 +17,11 @@
   "projectsPreview": { "label": "All projects", "viewAll": "View all" },
   "techStack": { "label": "What I build with" },
   "manifesto": {
-    "label": "The one-person company",
+    "label": "Official portfolio",
     "lines": [
-      "Lean. Solo. Shipping.",
-      "Three products. One brain.",
-      "Open source by default."
+      "Built around a small but complete product system.",
+      "One website. Multiple products.",
+      "Designed to ship and stay current."
     ],
     "cta": "Read the story"
   }

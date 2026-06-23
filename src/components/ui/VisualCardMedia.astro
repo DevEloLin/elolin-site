@@ -1,0 +1,225 @@
+---
+import { cn } from "@/lib/cn";
+
+type Props = {
+  seed: string;
+  title: string;
+  subtitle?: string;
+  kind?: "product" | "project" | "platform";
+  image?: string | undefined;
+  class?: string;
+};
+
+const { seed, title, subtitle, kind = "product", image, class: cls = "" } = Astro.props;
+
+function hash(input: string): number {
+  let out = 0;
+  for (let i = 0; i < input.length; i += 1) out = (out * 31 + input.charCodeAt(i)) >>> 0;
+  return out;
+}
+
+const value = hash(`${kind}:${seed}`);
+const hue = value % 360;
+const hue2 = (hue + 38) % 360;
+const hue3 = (hue + 172) % 360;
+const sat = 78;
+const light = 60;
+const glow = `hsla(${hue}, ${sat}%, ${light}%, 0.38)`;
+const glow2 = `hsla(${hue2}, ${sat}%, ${light + 8}%, 0.26)`;
+const glow3 = `hsla(${hue3}, ${sat - 14}%, ${light + 16}%, 0.18)`;
+---
+
+<div
+  data-visual-card
+  class={cn("visual-media relative overflow-hidden rounded-[1.4rem] border border-white/10 bg-[#07070D] shadow-[0_18px_60px_rgba(0,0,0,0.35)]", cls)}
+  style={`--vm-a:${glow}; --vm-b:${glow2}; --vm-c:${glow3}; --vm-h:${hue}deg;`}
+  aria-hidden="true"
+>
+  {image ? (
+    <img
+      src={image}
+      alt=""
+      loading="lazy"
+      decoding="async"
+      class="absolute inset-0 h-full w-full object-cover object-center visual-media__image"
+    />
+  ) : null}
+  <div class="absolute inset-0 visual-media__grid"></div>
+  <div class="absolute inset-0 visual-media__glow"></div>
+  <div class="absolute inset-0 visual-media__vignette"></div>
+  <div class="absolute inset-0 visual-media__scan"></div>
+  <div class="visual-media__orb visual-media__orb--a"></div>
+  <div class="visual-media__orb visual-media__orb--b"></div>
+  <div class="visual-media__orb visual-media__orb--c"></div>
+  <div class="visual-media__panel visual-media__panel--left"></div>
+  <div class="visual-media__panel visual-media__panel--right"></div>
+  <div class="visual-media__caption">
+    <div class="text-[11px] uppercase tracking-[0.28em] text-white/70">{kind}</div>
+    <div class="mt-2 text-base font-medium text-white">{title}</div>
+    {subtitle && <div class="mt-1 text-sm text-white/65">{subtitle}</div>}
+  </div>
+</div>
+
+<style>
+  .visual-media {
+    min-height: 13rem;
+    background:
+      radial-gradient(circle at 35% 28%, color-mix(in srgb, var(--vm-a) 42%, transparent), transparent 26%),
+      radial-gradient(circle at 72% 30%, color-mix(in srgb, var(--vm-b) 38%, transparent), transparent 24%),
+      radial-gradient(circle at 50% 78%, color-mix(in srgb, var(--vm-c) 26%, transparent), transparent 30%),
+      linear-gradient(180deg, rgba(8, 8, 15, 0.98), rgba(11, 11, 19, 0.98));
+  }
+
+  .visual-media__image {
+    transform: scale(1.04);
+    filter: saturate(1.08) contrast(1.04) brightness(0.94);
+  }
+
+  .visual-media__grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(circle at 50% 38%, #000 18%, transparent 76%);
+    opacity: 0.26;
+  }
+
+  .visual-media__glow {
+    background:
+      radial-gradient(circle at 38% 34%, color-mix(in srgb, var(--vm-a) 72%, transparent), transparent 22%),
+      radial-gradient(circle at 62% 56%, color-mix(in srgb, var(--vm-b) 70%, transparent), transparent 26%),
+      radial-gradient(circle at 50% 62%, color-mix(in srgb, var(--vm-c) 56%, transparent), transparent 32%);
+    filter: blur(16px);
+    opacity: 0.96;
+    animation: media-pulse 10s ease-in-out infinite;
+  }
+
+  .visual-media__vignette {
+    background:
+      radial-gradient(ellipse 75% 60% at 50% 42%, transparent 20%, rgba(4, 4, 9, 0.15) 58%, rgba(4, 4, 9, 0.8) 100%);
+  }
+
+  .visual-media__scan {
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.06) 50%, transparent 100%);
+    background-size: 100% 16px;
+    mix-blend-mode: screen;
+    opacity: 0.12;
+    transform: translateY(-100%);
+    animation: scan 5.5s linear infinite;
+  }
+
+  .visual-media__orb {
+    position: absolute;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+      0 0 50px color-mix(in srgb, var(--vm-a) 32%, transparent);
+    backdrop-filter: blur(8px);
+  }
+
+  .visual-media__orb--a {
+    left: 10%;
+    top: 18%;
+    width: 38%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, color-mix(in srgb, var(--vm-a) 36%, transparent), transparent 68%);
+    animation: drift-a 8s ease-in-out infinite alternate;
+  }
+
+  .visual-media__orb--b {
+    right: 12%;
+    top: 16%;
+    width: 24%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, color-mix(in srgb, var(--vm-b) 34%, transparent), transparent 70%);
+    animation: drift-b 11s ease-in-out infinite alternate;
+  }
+
+  .visual-media__orb--c {
+    left: 48%;
+    bottom: 10%;
+    width: 20%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, color-mix(in srgb, var(--vm-c) 30%, transparent), transparent 72%);
+    animation: drift-c 13s ease-in-out infinite alternate;
+  }
+
+  .visual-media__panel {
+    position: absolute;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .visual-media__panel--left {
+    left: 8%;
+    bottom: 18%;
+    width: 26%;
+    height: 22%;
+    transform: rotate(-10deg);
+  }
+
+  .visual-media__panel--right {
+    right: 10%;
+    bottom: 16%;
+    width: 30%;
+    height: 26%;
+    transform: rotate(9deg);
+  }
+
+  .visual-media__caption {
+    position: absolute;
+    inset-inline: 1rem;
+    bottom: 1rem;
+    z-index: 2;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(5, 5, 10, 0.45);
+    padding: 0.9rem 1rem;
+    backdrop-filter: blur(14px);
+  }
+
+  @keyframes media-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.92;
+    }
+    50% {
+      transform: scale(1.04);
+      opacity: 1;
+    }
+  }
+
+  @keyframes scan {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(100%); }
+  }
+
+  @keyframes drift-a {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(10px, 8px, 0) scale(1.05); }
+  }
+
+  @keyframes drift-b {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(-8px, 12px, 0) scale(1.08); }
+  }
+
+  @keyframes drift-c {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(6px, -10px, 0) scale(1.06); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .visual-media__glow,
+    .visual-media__scan,
+    .visual-media__orb {
+      animation: none;
+    }
+  }
+</style>
