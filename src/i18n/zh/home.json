@@ -3,7 +3,12 @@
     "title": "EloLin 官方网站",
     "subtitle": "EloLin 产品、项目与作品集的官方网站。",
     "ctaPrimary": "打开项目",
-    "ctaSecondary": "查看源码"
+    "ctaSecondary": "查看源码",
+    "featuredEyebrow": "主推产品",
+    "featuredName": "TestHive",
+    "featuredTagline": "真实测试者 · 真实反馈 · 真实报告",
+    "featuredDescription": "Google Play Closed Testing 测试平台 · 12 位真人测试者 × 14 天 · 付费或免费起步",
+    "featuredCta": "打开 TestHive"
   },
   "flagship": { "label": "旗舰" },
   "products": {
