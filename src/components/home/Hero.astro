@@ -71,11 +71,31 @@ const particles = Array.from({ length: 10 }, (_, i) => ({
             </Button>
           </div>
 
-          <div class="mt-10 flex flex-wrap gap-3 text-caption uppercase tracking-[0.22em] text-fg-2">
-            <span class="rounded-full border border-white/8 bg-white/4 px-3 py-2">60 FPS motion</span>
-            <span class="rounded-full border border-white/8 bg-white/4 px-3 py-2">Blue neon lighting</span>
-            <span class="rounded-full border border-white/8 bg-white/4 px-3 py-2">Mouse-reactive 3D</span>
-          </div>
+          {/* Featured product card · TestHive 主推 · 上一周用户决策放进 hero
+              首屏 · SEO 信号 (TestHive 名字出现在 above-the-fold visible body
+              · 进 Google 实体识别强信号) + 流量导出 (主推产品 CTA) */}
+          <a href="https://testhive.elolin.com" target="_blank" rel="noopener" class="hero-featured mt-10 group" aria-label={`${t("home.hero.featuredEyebrow", locale)}: ${t("home.hero.featuredName", locale)}`}>
+            <div class="hero-featured-inner">
+              <div class="hero-featured-glow" aria-hidden="true"></div>
+              <div class="hero-featured-content">
+                <span class="hero-featured-eyebrow">
+                  <span class="hero-featured-dot" aria-hidden="true"></span>
+                  {t("home.hero.featuredEyebrow", locale)}
+                </span>
+                <div class="hero-featured-row">
+                  <div>
+                    <p class="hero-featured-name">{t("home.hero.featuredName", locale)}</p>
+                    <p class="hero-featured-tagline">{t("home.hero.featuredTagline", locale)}</p>
+                  </div>
+                  <span class="hero-featured-cta">
+                    {t("home.hero.featuredCta", locale)}
+                    <ArrowRight size={14} />
+                  </span>
+                </div>
+                <p class="hero-featured-desc">{t("home.hero.featuredDescription", locale)}</p>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
 
@@ -539,6 +559,127 @@ const particles = Array.from({ length: 10 }, (_, i) => ({
     filter: blur(18px);
   }
 
+  /* Featured product card — placed inside hero-content, below CTAs. Visible
+     in above-the-fold for SEO entity signal (TestHive brand name in hero) +
+     traffic CTA. Hover glow + scale to match the hero's blue-neon motif. */
+  .hero-featured {
+    display: block;
+    max-width: 32rem;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 1.25rem;
+    transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hero-featured:hover {
+    transform: translateY(-2px);
+  }
+  .hero-featured-inner {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(96, 165, 250, 0.28);
+    background:
+      linear-gradient(135deg, rgba(15, 22, 41, 0.78), rgba(8, 12, 24, 0.92));
+    backdrop-filter: blur(14px);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+      0 16px 40px rgba(0, 0, 0, 0.45),
+      0 0 32px rgba(59, 130, 246, 0.18);
+    transition: border-color 240ms ease, box-shadow 240ms ease;
+  }
+  .hero-featured:hover .hero-featured-inner {
+    border-color: rgba(96, 165, 250, 0.6);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+      0 20px 56px rgba(0, 0, 0, 0.5),
+      0 0 56px rgba(59, 130, 246, 0.36);
+  }
+  .hero-featured-glow {
+    position: absolute;
+    inset: -40% -10% auto auto;
+    width: 18rem;
+    height: 18rem;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.32), transparent 65%);
+    filter: blur(28px);
+    opacity: 0.55;
+    transition: opacity 240ms ease;
+    pointer-events: none;
+  }
+  .hero-featured:hover .hero-featured-glow {
+    opacity: 0.85;
+  }
+  .hero-featured-content {
+    position: relative;
+    z-index: 1;
+    padding: 1.25rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .hero-featured-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(191, 219, 254, 0.85);
+  }
+  .hero-featured-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 9999px;
+    background: rgb(96, 165, 250);
+    box-shadow: 0 0 8px rgba(96, 165, 250, 0.85);
+    animation: featured-pulse 2.4s ease-in-out infinite;
+  }
+  .hero-featured-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .hero-featured-name {
+    font-size: 2rem;
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: white;
+  }
+  .hero-featured-tagline {
+    margin-top: 0.35rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: rgba(226, 232, 240, 0.78);
+  }
+  .hero-featured-cta {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.55rem 0.85rem;
+    border-radius: 9999px;
+    background: rgba(96, 165, 250, 0.18);
+    border: 1px solid rgba(96, 165, 250, 0.35);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: white;
+    transition: background 200ms ease, border-color 200ms ease;
+  }
+  .hero-featured:hover .hero-featured-cta {
+    background: rgba(96, 165, 250, 0.32);
+    border-color: rgba(191, 219, 254, 0.65);
+  }
+  .hero-featured-desc {
+    font-size: 0.825rem;
+    line-height: 1.55;
+    color: rgba(203, 213, 225, 0.72);
+  }
+  @keyframes featured-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(1.25); }
+  }
+
   .hero-caption {
     position: absolute;
     left: 1.25rem;
@@ -634,6 +775,17 @@ const particles = Array.from({ length: 10 }, (_, i) => ({
 
     .hero-title {
       max-width: 10ch;
+    }
+
+    .hero-featured-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .hero-featured-name {
+      font-size: 1.6rem;
+    }
+    .hero-featured-cta {
+      align-self: flex-start;
     }
 
     .hero-sphere {

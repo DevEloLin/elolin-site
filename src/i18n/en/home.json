@@ -3,7 +3,12 @@
     "title": "EloLin Official Website",
     "subtitle": "The official website for EloLin products, projects, and portfolio work.",
     "ctaPrimary": "Open Projects",
-    "ctaSecondary": "View Code"
+    "ctaSecondary": "View Code",
+    "featuredEyebrow": "Featured product",
+    "featuredName": "TestHive",
+    "featuredTagline": "Real testers. Real feedback. Real reports.",
+    "featuredDescription": "User-testing platform for Google Play Closed Testing — 12 verified testers × 14 days, paid or free.",
+    "featuredCta": "Open TestHive"
   },
   "flagship": { "label": "Flagship" },
   "products": {
