@@ -26,6 +26,7 @@ export type ProductEntry = {
   url: string;
   tagline: { en: string; zh: string };
   tags: readonly string[];
+  coverImage?: string;
   repo?: string;
   extraLinks?: readonly { label: string; href: string }[];
 };
@@ -39,6 +40,7 @@ export const FLAGSHIP_PRODUCTS: readonly ProductEntry[] = [
       en: "Local-first self-evolving AI agent runtime.",
       zh: "本地优先 · 自我进化的 AI agent 运行时",
     },
+    coverImage: "https://develolin.github.io/EvoClawSite/image/EvoClaw2.png",
     tags: ["Rust", "Tauri", "Local-first"],
     repo: "evoclaw",
     extraLinks: [
@@ -53,6 +55,7 @@ export const FLAGSHIP_PRODUCTS: readonly ProductEntry[] = [
       en: "Private family health vault with AI explanations.",
       zh: "私密的家庭健康保险库 · AI 解读报告",
     },
+    coverImage: "https://develolin.github.io/kinmate-site/icon-512.png",
     tags: ["TypeScript", "Supabase", "AI"],
     repo: "kinmate-site",
   },
@@ -64,6 +67,7 @@ export const FLAGSHIP_PRODUCTS: readonly ProductEntry[] = [
       en: "Real testers for your Google Play Closed Testing.",
       zh: "真实测试者 · 真实反馈 · 真实报告",
     },
+    coverImage: "https://testhive.elolin.com/opengraph-image.png",
     tags: ["Indie Dev", "Beta"],
   },
   {
@@ -74,6 +78,7 @@ export const FLAGSHIP_PRODUCTS: readonly ProductEntry[] = [
       en: "Indie games · play in your browser.",
       zh: "浏览器秒玩独立游戏",
     },
+    coverImage: "https://games.elolin.com/og-default.png",
     tags: ["Gaming"],
   },
   {
@@ -84,6 +89,7 @@ export const FLAGSHIP_PRODUCTS: readonly ProductEntry[] = [
       en: "Chrome MV2 → MV3 migration CLI · scans, codemods, reports.",
       zh: "Chrome MV2 → MV3 迁移 CLI · 扫描 · 修补 · 报告",
     },
+    coverImage: "https://elolin.com/og-default.png",
     tags: ["Developer Tools", "CLI"],
   },
 ] as const;
@@ -97,6 +103,7 @@ export const PLATFORM_SERVICES: readonly ProductEntry[] = [
       en: "One sign-in for every EloLin product.",
       zh: "一次登录 · 通行所有 EloLin 产品",
     },
+    coverImage: "https://accounts.elolin.com/og-default.png",
     tags: ["Identity", "SSO"],
   },
   {
@@ -107,6 +114,7 @@ export const PLATFORM_SERVICES: readonly ProductEntry[] = [
       en: "Sub-domain hosting, ready in 30 seconds.",
       zh: "30 秒上线你的子域名",
     },
+    coverImage: "https://domains.elolin.com/og-default.png",
     tags: ["Hosting"],
   },
 ] as const;

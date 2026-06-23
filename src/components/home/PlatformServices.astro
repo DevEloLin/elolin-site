@@ -1,5 +1,6 @@
 ---
 import GlassCard from "@/components/ui/GlassCard.astro";
+import VisualCardMedia from "@/components/ui/VisualCardMedia.astro";
 import { ArrowUpRight } from "lucide-astro";
 import { t, type Locale } from "@/lib/i18n";
 import { PLATFORM_SERVICES } from "@/lib/site";
@@ -16,7 +17,7 @@ const { locale } = Astro.props;
     </header>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       {PLATFORM_SERVICES.map((s) => (
-        <GlassCard interactive class="group bg-bg-1/40">
+        <GlassCard interactive class="group overflow-hidden p-0 bg-bg-1/40">
           <a
             href={s.url}
             target="_blank"
@@ -24,20 +25,30 @@ const { locale } = Astro.props;
             aria-label={s.name}
             class="absolute inset-0 z-10"
           ></a>
-          <div class="flex items-start justify-between gap-3">
-            <h3 class="text-h3 font-semibold">{s.name}</h3>
-            <ArrowUpRight
-              size={18}
-              class="text-fg-2 transition-all group-hover:text-fg-0 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
-          </div>
-          <p class="mt-3 text-fg-1 text-body-sm">{s.tagline[locale]}</p>
-          <div class="mt-5 flex flex-wrap gap-1.5">
-            {s.tags.map((tag) => (
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] text-fg-2 bg-bg-1 border border-white/10">
-                {tag}
-              </span>
-            ))}
+          <VisualCardMedia
+            seed={s.slug}
+            title={s.name}
+            subtitle={s.tagline[locale]}
+            kind="platform"
+            {...(s.coverImage ? { image: s.coverImage } : {})}
+            class="min-h-[14rem] rounded-none border-0"
+          />
+          <div class="p-5 sm:p-6">
+            <div class="flex items-start justify-between gap-3">
+              <h3 class="text-h3 font-semibold">{s.name}</h3>
+              <ArrowUpRight
+                size={18}
+                class="text-fg-2 transition-all group-hover:text-fg-0 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </div>
+            <p class="mt-3 text-fg-1 text-body-sm">{s.tagline[locale]}</p>
+            <div class="mt-5 flex flex-wrap gap-1.5">
+              {s.tags.map((tag) => (
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] text-fg-2 bg-bg-1 border border-white/10">
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
         </GlassCard>
       ))}
