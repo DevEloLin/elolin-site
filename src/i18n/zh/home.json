@@ -1,8 +1,8 @@
 {
   "hero": {
-    "title": "一个人 · 一座工作室 · 多个产品",
-    "subtitle": "EvoClaw、KinMate,以及还在路上的下一批。",
-    "ctaPrimary": "探索产品",
+    "title": "EloLin 官方网站",
+    "subtitle": "EloLin 产品、项目与作品集的官方网站。",
+    "ctaPrimary": "打开项目",
     "ctaSecondary": "查看源码"
   },
   "flagship": { "label": "旗舰" },
@@ -17,11 +17,11 @@
   "projectsPreview": { "label": "全部项目", "viewAll": "查看全部" },
   "techStack": { "label": "我用什么搭" },
   "manifesto": {
-    "label": "一人公司",
+    "label": "官方网站",
     "lines": [
-      "精瘦 · 单兵 · 持续交付。",
-      "三个产品,一个大脑。",
-      "默认开源。"
+      "围绕一个完整的产品体系构建。",
+      "一个官网，多个产品。",
+      "为持续更新和长期展示而设计。"
     ],
     "cta": "看完整故事"
   }
