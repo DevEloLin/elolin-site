@@ -15,20 +15,58 @@ const canonical = `${SITE.url}${path}`;
 const enPart = path.replace(/^\/zh\/?/, "/") || "/";
 const zhPart = enPart === "/" ? "/zh/" : `/zh${enPart}`;
 
-// Default keywords — broad EloLin family terms · per-page can override via prop.
+// Default keywords — comprehensive EloLin family terms covering parent brand
+// + 7 product brands + category positioning + audience + alternatives. The
+// same set seeds keywords for every page that doesn't override via prop.
 const DEFAULT_KEYWORDS = locale === "zh"
   ? [
-      "EloLin", "独立开发者", "一人公司", "AI 产品",
-      "EvoClaw", "KinMate", "TestHive", "EloGames",
-      "免费子域名托管", "Google Play Closed Testing",
-      "本地 AI agent", "家庭健康应用", "浏览器游戏",
+      // 品牌父
+      "EloLin", "elolin.com", "EloLin 工作室",
+      // 7 个产品品牌
+      "EvoClaw", "KinMate", "TestHive", "EloGames", "EloLin Accounts", "EloLin Domains", "mv3migrate",
+      // 公司定位
+      "独立开发者", "一人公司", "独立 SaaS", "indie hacker",
+      "一人创业", "副业产品", "全栈独立开发",
+      "AI 产品", "AI 应用", "AI 工具",
+      // 产品类别
+      "本地 AI agent", "AI agent 运行时",
+      "家庭健康应用", "私密家庭健康保险库",
+      "应用测试者", "Google Play Closed Testing", "12 个测试者 14 天",
+      "浏览器游戏", "免费 HTML5 游戏",
+      "单点登录", "统一账号 SSO",
+      "免费子域名托管", "免费 DNS",
+      "Chrome 扩展迁移", "MV2 到 MV3 迁移",
+      // 跨产品组合
+      "EloLin 全家桶", "EloLin 产品矩阵",
+      "EloLin 单点登录", "EloLin 共享账号",
     ]
   : [
-      "EloLin", "solo developer", "indie products", "AI products",
-      "EvoClaw", "KinMate", "TestHive", "EloGames",
-      "free subdomain hosting", "Google Play Closed Testing",
-      "local AI agent", "family health app", "browser games",
-      "one-person company", "indie SaaS",
+      // Parent brand
+      "EloLin", "elolin.com", "EloLin studio", "EloLin company",
+      // 7 product brands
+      "EvoClaw", "KinMate", "TestHive", "EloGames", "EloLin Accounts", "EloLin Domains", "mv3migrate",
+      // Founder positioning
+      "solo developer", "one-person company", "indie hacker",
+      "indie products", "indie SaaS", "indie products company",
+      "AI products", "AI applications", "AI tools",
+      "one person many products",
+      // Product categories
+      "local AI agent", "self-evolving AI agent",
+      "family health app", "private family health vault",
+      "app testing platform", "Google Play Closed Testing", "12 testers 14 days",
+      "real human testers", "beta tester marketplace",
+      "browser games", "free HTML5 games", "instant play games",
+      "single sign-on", "SSO platform", "OAuth identity",
+      "free subdomain hosting", "free DNS", "instant DNS",
+      "Chrome extension migration", "MV2 to MV3", "Manifest V3 migration",
+      // Cross-product family
+      "EloLin product family", "EloLin one-account",
+      "EloLin SSO", "cross-product sign-in",
+      // Audience
+      "indie Android developer", "solo founder",
+      "Chrome extension developer", "Closed Testing requirement",
+      // Brand alternatives
+      "elolin", "elo lin", "develolin",
     ];
 const kwList = keywords && keywords.length > 0 ? keywords : DEFAULT_KEYWORDS;
 ---
