@@ -28,26 +28,43 @@ const QA = locale === "zh" ? [
 ];
 ---
 <section class="py-24 sm:py-32" data-reveal>
-  <div class="container mx-auto px-6 max-w-3xl">
-    <header class="mb-10">
+  <div class="faq-stage container mx-auto px-6 max-w-5xl" data-motion-section>
+    <header class="faq-stage__header" data-motion-item>
       <p class="section-eyebrow">FAQ</p>
       <h2 class="section-title">
         {locale === "zh" ? "常见问题" : "Common questions"}
       </h2>
+      <p>{locale === "zh" ? "关于产品、开放源代码与独立运营的直接回答。" : "Direct answers about the products, the open work, and the solo studio behind it."}</p>
     </header>
-    <dl class="divide-y divide-white/[0.08] overflow-hidden rounded-[1.5rem] border border-white/[0.1] bg-white/[0.025] backdrop-blur-sm">
-      {QA.map((it) => (
-        <details class="group p-5 transition hover:bg-white/[0.025] sm:p-6">
+    <dl class="faq-stage__list" data-motion-item>
+      {QA.map((it, index) => (
+        <details class="faq-stage__item group">
           <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-medium tracking-[-0.02em]">
-            <dt>{it.q}</dt>
-            <span class="text-fg-2 transition-transform group-open:rotate-180">▾</span>
+            <dt><span>{String(index + 1).padStart(2, "0")}</span>{it.q}</dt>
+            <span class="faq-stage__toggle">+</span>
           </summary>
-          <dd class="mt-3 text-fg-1 text-body-sm leading-relaxed">{it.a}</dd>
+          <dd>{it.a}</dd>
         </details>
       ))}
     </dl>
   </div>
 </section>
+<style>
+  .faq-stage { display: grid; grid-template-columns: minmax(14rem, 0.6fr) minmax(0, 1.4fr); gap: clamp(2rem, 7vw, 7rem); align-items: start; }
+  .faq-stage__header { position: sticky; top: 7rem; }
+  .faq-stage__header p:last-child { max-width: 17rem; margin-top: 1rem; color: var(--fg-2); font-size: 0.88rem; line-height: 1.6; }
+  .faq-stage__list { margin: 0; border-top: 1px solid rgba(191,219,254,0.2); }
+  .faq-stage__item { border-bottom: 1px solid rgba(255,255,255,0.1); transition: background 200ms ease; }
+  .faq-stage__item:hover { background: linear-gradient(90deg, rgba(59,130,246,0.06), transparent 62%); }
+  .faq-stage__item summary { padding: 1.3rem 0; color: var(--fg-0); font-size: clamp(1rem, 1.4vw, 1.12rem); }
+  .faq-stage__item summary::-webkit-details-marker { display: none; }
+  .faq-stage__item dt { display: flex; align-items: baseline; gap: 1rem; }
+  .faq-stage__item dt span { flex: none; color: rgba(147,197,253,0.68); font-family: "Geist Mono", monospace; font-size: 0.67rem; font-weight: 500; letter-spacing: 0.1em; }
+  .faq-stage__toggle { display: grid; flex: none; width: 1.75rem; height: 1.75rem; place-items: center; border: 1px solid rgba(191,219,254,0.25); border-radius: 50%; color: var(--fg-1); font-size: 1.15rem; font-weight: 300; line-height: 1; transition: transform 240ms ease, background 240ms ease, color 240ms ease; }
+  .faq-stage__item[open] .faq-stage__toggle { background: #dbeafe; color: #07111f; transform: rotate(45deg); }
+  .faq-stage__item dd { max-width: 43rem; margin: 0; padding: 0 3rem 1.5rem 2rem; color: var(--fg-1); font-size: 0.92rem; line-height: 1.7; }
+  @media (max-width: 760px) { .faq-stage { grid-template-columns: 1fr; gap: 2rem; } .faq-stage__header { position: static; } .faq-stage__item dd { padding-right: 0.5rem; } }
+</style>
 <script type="application/ld+json" set:html={JSON.stringify({
   "@context": "https://schema.org",
   "@type": "FAQPage",
