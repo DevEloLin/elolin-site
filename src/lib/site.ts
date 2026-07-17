@@ -8,8 +8,8 @@ export const SITE = {
   defaultLocale: "en" as const,
   locales: ["en", "zh"] as const,
   description: {
-    en: "Solo developer building AI products. One person. Many products.",
-    zh: "独立开发者 · 一人公司 · AI 产品",
+    en: "Focused tools for the final mile of shipping products — testing, identity, and developer workflows.",
+    zh: "专注解决产品发布最后一公里难题的工具：测试、身份体系与开发者工作流。",
   },
 } as const;
 

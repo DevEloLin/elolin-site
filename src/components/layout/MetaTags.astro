@@ -8,7 +8,7 @@ type Props = {
   ogImage?: string;
   keywords?: string[];
 };
-const { title, description, locale, path, ogImage = "/og-default.png", keywords } = Astro.props;
+const { title, description, locale, path, ogImage = "/og-launch.png", keywords } = Astro.props;
 const fullTitle = title === SITE.name ? SITE.name : `${title} · ${SITE.name}`;
 const desc = description ?? SITE.description[locale];
 const canonical = `${SITE.url}${path}`;

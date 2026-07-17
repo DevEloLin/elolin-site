@@ -1,19 +1,19 @@
 {
   "hero": {
-    "title": "EloLin 官方网站",
-    "subtitle": "EloLin 产品、项目与作品集的官方网站。",
-    "ctaPrimary": "打开项目",
-    "ctaSecondary": "查看源码",
-    "featuredEyebrow": "主推产品",
+    "title": "少一点上线阻力，多一点真正上线的产品。",
+    "subtitle": "专注解决产品发布最后一公里的难题——从 Android 封闭测试，到身份体系与开发者工作流。",
+    "ctaPrimary": "探索产品",
+    "ctaSecondary": "用 TestHive 找测试者",
+    "featuredEyebrow": "为下一次发布而生",
     "featuredName": "TestHive",
-    "featuredTagline": "真实测试者 · 真实反馈 · 真实报告",
-    "featuredDescription": "Google Play Closed Testing 测试平台 · 12 位真人测试者 × 14 天 · 付费或免费起步",
+    "featuredTagline": "顺利通过 Google Play 封闭测试。",
+    "featuredDescription": "连接真实测试者，获取可用反馈，并完成 Google 要求的 12 位测试者 / 14 天测试周期。",
     "featuredCta": "打开 TestHive"
   },
   "flagship": { "label": "旗舰" },
   "products": {
     "heading": "产品",
-    "subhead": "一个人也能跑通的产品 · 简单 · 稳 · 久用"
+    "subhead": "用一组小而锋利的工具，跨过从好想法到真正上线之间的每一步。"
   },
   "platform": {
     "heading": "平台",
