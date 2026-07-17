@@ -53,11 +53,12 @@ const siteJson = JSON.stringify(website(locale));
     <slot name="footer" />
     <script>
       import { setupReveal } from "@/lib/motion";
-      import { setupQuantumCursor, setupTiltCards } from "@/lib/interactions";
+      import { setupMotionChoreography, setupQuantumCursor, setupTiltCards } from "@/lib/interactions";
       if (document.readyState === "complete") setupReveal();
       else window.addEventListener("DOMContentLoaded", () => setupReveal());
       setupQuantumCursor();
       setupTiltCards();
+      setupMotionChoreography();
     </script>
   </body>
 </html>
