@@ -1,6 +1,5 @@
 ---
 import AiBadge from "@/components/ui/AiBadge.astro";
-import VisualCardMedia from "@/components/ui/VisualCardMedia.astro";
 import { ArrowUpRight, Github } from "lucide-astro";
 import projects from "@/data/projects.json";
 import { projectDescription, t, type Locale } from "@/lib/i18n";
@@ -15,9 +14,15 @@ const repo = product.repo ? all.find((p) => p.slug === product.repo) : undefined
 const isAi = repo?.tags.includes("ai") ?? false;
 const desc = product.tagline?.[locale] ?? (repo ? projectDescription(repo.slug, repo.description, locale) : "");
 const liveLabel = locale === "zh" ? "已上线" : "Live";
+const entryNumber = String(["evoclaw", "kinmate", "testhive", "games", "mv3migrate"].indexOf(product.slug) + 1).padStart(2, "0");
+
+function colorFor(input: string) {
+  return Array.from(input).reduce((value, char) => (value * 31 + char.charCodeAt(0)) % 360, 0);
+}
+const hue = colorFor(product.slug);
 ---
 
-<article class="product-entry group">
+<article class="product-entry group" data-product-entry style={`--entry-hue:${hue};`}>
   <div class="product-entry__copy">
     <div class="flex items-start justify-between gap-5">
       <div>
@@ -46,18 +51,41 @@ const liveLabel = locale === "zh" ? "已上线" : "Live";
     ))}
   </div>
 
-  <VisualCardMedia
-    seed={product.slug}
-    title={product.name}
-    subtitle={product.tagline[locale]}
-    kind="product"
-    {...(product.coverImage ? { image: product.coverImage } : {})}
-    class="product-entry__visual"
-  />
+  <a class="product-entry__art" href={product.url} target="_blank" rel="noopener" aria-label={`${product.name} — ${t("products.links.site", locale)}`}>
+    {product.coverImage && <img src={product.coverImage} alt="" loading="lazy" decoding="async" />}
+    <span class="product-entry__art-no">{entryNumber}</span>
+    <span class="product-entry__art-title">{product.name}</span>
+    <span class="product-entry__art-orbit product-entry__art-orbit--one"></span>
+    <span class="product-entry__art-orbit product-entry__art-orbit--two"></span>
+    <span class="product-entry__art-pointer" aria-hidden="true"></span>
+  </a>
 </article>
+
+<script>
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  if (!reducedMotion.matches) {
+    document.querySelectorAll<HTMLElement>("[data-product-entry]").forEach((entry) => {
+      const setPointer = (event: PointerEvent) => {
+        const rect = entry.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width) * 100;
+        const y = ((event.clientY - rect.top) / rect.height) * 100;
+        entry.style.setProperty("--pointer-x", `${x}%`);
+        entry.style.setProperty("--pointer-y", `${y}%`);
+        entry.dataset.active = "true";
+      };
+
+      entry.addEventListener("pointermove", setPointer, { passive: true });
+      entry.addEventListener("pointerleave", () => delete entry.dataset.active);
+    });
+  }
+</script>
 
 <style>
   .product-entry {
+    --pointer-x: 50%;
+    --pointer-y: 50%;
+    position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1.15fr) minmax(10rem, 0.55fr) minmax(12rem, 15rem);
     align-items: center;
@@ -65,11 +93,24 @@ const liveLabel = locale === "zh" ? "已上线" : "Live";
     min-height: 15.5rem;
     padding: 1.7rem 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    transition: border-color 260ms ease;
+    isolation: isolate;
+    transition: border-color 320ms ease;
+  }
+
+  .product-entry::before {
+    position: absolute;
+    inset: 0 -2rem;
+    z-index: -1;
+    opacity: 0;
+    background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), hsl(var(--entry-hue) 85% 64% / 0.13), transparent 28rem);
+    content: "";
+    pointer-events: none;
+    transition: opacity 360ms ease;
   }
 
   .product-entry:first-child { border-top: 0; }
-  .product-entry:hover { border-color: rgba(147, 197, 253, 0.48); }
+  .product-entry:hover, .product-entry[data-active="true"] { border-color: hsl(var(--entry-hue) 80% 72% / 0.6); }
+  .product-entry:hover::before, .product-entry[data-active="true"]::before { opacity: 1; }
   .product-entry__status {
     display: flex;
     align-items: center;
@@ -81,19 +122,50 @@ const liveLabel = locale === "zh" ? "已上线" : "Live";
     letter-spacing: 0.14em;
     text-transform: uppercase;
   }
-  .product-entry__status span { width: 0.42rem; height: 0.42rem; border-radius: 9999px; background: #60a5fa; box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.1), 0 0 12px rgba(96, 165, 250, 0.7); }
-  .product-entry__name { margin-top: 0.8rem; font-size: clamp(1.85rem, 2.5vw, 2.7rem); font-weight: 600; letter-spacing: -0.055em; line-height: 0.98; }
+  .product-entry__status span { width: 0.42rem; height: 0.42rem; border-radius: 9999px; background: hsl(var(--entry-hue) 92% 72%); box-shadow: 0 0 0 4px hsl(var(--entry-hue) 85% 62% / 0.12), 0 0 12px hsl(var(--entry-hue) 85% 62% / 0.75); }
+  .product-entry__name { margin-top: 0.8rem; font-size: clamp(1.85rem, 2.5vw, 2.7rem); font-weight: 600; letter-spacing: -0.055em; line-height: 0.98; transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), color 300ms ease; }
+  .product-entry:hover .product-entry__name, .product-entry[data-active="true"] .product-entry__name { color: hsl(var(--entry-hue) 100% 88%); transform: translateX(0.35rem); }
   .product-entry__description { max-width: 35rem; margin-top: 1rem; color: var(--fg-1); font-size: 0.95rem; line-height: 1.6; }
   .product-entry__meta { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.25rem; color: var(--fg-2); font-family: "Geist Mono", monospace; font-size: 0.68rem; letter-spacing: 0.04em; }
   .product-entry__meta span:not(:last-child)::after { margin-left: 0.45rem; content: "·"; }
   .product-entry__actions { display: flex; flex-direction: column; align-items: flex-start; gap: 0.8rem; }
-  .product-entry__primary, .product-entry__secondary { display: inline-flex; align-items: center; gap: 0.45rem; transition: color 180ms ease, border-color 180ms ease; }
+  .product-entry__primary, .product-entry__secondary { display: inline-flex; align-items: center; gap: 0.45rem; transition: color 180ms ease, border-color 180ms ease, transform 180ms ease; }
   .product-entry__primary { padding-bottom: 0.3rem; border-bottom: 1px solid rgba(191, 219, 254, 0.42); color: #dbeafe; font-size: 0.9rem; font-weight: 600; }
-  .product-entry__primary:hover { border-color: white; color: white; }
+  .product-entry__primary:hover { transform: translateX(0.25rem); border-color: white; color: white; }
   .product-entry__secondary { color: var(--fg-2); font-size: 0.78rem; }
   .product-entry__secondary:hover { color: var(--fg-0); }
-  .product-entry__visual { min-height: 10.5rem; border-radius: 1rem; transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), border-color 320ms ease; }
-  .product-entry:hover .product-entry__visual { transform: scale(1.025); border-color: rgba(147, 197, 253, 0.35); }
+
+  .product-entry__art {
+    position: relative;
+    display: block;
+    min-height: 10.5rem;
+    overflow: hidden;
+    border: 1px solid hsl(var(--entry-hue) 55% 70% / 0.2);
+    border-radius: 1rem;
+    background:
+      radial-gradient(circle at 18% 78%, hsl(var(--entry-hue) 80% 55% / 0.5), transparent 26%),
+      linear-gradient(135deg, hsl(var(--entry-hue) 52% 10%), #080910 70%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04), 0 14px 45px rgba(0,0,0,0.28);
+    transform: perspective(700px) rotateY(-4deg) rotateX(2deg);
+    transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1), border-color 360ms ease, box-shadow 360ms ease;
+  }
+  .product-entry__art::before { position: absolute; inset: 0; z-index: 1; background: linear-gradient(120deg, rgba(4,6,14,0.1), rgba(4,6,14,0.72)); content: ""; }
+  .product-entry__art::after { position: absolute; inset: 0; z-index: 2; opacity: 0.34; background-image: linear-gradient(hsl(var(--entry-hue) 80% 80% / 0.25) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--entry-hue) 80% 80% / 0.25) 1px, transparent 1px); background-size: 26px 26px; mask-image: linear-gradient(135deg, #000, transparent 82%); content: ""; }
+  .product-entry__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.64; filter: grayscale(0.45) contrast(1.2) saturate(0.82); transform: scale(1.12); transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1), opacity 500ms ease, filter 500ms ease; }
+  .product-entry__art-no { position: absolute; z-index: 4; top: 0.9rem; left: 1rem; color: white; font-family: "Geist Mono", monospace; font-size: 0.68rem; letter-spacing: 0.18em; opacity: 0.85; }
+  .product-entry__art-title { position: absolute; z-index: 4; right: -0.2rem; bottom: 0.55rem; color: white; font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 600; letter-spacing: -0.075em; line-height: 0.8; opacity: 0.92; transform: rotate(-6deg); transform-origin: bottom right; transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1); }
+  .product-entry__art-orbit { position: absolute; z-index: 3; width: 12rem; aspect-ratio: 1; border: 1px solid hsl(var(--entry-hue) 90% 80% / 0.5); border-radius: 50%; box-shadow: 0 0 30px hsl(var(--entry-hue) 90% 62% / 0.25); transition: transform 750ms cubic-bezier(0.16, 1, 0.3, 1); }
+  .product-entry__art-orbit--one { top: -5rem; right: -3.5rem; }
+  .product-entry__art-orbit--two { right: 28%; bottom: -7rem; width: 10rem; border-color: hsl(var(--entry-hue) 90% 80% / 0.25); }
+  .product-entry__art-pointer { position: absolute; z-index: 5; top: var(--pointer-y); left: var(--pointer-x); width: 5rem; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, hsl(var(--entry-hue) 95% 84% / 0.36), transparent 66%); filter: blur(7px); opacity: 0; transform: translate(-50%, -50%); transition: opacity 260ms ease; pointer-events: none; }
+  .product-entry:hover .product-entry__art, .product-entry[data-active="true"] .product-entry__art { border-color: hsl(var(--entry-hue) 90% 80% / 0.62); box-shadow: inset 0 0 0 1px hsl(var(--entry-hue) 90% 80% / 0.18), 0 22px 56px hsl(var(--entry-hue) 75% 20% / 0.3); transform: perspective(700px) rotateY(0deg) rotateX(0deg) translateY(-0.3rem); }
+  .product-entry:hover .product-entry__art img, .product-entry[data-active="true"] .product-entry__art img { opacity: 0.84; filter: grayscale(0) contrast(1.08) saturate(1.1); transform: scale(1.02); }
+  .product-entry:hover .product-entry__art-title, .product-entry[data-active="true"] .product-entry__art-title { transform: rotate(0deg) translate(-0.35rem, -0.25rem); }
+  .product-entry:hover .product-entry__art-orbit--one, .product-entry[data-active="true"] .product-entry__art-orbit--one { transform: rotate(58deg) scale(1.16); }
+  .product-entry:hover .product-entry__art-orbit--two, .product-entry[data-active="true"] .product-entry__art-orbit--two { transform: rotate(-75deg) scale(0.85); }
+  .product-entry[data-active="true"] .product-entry__art-pointer { opacity: 1; }
+
   @media (max-width: 900px) { .product-entry { grid-template-columns: minmax(0, 1fr) 12rem; gap: 1.5rem; } .product-entry__actions { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; } }
-  @media (max-width: 620px) { .product-entry { grid-template-columns: 1fr; min-height: 0; padding: 1.6rem 0; } .product-entry__visual { order: -1; min-height: 12rem; } .product-entry__actions { grid-column: auto; } }
+  @media (max-width: 620px) { .product-entry { grid-template-columns: 1fr; min-height: 0; padding: 1.6rem 0; } .product-entry__art { order: -1; min-height: 13rem; transform: none; } .product-entry__actions { grid-column: auto; } }
+  @media (prefers-reduced-motion: reduce) { .product-entry, .product-entry *, .product-entry::before { transition: none !important; } .product-entry__art { transform: none; } }
 </style>
