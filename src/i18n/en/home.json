@@ -8,7 +8,11 @@
     "featuredName": "TestHive",
     "featuredTagline": "Get through Google Play Closed Testing.",
     "featuredDescription": "Connect with real testers, collect actionable feedback, and meet Google's 12-tester / 14-day requirement.",
-    "featuredCta": "Open TestHive"
+    "featuredCta": "Open TestHive",
+    "kinmateEyebrow": "Now live",
+    "kinmateName": "KinMate",
+    "kinmateTagline": "A private health vault for your family.",
+    "kinmateDescription": "Keep records, reports, and medication notes together — with clear AI explanations when you need them."
   },
   "flagship": { "label": "Flagship" },
   "products": {
