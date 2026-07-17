@@ -14,21 +14,20 @@ const nav = [
 ];
 const homeHref = localizePath("/", locale);
 ---
-<header id="site-header"
-        class="fixed top-0 inset-x-0 z-50 transition-all duration-300 ease-out">
-  <div class="container mx-auto px-6 h-16 flex items-center justify-between">
-    <a href={homeHref} class="flex items-center gap-2">
+<header id="site-header" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 ease-out">
+  <div class="site-header__bar">
+    <a href={homeHref} class="flex items-center gap-2.5">
       <EloLogo size={28} />
-      <span class="text-body font-semibold">EloLin</span>
+      <span class="text-body font-semibold tracking-[-0.03em]">EloLin</span>
     </a>
-    <nav class="hidden md:flex items-center gap-1">
+    <nav class="hidden md:flex items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.035] p-1" aria-label="Primary navigation">
       {nav.map((n) => (
-        <a href={n.href} class="px-3 py-2 text-body-sm text-fg-1 hover:text-fg-0 transition rounded-md hover:bg-bg-1">
+        <a href={n.href} class="rounded-full px-3.5 py-1.5 text-body-sm text-fg-1 transition hover:bg-white/[0.08] hover:text-fg-0">
           {t(n.key, locale)}
         </a>
       ))}
     </nav>
-    <div class="flex items-center gap-1">
+    <div class="flex items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.035] p-1">
       <LangSwitch current={locale} {path} />
       <a href={SITE.github} target="_blank" rel="noopener"
          class="p-2 text-fg-1 hover:text-fg-0 rounded-md hover:bg-bg-1 transition"
@@ -38,6 +37,21 @@ const homeHref = localizePath("/", locale);
     </div>
   </div>
 </header>
+
+<style>
+  .site-header__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(100% - 2rem, 76rem);
+    height: 4.75rem;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 640px) {
+    .site-header__bar { width: min(100% - 1.25rem, 76rem); height: 4.25rem; }
+  }
+</style>
 
 <script>
   const h = document.getElementById("site-header");

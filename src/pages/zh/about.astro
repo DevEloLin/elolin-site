@@ -6,10 +6,10 @@ import EloLogo from "@/components/ui/EloLogo.astro";
 import Button from "@/components/ui/Button.astro";
 import GlassCard from "@/components/ui/GlassCard.astro";
 import VisualCardMedia from "@/components/ui/VisualCardMedia.astro";
+import PageIntro from "@/components/ui/PageIntro.astro";
 import Timeline from "@/components/about/Timeline.astro";
 import UsesGrid from "@/components/about/UsesGrid.astro";
 import zhAbout from "@/i18n/zh/about.json";
-import { t } from "@/lib/i18n";
 import { ArrowRight } from "lucide-astro";
 import JsonLd from "@/components/seo/JsonLd.astro";
 const locale = "zh" as const;
@@ -29,38 +29,35 @@ const a = zhAbout;
     "jobTitle": "创始人 · 独立开发者",
     "knowsAbout": ["Rust", "TypeScript", "AI", "Healthcare", "Astro"]
   }} />
-  <main class="pt-28 pb-24 container mx-auto px-6 max-w-7xl">
-    <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+  <main class="page-shell">
+    <PageIntro eyebrow={a.sections.building.label} title={a.title} description={a.sections.building.body} index="01 / 04" meta="独立工作室" />
+    <div class="mt-14 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
       <VisualCardMedia
         seed="about-zh"
         title={a.title}
         subtitle={a.sections.building.body}
         kind="platform"
         image="https://elolin.com/og-default.png"
-        class="min-h-[26rem] rounded-[1.75rem]"
+        class="min-h-[32rem] rounded-[1.75rem]"
       />
       <div class="space-y-6">
-        <div class="flex flex-col gap-5">
-          <EloLogo size={80} />
-          <div>
-            <p class="text-caption text-fg-2 uppercase">{a.sections.building.label}</p>
-            <h1 class="mt-4 text-display-2 font-semibold">{a.title}</h1>
-            <p class="mt-5 text-body-lg text-fg-1">{a.sections.building.body}</p>
-          </div>
+        <div class="flex items-center gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-5">
+          <EloLogo size={48} />
+          <p class="text-body-sm leading-relaxed text-fg-1">{a.sections.building.body}</p>
         </div>
         <div class="grid gap-6">
           <GlassCard class="bg-bg-1/50">
-            <p class="text-caption text-fg-2 uppercase">{a.sections.how.label}</p>
+            <p class="section-eyebrow">{a.sections.how.label}</p>
             <ul class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-body text-fg-1">
               {a.sections.how.items.map((i) => (<li class="px-4 py-3 rounded-lg border border-white/10 bg-white/[0.03]">{i}</li>))}
             </ul>
           </GlassCard>
           <GlassCard class="bg-bg-1/50">
-            <p class="text-caption text-fg-2 uppercase">{a.sections.timeline.label}</p>
+            <p class="section-eyebrow">{a.sections.timeline.label}</p>
             <div class="mt-4"><Timeline items={a.sections.timeline.items} /></div>
           </GlassCard>
           <GlassCard class="bg-bg-1/50">
-            <p class="text-caption text-fg-2 uppercase">{a.sections.uses.label}</p>
+            <p class="section-eyebrow">{a.sections.uses.label}</p>
             <div class="mt-4"><UsesGrid items={a.sections.uses.items} /></div>
           </GlassCard>
         </div>

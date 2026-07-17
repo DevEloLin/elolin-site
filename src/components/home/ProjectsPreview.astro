@@ -11,15 +11,18 @@ const flagshipSet = new Set(["evoclaw", "kinmate-site"]);
 const sample = all.filter((p) => !flagshipSet.has(p.slug)).slice(0, 6);
 const allHref = localizePath("/projects", locale);
 ---
-<section class="py-16" data-reveal>
+<section class="py-20 sm:py-28" data-reveal>
   <div class="container mx-auto px-6">
-    <div class="flex items-baseline justify-between">
-      <p class="text-caption text-fg-2 uppercase">{t("home.projectsPreview.label", locale)}</p>
-      <a href={allHref} class="text-body-sm text-fg-1 hover:text-fg-0 inline-flex items-center gap-1">
+    <div class="section-heading mb-0">
+      <div>
+        <p class="section-eyebrow">{t("home.projectsPreview.label", locale)}</p>
+        <h2 class="section-title">{locale === "zh" ? "公开构建。" : "Built in public."}</h2>
+      </div>
+      <a href={allHref} class="inline-flex items-center gap-1 border-b border-white/[0.14] pb-1 text-body-sm text-fg-1 transition hover:border-blue-200/70 hover:text-fg-0">
         {t("home.projectsPreview.viewAll", locale)} <ArrowRight size={14} />
       </a>
     </div>
-    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
       {sample.map((p) => (
         <ProjectCard project={p} locale={locale} href={`${locale === "zh" ? "/zh" : ""}/projects/${p.slug}`} />
       ))}

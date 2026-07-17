@@ -24,21 +24,22 @@ const desc =
   product.tagline?.[locale] ??
   (repo ? projectDescription(repo.slug, repo.description, locale) : "");
 ---
-<GlassCard interactive class="overflow-hidden p-0">
-  <div class="grid gap-0 lg:grid-cols-[1.15fr_0.85fr]">
+<GlassCard interactive class="group h-full overflow-hidden p-0">
+  <div class="flex h-full flex-col">
     <VisualCardMedia
       seed={product.slug}
       title={product.name}
       subtitle={product.tagline[locale]}
       kind="product"
       {...(product.coverImage ? { image: product.coverImage } : {})}
-      class="min-h-[16rem] rounded-none border-0 lg:min-h-[20rem]"
+      class="min-h-[17rem] rounded-none border-0 sm:min-h-[19rem]"
     />
-    <div class="p-6 sm:p-8">
+    <div class="relative z-10 flex flex-1 flex-col p-6 sm:p-7">
       <div class="flex items-start justify-between gap-4">
         <div>
-          <h2 class="text-h2 font-semibold">{product.name}</h2>
-          <p class="mt-3 text-fg-1 text-body-lg max-w-2xl">{desc}</p>
+          <p class="section-eyebrow">Live product</p>
+          <h2 class="mt-4 text-h2 font-semibold tracking-[-0.04em]">{product.name}</h2>
+          <p class="mt-3 text-fg-1 text-body leading-relaxed">{desc}</p>
         </div>
         {isAi && <AiBadge />}
       </div>
@@ -47,7 +48,7 @@ const desc =
           <span class="px-3 py-1 rounded-full text-caption text-fg-1 bg-bg-1 border border-white/10">{tag}</span>
         ))}
       </div>
-      <div class="mt-8 flex flex-wrap items-center gap-3">
+      <div class="mt-auto flex flex-wrap items-center gap-3 pt-8">
         <Button href={product.url} external>
           {t("products.links.site", locale)} <ExternalLink size={16} />
         </Button>
