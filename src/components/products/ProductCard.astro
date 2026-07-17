@@ -1,9 +1,7 @@
 ---
-import GlassCard from "@/components/ui/GlassCard.astro";
-import Button from "@/components/ui/Button.astro";
 import AiBadge from "@/components/ui/AiBadge.astro";
 import VisualCardMedia from "@/components/ui/VisualCardMedia.astro";
-import { ExternalLink, Github } from "lucide-astro";
+import { ArrowUpRight, Github } from "lucide-astro";
 import projects from "@/data/projects.json";
 import { projectDescription, t, type Locale } from "@/lib/i18n";
 import type { Project } from "@/lib/github";
@@ -15,52 +13,87 @@ const { product, locale } = Astro.props;
 const all = projects as Project[];
 const repo = product.repo ? all.find((p) => p.slug === product.repo) : undefined;
 const isAi = repo?.tags.includes("ai") ?? false;
-
-// Description priority:
-//   1. product.tagline (always present on ProductEntry) — single source of truth
-//   2. projectDescription(repo, ...) — legacy GitHub-based fallback only if tagline missing
-//      (kept as defensive fallback; current shape guarantees tagline exists)
-const desc =
-  product.tagline?.[locale] ??
-  (repo ? projectDescription(repo.slug, repo.description, locale) : "");
+const desc = product.tagline?.[locale] ?? (repo ? projectDescription(repo.slug, repo.description, locale) : "");
+const liveLabel = locale === "zh" ? "已上线" : "Live";
 ---
-<GlassCard interactive class="group h-full overflow-hidden p-0">
-  <div class="flex h-full flex-col">
-    <VisualCardMedia
-      seed={product.slug}
-      title={product.name}
-      subtitle={product.tagline[locale]}
-      kind="product"
-      {...(product.coverImage ? { image: product.coverImage } : {})}
-      class="min-h-[17rem] rounded-none border-0 sm:min-h-[19rem]"
-    />
-    <div class="relative z-10 flex flex-1 flex-col p-6 sm:p-7">
-      <div class="flex items-start justify-between gap-4">
-        <div>
-          <p class="section-eyebrow">Live product</p>
-          <h2 class="mt-4 text-h2 font-semibold tracking-[-0.04em]">{product.name}</h2>
-          <p class="mt-3 text-fg-1 text-body leading-relaxed">{desc}</p>
-        </div>
-        {isAi && <AiBadge />}
+
+<article class="product-entry group">
+  <div class="product-entry__copy">
+    <div class="flex items-start justify-between gap-5">
+      <div>
+        <p class="product-entry__status"><span></span>{liveLabel}</p>
+        <h2 class="product-entry__name">{product.name}</h2>
       </div>
-      <div class="mt-6 flex flex-wrap gap-2">
-        {product.tags.map((tag) => (
-          <span class="px-3 py-1 rounded-full text-caption text-fg-1 bg-bg-1 border border-white/10">{tag}</span>
-        ))}
-      </div>
-      <div class="mt-auto flex flex-wrap items-center gap-3 pt-8">
-        <Button href={product.url} external>
-          {t("products.links.site", locale)} <ExternalLink size={16} />
-        </Button>
-        {repo && (
-          <Button href={repo.url} variant="ghost" external>
-            <Github size={16} /> {t("products.links.github", locale)}
-          </Button>
-        )}
-        {product.extraLinks?.map((l) => (
-          <Button href={l.href} variant="ghost" external>{l.label}</Button>
-        ))}
-      </div>
+      {isAi && <AiBadge />}
+    </div>
+    <p class="product-entry__description">{desc}</p>
+    <div class="product-entry__meta">
+      {product.tags.map((tag) => <span>{tag}</span>)}
     </div>
   </div>
-</GlassCard>
+
+  <div class="product-entry__actions">
+    <a class="product-entry__primary" href={product.url} target="_blank" rel="noopener">
+      {t("products.links.site", locale)} <ArrowUpRight size={16} />
+    </a>
+    {repo && (
+      <a class="product-entry__secondary" href={repo.url} target="_blank" rel="noopener">
+        <Github size={15} /> {t("products.links.github", locale)}
+      </a>
+    )}
+    {product.extraLinks?.map((link) => (
+      <a class="product-entry__secondary" href={link.href} target="_blank" rel="noopener">{link.label}</a>
+    ))}
+  </div>
+
+  <VisualCardMedia
+    seed={product.slug}
+    title={product.name}
+    subtitle={product.tagline[locale]}
+    kind="product"
+    {...(product.coverImage ? { image: product.coverImage } : {})}
+    class="product-entry__visual"
+  />
+</article>
+
+<style>
+  .product-entry {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(10rem, 0.55fr) minmax(12rem, 15rem);
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    min-height: 15.5rem;
+    padding: 1.7rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    transition: border-color 260ms ease;
+  }
+
+  .product-entry:first-child { border-top: 0; }
+  .product-entry:hover { border-color: rgba(147, 197, 253, 0.48); }
+  .product-entry__status {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: rgba(191, 219, 254, 0.88);
+    font-family: "Geist Mono", monospace;
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .product-entry__status span { width: 0.42rem; height: 0.42rem; border-radius: 9999px; background: #60a5fa; box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.1), 0 0 12px rgba(96, 165, 250, 0.7); }
+  .product-entry__name { margin-top: 0.8rem; font-size: clamp(1.85rem, 2.5vw, 2.7rem); font-weight: 600; letter-spacing: -0.055em; line-height: 0.98; }
+  .product-entry__description { max-width: 35rem; margin-top: 1rem; color: var(--fg-1); font-size: 0.95rem; line-height: 1.6; }
+  .product-entry__meta { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.25rem; color: var(--fg-2); font-family: "Geist Mono", monospace; font-size: 0.68rem; letter-spacing: 0.04em; }
+  .product-entry__meta span:not(:last-child)::after { margin-left: 0.45rem; content: "·"; }
+  .product-entry__actions { display: flex; flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+  .product-entry__primary, .product-entry__secondary { display: inline-flex; align-items: center; gap: 0.45rem; transition: color 180ms ease, border-color 180ms ease; }
+  .product-entry__primary { padding-bottom: 0.3rem; border-bottom: 1px solid rgba(191, 219, 254, 0.42); color: #dbeafe; font-size: 0.9rem; font-weight: 600; }
+  .product-entry__primary:hover { border-color: white; color: white; }
+  .product-entry__secondary { color: var(--fg-2); font-size: 0.78rem; }
+  .product-entry__secondary:hover { color: var(--fg-0); }
+  .product-entry__visual { min-height: 10.5rem; border-radius: 1rem; transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), border-color 320ms ease; }
+  .product-entry:hover .product-entry__visual { transform: scale(1.025); border-color: rgba(147, 197, 253, 0.35); }
+  @media (max-width: 900px) { .product-entry { grid-template-columns: minmax(0, 1fr) 12rem; gap: 1.5rem; } .product-entry__actions { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; } }
+  @media (max-width: 620px) { .product-entry { grid-template-columns: 1fr; min-height: 0; padding: 1.6rem 0; } .product-entry__visual { order: -1; min-height: 12rem; } .product-entry__actions { grid-column: auto; } }
+</style>

@@ -32,12 +32,12 @@ const locale = "zh" as const;
   <Header slot="header" />
   <main class="page-shell">
     <PageIntro eyebrow="产品矩阵" title={t("products.title", locale)} description={t("products.subtitle", locale)} index="02 / 04" meta={`${FLAGSHIP_PRODUCTS.length} 个已上线产品`} />
-    <div class="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="mt-12 border-b border-white/[0.1]">
       {FLAGSHIP_PRODUCTS.map((p) => (
         <ProductCard product={p} {locale} />
       ))}
-      <div class="relative flex min-h-[24rem] items-center justify-center overflow-hidden rounded-[1.5rem] border border-dashed border-blue-200/20 bg-[radial-gradient(circle_at_50%_20%,rgba(59,130,246,0.13),transparent_42%),rgba(255,255,255,0.025)] p-8 text-center text-fg-2">
-        <p class="section-eyebrow justify-center">{t("products.comingNext", locale)}…</p>
+      <div class="flex min-h-[10rem] items-center border-t border-dashed border-white/[0.15] py-10 text-fg-2">
+        <p class="section-eyebrow">{t("products.comingNext", locale)}…</p>
       </div>
     </div>
   </main>
