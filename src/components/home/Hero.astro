@@ -1,151 +1,121 @@
 ---
 import Button from "@/components/ui/Button.astro";
 import { localizePath, t, type Locale } from "@/lib/i18n";
-import { SITE } from "@/lib/site";
-import { ArrowRight, Sparkles } from "lucide-astro";
+import { ArrowRight, ArrowUpRight } from "lucide-astro";
 
 type Props = { locale: Locale };
 const { locale } = Astro.props;
 
-const projectsHref = localizePath("/projects", locale);
-const codeHref = SITE.github;
-
-const rings = [
-  { size: "20rem", tilt: "-68deg", duration: "18s", opacity: "0.42" },
-  { size: "27rem", tilt: "24deg", duration: "28s", opacity: "0.22" },
-  { size: "33rem", tilt: "82deg", duration: "38s", opacity: "0.16" },
-];
-
-const particles = Array.from({ length: 10 }, (_, i) => ({
-  start: `${i * 36}deg`,
-  radius: `${8.8 + (i % 3) * 1.2}rem`,
-  size: `${4 + (i % 4)}px`,
-  duration: `${10 + (i % 5) * 1.5}s`,
-  delay: `${i * -0.8}s`,
-  opacity: `${0.45 + (i % 4) * 0.12}`,
-}));
+const projectsHref = localizePath("/products", locale);
+const testHiveHref = "https://testhive.elolin.com";
+const proof =
+  locale === "zh"
+    ? ["7 个已上线产品", "一个账号通行", "持续公开迭代"]
+    : [
+        "7 products in the wild",
+        "One account across the suite",
+        "Built in public",
+      ];
 ---
 
 <section class="hero-shell relative isolate overflow-hidden pt-16" data-hero>
-  <div class="absolute inset-0 hero-backdrop" aria-hidden="true"></div>
   <div class="absolute inset-0 hero-grid" aria-hidden="true"></div>
-  <div class="absolute inset-0 hero-vignette" aria-hidden="true"></div>
 
-  <div class="relative min-h-[calc(100svh-4rem)]">
-    <div class="hero-stage" data-stage>
-      <video
-        class="hero-video"
-        src="/media/elolin-hero.mp4"
-        poster="/media/elolin-hero-poster.jpg"
-        autoplay
-        muted
-        loop
-        playsinline
-        data-bg-video
-        preload="metadata"
-        aria-hidden="true"
-      ></video>
-      <div class="hero-video-overlay" aria-hidden="true"></div>
+  <div class="hero-stage">
+    <video
+      class="hero-video"
+      src="/media/elolin-hero.mp4"
+      poster="/media/elolin-hero-poster.jpg"
+      autoplay
+      muted
+      loop
+      playsinline
+      data-bg-video
+      preload="metadata"
+      aria-hidden="true"></video>
+    <div class="hero-video-overlay" aria-hidden="true"></div>
 
-      <div class="hero-content-shell">
-        <div class="hero-content pointer-events-auto" data-reveal>
-          <p class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/6 px-4 py-2 text-caption uppercase tracking-[0.26em] text-fg-1 shadow-[0_0_0_1px_rgba(255,255,255,0.03)_inset] backdrop-blur-md">
-            <Sparkles size={14} />
-            {locale === "zh" ? "EloLin 官方网站" : "EloLin official site"}
-          </p>
+    <div class="hero-content-shell">
+      <div class="hero-content" data-reveal>
+        <p class="hero-kicker">
+          <span class="hero-kicker-dot" aria-hidden="true"></span>
+          {locale === "zh" ? "独立产品工作室" : "Independent product studio"}
+        </p>
 
-          <h1 class="hero-title mt-6 text-display-2 md:text-display-1 font-semibold leading-[0.96] tracking-[-0.045em] text-white">
-            {t("home.hero.title", locale)}
-          </h1>
+        <h1
+          class="hero-title mt-6 text-display-2 md:text-display-1 font-semibold leading-[0.94] tracking-[-0.055em] text-white"
+        >
+          {t("home.hero.title", locale)}
+        </h1>
 
-          <p class="hero-subtitle mt-6 max-w-3xl text-body-lg md:text-h3 text-fg-1">
-            {t("home.hero.subtitle", locale)}
-          </p>
+        <p
+          class="hero-subtitle mt-6 max-w-2xl text-body-lg md:text-h3 text-fg-1"
+        >
+          {t("home.hero.subtitle", locale)}
+        </p>
 
-          <div class="mt-10 flex flex-wrap gap-4">
-            <Button href={projectsHref}>
-              {t("home.hero.ctaPrimary", locale)} <ArrowRight size={18} />
-            </Button>
-            <Button href={codeHref} variant="ghost" external>
-              {t("home.hero.ctaSecondary", locale)}
-            </Button>
-          </div>
-
-          {/* Featured product card · TestHive 主推 · 上一周用户决策放进 hero
-              首屏 · SEO 信号 (TestHive 名字出现在 above-the-fold visible body
-              · 进 Google 实体识别强信号) + 流量导出 (主推产品 CTA) */}
-          <a href="https://testhive.elolin.com" target="_blank" rel="noopener" class="hero-featured mt-10 group" aria-label={`${t("home.hero.featuredEyebrow", locale)}: ${t("home.hero.featuredName", locale)}`}>
-            <div class="hero-featured-inner">
-              <div class="hero-featured-glow" aria-hidden="true"></div>
-              <div class="hero-featured-content">
-                <span class="hero-featured-eyebrow">
-                  <span class="hero-featured-dot" aria-hidden="true"></span>
-                  {t("home.hero.featuredEyebrow", locale)}
-                </span>
-                <div class="hero-featured-row">
-                  <div>
-                    <p class="hero-featured-name">{t("home.hero.featuredName", locale)}</p>
-                    <p class="hero-featured-tagline">{t("home.hero.featuredTagline", locale)}</p>
-                  </div>
-                  <span class="hero-featured-cta">
-                    {t("home.hero.featuredCta", locale)}
-                    <ArrowRight size={14} />
-                  </span>
-                </div>
-                <p class="hero-featured-desc">{t("home.hero.featuredDescription", locale)}</p>
-              </div>
-            </div>
-          </a>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <Button href={projectsHref}>
+            {t("home.hero.ctaPrimary", locale)}
+            <ArrowRight size={18} />
+          </Button>
+          <Button href={testHiveHref} variant="ghost" external>
+            {t("home.hero.ctaSecondary", locale)}
+            <ArrowUpRight size={17} />
+          </Button>
         </div>
-      </div>
 
-      <div class="hero-rings" aria-hidden="true">
-        {rings.map((ring) => (
-          <span
-            class="hero-ring"
-            style={`--ring-size:${ring.size}; --ring-tilt:${ring.tilt}; --ring-duration:${ring.duration}; --ring-opacity:${ring.opacity};`}
-          ></span>
-        ))}
-      </div>
-
-      <div class="hero-particles" aria-hidden="true">
-        {particles.map((particle) => (
-          <span
-            class="hero-particle"
-            style={`--particle-start:${particle.start}; --particle-radius:${particle.radius}; --particle-size:${particle.size}; --particle-duration:${particle.duration}; --particle-delay:${particle.delay}; --particle-opacity:${particle.opacity};`}
-          >
-            <span class="hero-particle-dot"></span>
-          </span>
-        ))}
-      </div>
-
-      <a
-        class="hero-sphere"
-        href={projectsHref}
-        data-sphere
-        aria-label={locale === "zh" ? "打开作品集项目" : "Open portfolio projects"}
-      >
-        <span class="hero-sphere-core"></span>
-        <span class="hero-sphere-glow"></span>
-        <span class="hero-sphere-ring"></span>
-        <span class="hero-sphere-ring hero-sphere-ring--inner"></span>
-        <span class="hero-sphere-label">
-          {locale === "zh" ? "项目入口" : "Projects"}
-        </span>
-      </a>
-
-      <div class="hero-caption">
-        <span class="hero-caption-pill">{locale === "zh" ? "EloLin / 官方网站" : "EloLin / Official website"}</span>
+        <ul
+          class="hero-proof mt-10"
+          aria-label={locale === "zh"
+            ? "EloLin 产品概览"
+            : "EloLin product overview"}
+        >
+          {proof.map((item) => <li>{item}</li>)}
+        </ul>
       </div>
     </div>
+
+    <a
+      href={testHiveHref}
+      target="_blank"
+      rel="noopener"
+      class="hero-featured group"
+      aria-label={`${t("home.hero.featuredEyebrow", locale)}: ${t("home.hero.featuredName", locale)}`}
+    >
+      <div class="hero-featured-glow" aria-hidden="true"></div>
+      <div class="hero-featured-content">
+        <span class="hero-featured-eyebrow">
+          <span class="hero-featured-dot" aria-hidden="true"></span>
+          {t("home.hero.featuredEyebrow", locale)}
+        </span>
+        <div class="hero-featured-row">
+          <div>
+            <p class="hero-featured-name">
+              {t("home.hero.featuredName", locale)}
+            </p>
+            <p class="hero-featured-tagline">
+              {t("home.hero.featuredTagline", locale)}
+            </p>
+          </div>
+          <ArrowUpRight
+            class="hero-featured-arrow"
+            size={20}
+            aria-hidden="true"
+          />
+        </div>
+        <p class="hero-featured-desc">
+          {t("home.hero.featuredDescription", locale)}
+        </p>
+      </div>
+    </a>
+
+    <p class="hero-index" aria-hidden="true">01 / 07</p>
   </div>
 </section>
 
 <script>
-  const hero = document.querySelector<HTMLElement>("[data-hero]");
-  const stage = hero?.querySelector<HTMLElement>("[data-stage]");
-  const sphere = hero?.querySelector<HTMLElement>("[data-sphere]");
-  const bgVideo = hero?.querySelector<HTMLVideoElement>("[data-bg-video]");
+  const bgVideo = document.querySelector<HTMLVideoElement>("[data-bg-video]");
 
   if (bgVideo) {
     const slowRate = 0.45;
@@ -158,225 +128,34 @@ const particles = Array.from({ length: 10 }, (_, i) => ({
     bgVideo.addEventListener("loadedmetadata", syncRate);
     bgVideo.addEventListener("play", syncRate);
   }
-
-  if (hero && stage && sphere) {
-    const finePointer = window.matchMedia("(pointer: fine)");
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const hoverable = window.matchMedia("(hover: hover)");
-
-    const prefersMotion = finePointer.matches && !reducedMotion.matches;
-    stage.dataset.motion = prefersMotion ? "on" : "off";
-
-    const state = {
-      x: 0,
-      y: 0,
-      tx: 0,
-      ty: 0,
-      sx: 0,
-      sy: 0,
-      hover: false,
-      active: false,
-    };
-
-    const baseSphere = { x: 60, y: 46 };
-    let raf = 0;
-
-    const apply = () => {
-      raf = 0;
-      state.x += (state.tx - state.x) * 0.08;
-      state.y += (state.ty - state.y) * 0.08;
-      state.sx += (state.tx * 0.36 - state.sx) * 0.1;
-      state.sy += (state.ty * 0.36 - state.sy) * 0.1;
-
-      stage.style.setProperty("--hero-rot-x", `${state.x}deg`);
-      stage.style.setProperty("--hero-rot-y", `${state.y}deg`);
-      stage.style.setProperty("--hero-shift-x", `${state.sx}px`);
-      stage.style.setProperty("--hero-shift-y", `${state.sy}px`);
-      stage.style.setProperty("--hero-depth", state.hover ? "1.15" : "1");
-      stage.style.setProperty("--hero-fade", state.active ? "1" : "0.82");
-
-      const sphereX = baseSphere.x + state.tx * 0.18;
-      const sphereY = baseSphere.y + state.ty * 0.18;
-      stage.style.setProperty("--sphere-x", `${sphereX}%`);
-      stage.style.setProperty("--sphere-y", `${sphereY}%`);
-      stage.style.setProperty("--sphere-offset-x", `${state.sx * 0.45}px`);
-      stage.style.setProperty("--sphere-offset-y", `${state.sy * 0.45}px`);
-      stage.style.setProperty("--sphere-scale", state.hover ? "1.08" : "1");
-      stage.style.setProperty("--glow-strength", state.hover ? "1.2" : "1");
-
-      if (prefersMotion || state.active) {
-        raf = window.requestAnimationFrame(apply);
-      }
-    };
-
-    const setPointer = (clientX: number, clientY: number) => {
-      const rect = hero.getBoundingClientRect();
-      const px = Math.min(Math.max((clientX - rect.left) / rect.width, 0), 1);
-      const py = Math.min(Math.max((clientY - rect.top) / rect.height, 0), 1);
-      state.tx = (px - 0.5) * 18;
-      state.ty = (0.5 - py) * 12;
-      state.active = true;
-
-      if (!raf) {
-        raf = window.requestAnimationFrame(apply);
-      }
-    };
-
-    const resetPointer = () => {
-      state.tx = 0;
-      state.ty = 0;
-      state.active = false;
-      if (!raf && prefersMotion) {
-        raf = window.requestAnimationFrame(apply);
-      }
-    };
-
-    const enableHover = () => {
-      state.hover = true;
-      stage.dataset.hover = "true";
-      if (!raf) {
-        raf = window.requestAnimationFrame(apply);
-      }
-    };
-
-    const disableHover = () => {
-      state.hover = false;
-      delete stage.dataset.hover;
-      if (!raf && prefersMotion) {
-        raf = window.requestAnimationFrame(apply);
-      }
-    };
-
-    hero.addEventListener("pointermove", (event) => {
-      if (!hoverable.matches && event.pointerType !== "mouse") return;
-      setPointer(event.clientX, event.clientY);
-    }, { passive: true });
-
-    hero.addEventListener("pointerenter", (event) => {
-      if (!hoverable.matches && event.pointerType !== "mouse") return;
-      setPointer(event.clientX, event.clientY);
-    });
-
-    hero.addEventListener("pointerleave", () => {
-      resetPointer();
-      disableHover();
-    });
-
-    sphere.addEventListener("pointerenter", enableHover);
-    sphere.addEventListener("pointerleave", disableHover);
-    sphere.addEventListener("focus", enableHover);
-    sphere.addEventListener("blur", disableHover);
-
-    if (!prefersMotion) {
-      stage.style.setProperty("--hero-rot-x", "0deg");
-      stage.style.setProperty("--hero-rot-y", "0deg");
-      stage.style.setProperty("--hero-shift-x", "0px");
-      stage.style.setProperty("--hero-shift-y", "0px");
-      stage.style.setProperty("--sphere-offset-x", "0px");
-      stage.style.setProperty("--sphere-offset-y", "0px");
-      stage.style.setProperty("--sphere-scale", "1");
-      stage.style.setProperty("--glow-strength", "1");
-    } else {
-      apply();
-    }
-  }
 </script>
 
 <style>
   .hero-shell {
-    background:
-      radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.18), transparent 34%),
-      radial-gradient(circle at 18% 10%, rgba(124, 58, 237, 0.14), transparent 24%),
-      linear-gradient(180deg, #05050a 0%, #070710 45%, #05050a 100%);
-  }
-
-  .hero-backdrop {
-    background:
-      radial-gradient(circle at 58% 44%, rgba(59, 130, 246, 0.22), transparent 16%),
-      radial-gradient(circle at 62% 54%, rgba(96, 165, 250, 0.08), transparent 32%),
-      radial-gradient(circle at 50% 62%, rgba(255, 255, 255, 0.05), transparent 42%);
-    filter: blur(10px);
-    opacity: 0.95;
+    background: #05060a;
   }
 
   .hero-grid {
+    z-index: 1;
+    opacity: 0.24;
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(circle at 52% 40%, #000 22%, transparent 76%);
-    opacity: 0.22;
-  }
-
-  .hero-vignette {
-    background:
-      radial-gradient(ellipse 80% 55% at 50% 42%, transparent 24%, rgba(5, 5, 10, 0.1) 60%, rgba(5, 5, 10, 0.92) 100%),
-      linear-gradient(90deg, rgba(5, 5, 10, 0.34), transparent 28%, transparent 72%, rgba(5, 5, 10, 0.42));
-  }
-
-  .hero-content-shell {
-    position: absolute;
-    inset: 0;
-    z-index: 5;
-    display: flex;
-    align-items: flex-start;
-    padding: clamp(1rem, 4vw, 3rem);
+      linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 52px 52px;
+    mask-image: linear-gradient(
+      90deg,
+      #000 0%,
+      rgba(0, 0, 0, 0.62) 48%,
+      transparent 88%
+    );
     pointer-events: none;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 5;
-    max-width: 52rem;
-    padding-top: clamp(1rem, 4vw, 3.5rem);
-    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.38);
-    pointer-events: auto;
-  }
-
-  .hero-title {
-    max-width: 12ch;
-  }
-
-  .hero-subtitle {
-    text-wrap: balance;
   }
 
   .hero-stage {
-    position: absolute;
-    inset: 0;
-    isolation: isolate;
+    position: relative;
     min-height: calc(100svh - 4rem);
-    border: 0;
-    border-radius: 0;
     overflow: hidden;
-    background: #040509;
-    transform-style: preserve-3d;
-    perspective: 1400px;
-    box-shadow: none;
-    --hero-rot-x: 0deg;
-    --hero-rot-y: 0deg;
-    --hero-shift-x: 0px;
-    --hero-shift-y: 0px;
-    --sphere-x: 60%;
-    --sphere-y: 46%;
-    --sphere-offset-x: 0px;
-    --sphere-offset-y: 0px;
-    --sphere-scale: 1;
-    --glow-strength: 1;
-    --hero-fade: 1;
-  }
-
-  .hero-stage::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(circle at var(--sphere-x) var(--sphere-y), rgba(59, 130, 246, calc(0.32 * var(--glow-strength))) 0%, transparent 28%),
-      linear-gradient(180deg, rgba(3, 6, 15, 0.08), rgba(3, 6, 15, 0.38));
-    pointer-events: none;
-    z-index: 1;
-    opacity: var(--hero-fade);
-    mix-blend-mode: screen;
+    background: #05060a;
   }
 
   .hero-video {
@@ -385,431 +164,285 @@ const particles = Array.from({ length: 10 }, (_, i) => ({
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 50% 50%;
-    transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0) scale(1.16) rotateX(var(--hero-rot-x)) rotateY(var(--hero-rot-y));
-    filter: saturate(1.08) contrast(1.12) brightness(0.84);
-    will-change: transform;
+    object-position: 56% 50%;
+    transform: scale(1.07);
+    filter: saturate(0.9) contrast(1.14) brightness(0.78);
   }
 
   .hero-video-overlay {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(circle at 58% 42%, rgba(96, 165, 250, 0.18), transparent 16%),
-      radial-gradient(circle at 30% 25%, rgba(59, 130, 246, 0.08), transparent 25%),
-      linear-gradient(180deg, transparent 0%, rgba(3, 6, 15, 0.18) 55%, rgba(3, 6, 15, 0.72) 100%);
-    pointer-events: none;
     z-index: 1;
+    background:
+      radial-gradient(
+        circle at 70% 48%,
+        rgba(96, 165, 250, 0.22),
+        transparent 24%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(3, 6, 15, 0.97) 0%,
+        rgba(3, 6, 15, 0.86) 34%,
+        rgba(3, 6, 15, 0.35) 65%,
+        rgba(3, 6, 15, 0.52) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(3, 6, 15, 0.25),
+        transparent 30%,
+        rgba(3, 6, 15, 0.7) 100%
+      );
   }
 
-  .hero-rings,
-  .hero-particles {
-    position: absolute;
-    inset: 0;
+  .hero-content-shell {
+    position: relative;
     z-index: 3;
-    pointer-events: none;
-    transform-style: preserve-3d;
-  }
-
-  .hero-ring {
-    position: absolute;
-    left: var(--sphere-x);
-    top: var(--sphere-y);
-    width: var(--ring-size);
-    height: var(--ring-size);
-    border-radius: 9999px;
-    border: 1px solid rgba(96, 165, 250, var(--ring-opacity));
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.03) inset,
-      0 0 32px rgba(59, 130, 246, 0.14);
-    transform:
-      translate3d(-50%, -50%, 0)
-      rotateX(var(--ring-tilt))
-      rotateZ(0deg);
-    animation: ring-spin var(--ring-duration) linear infinite;
-    mix-blend-mode: screen;
-  }
-
-  .hero-ring::after {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    opacity: 0.45;
-    filter: blur(0.2px);
-  }
-
-  .hero-particle {
-    position: absolute;
-    left: var(--sphere-x);
-    top: var(--sphere-y);
-    width: 0;
-    height: 0;
-    transform: translate3d(-50%, -50%, 0);
-    animation: particle-orbit var(--particle-duration) linear infinite;
-    animation-delay: var(--particle-delay);
-    transform-style: preserve-3d;
-  }
-
-  .hero-particle-dot {
-    display: block;
-    width: var(--particle-size);
-    height: var(--particle-size);
-    border-radius: 9999px;
-    background: rgba(148, 210, 255, var(--particle-opacity));
-    box-shadow:
-      0 0 10px rgba(96, 165, 250, 0.95),
-      0 0 24px rgba(59, 130, 246, 0.45);
-    filter: blur(0.15px);
-    transform: translateX(var(--particle-radius));
-  }
-
-  .hero-sphere {
-    position: absolute;
-    left: var(--sphere-x);
-    top: var(--sphere-y);
-    z-index: 4;
-    display: grid;
-    place-items: center;
-    width: clamp(7rem, 12vw, 10rem);
-    aspect-ratio: 1;
-    transform:
-      translate3d(calc(-50% + var(--sphere-offset-x)), calc(-50% + var(--sphere-offset-y)), 120px)
-      scale(var(--sphere-scale));
-    transition:
-      transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
-      filter 240ms cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
-    pointer-events: auto;
-  }
-
-  .hero-sphere:focus-visible {
-    outline: 2px solid rgba(96, 165, 250, 0.8);
-    outline-offset: 8px;
-    border-radius: 9999px;
-  }
-
-  .hero-sphere-core {
-    position: absolute;
-    inset: 14%;
-    border-radius: 9999px;
-    background:
-      radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 1), rgba(191, 219, 254, 0.92) 24%, rgba(59, 130, 246, 0.88) 60%, rgba(15, 23, 42, 0.96) 100%);
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.18) inset,
-      0 0 24px rgba(96, 165, 250, 0.65),
-      0 0 90px rgba(59, 130, 246, 0.35);
-    filter: saturate(1.16);
-  }
-
-  .hero-sphere-glow {
-    position: absolute;
-    inset: -28%;
-    border-radius: 9999px;
-    background: radial-gradient(circle, rgba(96, 165, 250, 0.6), transparent 64%);
-    filter: blur(14px);
-    opacity: 0.78;
-  }
-
-  .hero-sphere-ring {
-    position: absolute;
-    inset: -8%;
-    border-radius: 9999px;
-    border: 1px solid rgba(191, 219, 254, 0.48);
-    box-shadow: 0 0 18px rgba(96, 165, 250, 0.24);
-    transform: rotate(14deg);
-    animation: sphere-pulse 6s ease-in-out infinite;
-  }
-
-  .hero-sphere-ring--inner {
-    inset: 8%;
-    opacity: 0.6;
-    border-color: rgba(191, 219, 254, 0.24);
-    animation-direction: reverse;
-  }
-
-  .hero-sphere-label {
-    position: relative;
-    z-index: 1;
-    padding: 0.65rem 0.9rem;
-    border-radius: 9999px;
-    background: rgba(3, 6, 15, 0.5);
-    border: 1px solid rgba(191, 219, 254, 0.24);
-    color: white;
-    font-size: 0.7rem;
-    line-height: 1;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 0 22px rgba(59, 130, 246, 0.18);
-  }
-
-  .hero-sphere:hover .hero-sphere-core,
-  .hero-sphere:focus-visible .hero-sphere-core {
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.22) inset,
-      0 0 32px rgba(96, 165, 250, 0.85),
-      0 0 120px rgba(59, 130, 246, 0.56);
-  }
-
-  .hero-sphere:hover .hero-sphere-glow,
-  .hero-sphere:focus-visible .hero-sphere-glow {
-    opacity: 1;
-    filter: blur(18px);
-  }
-
-  /* Featured product card — placed inside hero-content, below CTAs. Visible
-     in above-the-fold for SEO entity signal (TestHive brand name in hero) +
-     traffic CTA. Hover glow + scale to match the hero's blue-neon motif. */
-  .hero-featured {
-    display: block;
-    max-width: 32rem;
-    text-decoration: none;
-    color: inherit;
-    border-radius: 1.25rem;
-    transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .hero-featured:hover {
-    transform: translateY(-2px);
-  }
-  .hero-featured-inner {
-    position: relative;
-    overflow: hidden;
-    border-radius: 1.25rem;
-    border: 1px solid rgba(96, 165, 250, 0.28);
-    background:
-      linear-gradient(135deg, rgba(15, 22, 41, 0.78), rgba(8, 12, 24, 0.92));
-    backdrop-filter: blur(14px);
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.04) inset,
-      0 16px 40px rgba(0, 0, 0, 0.45),
-      0 0 32px rgba(59, 130, 246, 0.18);
-    transition: border-color 240ms ease, box-shadow 240ms ease;
-  }
-  .hero-featured:hover .hero-featured-inner {
-    border-color: rgba(96, 165, 250, 0.6);
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.06) inset,
-      0 20px 56px rgba(0, 0, 0, 0.5),
-      0 0 56px rgba(59, 130, 246, 0.36);
-  }
-  .hero-featured-glow {
-    position: absolute;
-    inset: -40% -10% auto auto;
-    width: 18rem;
-    height: 18rem;
-    background: radial-gradient(circle, rgba(96, 165, 250, 0.32), transparent 65%);
-    filter: blur(28px);
-    opacity: 0.55;
-    transition: opacity 240ms ease;
-    pointer-events: none;
-  }
-  .hero-featured:hover .hero-featured-glow {
-    opacity: 0.85;
-  }
-  .hero-featured-content {
-    position: relative;
-    z-index: 1;
-    padding: 1.25rem 1.4rem;
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    align-items: center;
+    min-height: calc(100svh - 4rem);
+    width: min(100% - 3rem, 76rem);
+    margin: 0 auto;
+    padding: clamp(4rem, 9vw, 7.25rem) 0 clamp(4rem, 8vw, 6rem);
   }
+
+  .hero-content {
+    max-width: 47rem;
+    text-shadow: 0 2px 28px rgba(0, 0, 0, 0.52);
+  }
+
+  .hero-kicker,
   .hero-featured-eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.65rem;
-    letter-spacing: 0.22em;
+    gap: 0.6rem;
+    color: rgba(219, 234, 254, 0.88);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(191, 219, 254, 0.85);
   }
+
+  .hero-kicker-dot,
   .hero-featured-dot {
     width: 0.45rem;
     height: 0.45rem;
     border-radius: 9999px;
-    background: rgb(96, 165, 250);
-    box-shadow: 0 0 8px rgba(96, 165, 250, 0.85);
-    animation: featured-pulse 2.4s ease-in-out infinite;
+    background: #60a5fa;
+    box-shadow:
+      0 0 0 5px rgba(96, 165, 250, 0.12),
+      0 0 18px rgba(96, 165, 250, 0.96);
   }
+
+  .hero-title {
+    max-width: 11ch;
+  }
+
+  .hero-subtitle {
+    text-wrap: balance;
+  }
+
+  .hero-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem 1.25rem;
+    padding: 0;
+    margin-bottom: 0;
+    list-style: none;
+    color: rgba(226, 232, 240, 0.64);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-proof li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hero-proof li::before {
+    width: 3px;
+    height: 3px;
+    border-radius: 9999px;
+    background: rgba(147, 197, 253, 0.9);
+    content: "";
+  }
+
+  .hero-featured {
+    position: absolute;
+    z-index: 4;
+    right: max(1.5rem, calc((100vw - 76rem) / 2));
+    bottom: clamp(1.5rem, 4vw, 3.5rem);
+    width: min(24rem, calc(100vw - 3rem));
+    overflow: hidden;
+    border: 1px solid rgba(191, 219, 254, 0.22);
+    border-radius: 1.25rem;
+    background: linear-gradient(
+      135deg,
+      rgba(13, 20, 38, 0.88),
+      rgba(5, 8, 17, 0.92)
+    );
+    color: inherit;
+    text-decoration: none;
+    backdrop-filter: blur(18px);
+    box-shadow:
+      0 18px 60px rgba(0, 0, 0, 0.36),
+      0 0 0 1px rgba(255, 255, 255, 0.035) inset;
+    transition:
+      transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 220ms ease,
+      box-shadow 220ms ease;
+  }
+
+  .hero-featured:hover,
+  .hero-featured:focus-visible {
+    transform: translateY(-4px);
+    border-color: rgba(147, 197, 253, 0.58);
+    box-shadow:
+      0 26px 72px rgba(0, 0, 0, 0.46),
+      0 0 48px rgba(59, 130, 246, 0.18);
+    outline: none;
+  }
+
+  .hero-featured-glow {
+    position: absolute;
+    top: -9rem;
+    right: -8rem;
+    width: 18rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(96, 165, 250, 0.34);
+    filter: blur(58px);
+    transition: opacity 220ms ease;
+  }
+
+  .hero-featured:hover .hero-featured-glow {
+    opacity: 1.45;
+  }
+
+  .hero-featured-content {
+    position: relative;
+    padding: 1.3rem 1.35rem 1.35rem;
+  }
+
   .hero-featured-row {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 1rem;
+    margin-top: 0.85rem;
   }
+
   .hero-featured-name {
-    font-size: 2rem;
-    line-height: 1.05;
+    color: white;
+    font-size: 1.75rem;
     font-weight: 700;
-    letter-spacing: -0.02em;
-    color: white;
+    line-height: 1;
+    letter-spacing: -0.04em;
   }
+
   .hero-featured-tagline {
-    margin-top: 0.35rem;
-    font-size: 0.875rem;
+    margin-top: 0.45rem;
+    color: rgba(226, 232, 240, 0.86);
+    font-size: 0.85rem;
     line-height: 1.4;
-    color: rgba(226, 232, 240, 0.78);
   }
-  .hero-featured-cta {
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.55rem 0.85rem;
-    border-radius: 9999px;
-    background: rgba(96, 165, 250, 0.18);
-    border: 1px solid rgba(96, 165, 250, 0.35);
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: white;
-    transition: background 200ms ease, border-color 200ms ease;
+
+  .hero-featured-arrow {
+    flex: none;
+    color: #bfdbfe;
+    transition: transform 220ms ease;
   }
-  .hero-featured:hover .hero-featured-cta {
-    background: rgba(96, 165, 250, 0.32);
-    border-color: rgba(191, 219, 254, 0.65);
+
+  .hero-featured:hover .hero-featured-arrow {
+    transform: translate(3px, -3px);
   }
+
   .hero-featured-desc {
-    font-size: 0.825rem;
-    line-height: 1.55;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: rgba(203, 213, 225, 0.72);
-  }
-  @keyframes featured-pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.55; transform: scale(1.25); }
+    font-size: 0.78rem;
+    line-height: 1.55;
   }
 
-  .hero-caption {
+  .hero-index {
     position: absolute;
-    left: 1.25rem;
-    right: 1.25rem;
-    bottom: 1.25rem;
-    z-index: 4;
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  .hero-caption-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    border-radius: 9999px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(3, 6, 15, 0.42);
-    padding: 0.75rem 1rem;
+    z-index: 3;
+    right: max(1.5rem, calc((100vw - 76rem) / 2));
+    top: 2rem;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.44);
+    font-family: "Geist Mono", monospace;
     font-size: 0.7rem;
     letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.72);
-    backdrop-filter: blur(16px);
   }
 
-  .hero-stage[data-motion="off"] .hero-video,
-  .hero-stage[data-motion="off"] .hero-ring,
-  .hero-stage[data-motion="off"] .hero-particle,
-  .hero-stage[data-motion="off"] .hero-sphere-ring {
-    animation: none;
-  }
-
-  .hero-stage[data-motion="off"] .hero-video {
-    transform: none;
-  }
-
-  @keyframes ring-spin {
-    from {
-      transform: translate3d(-50%, -50%, 0) rotateX(var(--ring-tilt)) rotateZ(0deg);
+  @media (max-width: 900px) {
+    .hero-video {
+      object-position: 65% 50%;
     }
-    to {
-      transform: translate3d(-50%, -50%, 0) rotateX(var(--ring-tilt)) rotateZ(360deg);
-    }
-  }
-
-  @keyframes particle-orbit {
-    from {
-      transform: translate3d(-50%, -50%, 0) rotate(var(--particle-start));
-    }
-    to {
-      transform: translate3d(-50%, -50%, 0) rotate(calc(var(--particle-start) + 360deg));
-    }
-  }
-
-  @keyframes sphere-pulse {
-    0%,
-    100% {
-      transform: rotate(14deg) scale(0.98);
-      opacity: 0.82;
-    }
-    50% {
-      transform: rotate(18deg) scale(1.04);
-      opacity: 1;
-    }
-  }
-
-  @media (max-width: 1023px) {
-    .hero-stage {
-      min-height: calc(100svh - 4rem);
-    }
-
-    .hero-content {
-      max-width: 44rem;
-    }
-
-    .hero-caption {
-      bottom: 1rem;
+    .hero-video-overlay {
+      background:
+        linear-gradient(
+          90deg,
+          rgba(3, 6, 15, 0.94) 0%,
+          rgba(3, 6, 15, 0.76) 58%,
+          rgba(3, 6, 15, 0.45) 100%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(3, 6, 15, 0.2),
+          transparent 40%,
+          rgba(3, 6, 15, 0.68) 100%
+        );
     }
   }
 
   @media (max-width: 640px) {
-    .hero-shell {
-      padding-top: 4rem;
+    .hero-content-shell {
+      align-items: flex-start;
+      min-height: auto;
+      padding-top: 4.25rem;
+      padding-bottom: 1.5rem;
     }
 
     .hero-stage {
       min-height: calc(100svh - 4rem);
     }
-
-    .hero-content {
-      padding-top: 0.5rem;
+    .hero-video {
+      object-position: 64% 50%;
+    }
+    .hero-video-overlay {
+      background:
+        linear-gradient(90deg, rgba(3, 6, 15, 0.94), rgba(3, 6, 15, 0.52)),
+        linear-gradient(180deg, rgba(3, 6, 15, 0.1), rgba(3, 6, 15, 0.8) 100%);
     }
 
     .hero-title {
       max-width: 10ch;
     }
-
-    .hero-featured-row {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .hero-featured-name {
-      font-size: 1.6rem;
-    }
-    .hero-featured-cta {
-      align-self: flex-start;
+    .hero-proof {
+      font-size: 0.69rem;
+      gap: 0.5rem 0.75rem;
     }
 
-    .hero-sphere {
-      width: 5.5rem;
+    .hero-featured {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      z-index: 3;
+      margin: 0 auto 1.25rem;
     }
 
-    .hero-caption {
-      left: 0.875rem;
-      right: 0.875rem;
-      bottom: 0.875rem;
-    }
-
-    .hero-caption-pill {
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
+    .hero-index {
+      display: none;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-video,
-    .hero-ring,
-    .hero-particle,
-    .hero-sphere-ring {
-      animation: none !important;
+    .hero-featured {
+      transition: none;
     }
   }
 </style>
