@@ -1,19 +1,19 @@
 {
   "hero": {
-    "title": "EloLin Official Website",
-    "subtitle": "The official website for EloLin products, projects, and portfolio work.",
-    "ctaPrimary": "Open Projects",
-    "ctaSecondary": "View Code",
-    "featuredEyebrow": "Featured product",
+    "title": "Less launch friction. More product in the world.",
+    "subtitle": "Focused tools for the hard final mile of shipping — from Android closed testing to identity and developer workflows.",
+    "ctaPrimary": "Explore the tools",
+    "ctaSecondary": "Get testers with TestHive",
+    "featuredEyebrow": "Built for your next release",
     "featuredName": "TestHive",
-    "featuredTagline": "Real testers. Real feedback. Real reports.",
-    "featuredDescription": "User-testing platform for Google Play Closed Testing — 12 verified testers × 14 days, paid or free.",
+    "featuredTagline": "Get through Google Play Closed Testing.",
+    "featuredDescription": "Connect with real testers, collect actionable feedback, and meet Google's 12-tester / 14-day requirement.",
     "featuredCta": "Open TestHive"
   },
   "flagship": { "label": "Flagship" },
   "products": {
     "heading": "Products",
-    "subhead": "Tools shipped solo — built simple, made to last."
+    "subhead": "A small, sharp suite for the work between a good idea and a live product."
   },
   "platform": {
     "heading": "Platform",
