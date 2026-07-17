@@ -1,3 +1,5 @@
+import { animate, inView, stagger } from "motion";
+
 type TiltCard = HTMLElement & {
   __tiltCleanup?: () => void;
 };
@@ -167,5 +169,31 @@ export function setupTiltCards(root: ParentNode = document): void {
       card.removeEventListener("pointermove", onMove as EventListener);
       card.removeEventListener("pointerleave", onLeave);
     };
+  });
+}
+
+export function setupMotionChoreography(root: ParentNode = document): void {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const sections = Array.from(root.querySelectorAll<HTMLElement>("[data-motion-section]"));
+  sections.forEach((section) => {
+    const items = Array.from(section.querySelectorAll<HTMLElement>("[data-motion-item]"));
+    if (items.length === 0) return;
+
+    inView(
+      section,
+      () => {
+        animate(
+          items,
+          { opacity: [0, 1], y: [22, 0], filter: ["blur(5px)", "blur(0px)"] },
+          {
+            delay: stagger(0.075, { startDelay: 0.06 }),
+            duration: 0.72,
+            ease: [0.16, 1, 0.3, 1],
+          },
+        );
+      },
+      { amount: 0.18, margin: "0px 0px -8% 0px" },
+    );
   });
 }

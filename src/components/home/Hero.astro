@@ -94,13 +94,14 @@ const proof =
       </div>
     </div>
 
-    <div class="hero-launches" aria-label={locale === "zh" ? "已上线产品" : "Live products"}>
+    <div class="hero-launches" data-motion-section aria-label={locale === "zh" ? "已上线产品" : "Live products"}>
       {featuredProducts.map((product) => (
         <a
           href={product.href}
           target="_blank"
           rel="noopener"
           class="hero-featured group"
+          data-motion-item
           aria-label={`${product.eyebrow}: ${product.name}`}
         >
           <div class="hero-featured-media" aria-hidden="true">

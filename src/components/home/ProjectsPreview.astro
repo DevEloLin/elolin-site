@@ -22,7 +22,7 @@ const allHref = localizePath("/projects", locale);
         {t("home.projectsPreview.viewAll", locale)} <ArrowRight size={14} />
       </a>
     </div>
-    <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3" data-motion-section>
       {sample.map((p) => (
         <ProjectCard project={p} locale={locale} href={`${locale === "zh" ? "/zh" : ""}/projects/${p.slug}`} />
       ))}
