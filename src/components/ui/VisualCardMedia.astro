@@ -11,6 +11,8 @@ type Props = {
 };
 
 const { seed, title, subtitle, kind = "product", image, class: cls = "" } = Astro.props;
+const resolvedImage = image ?? "/symbol.png";
+const hasSourceImage = Boolean(image);
 
 function hash(input: string): number {
   let out = 0;
@@ -35,19 +37,21 @@ const glow3 = `hsla(${hue3}, ${sat - 14}%, ${light + 16}%, 0.18)`;
   style={`--vm-a:${glow}; --vm-b:${glow2}; --vm-c:${glow3}; --vm-h:${hue}deg;`}
   aria-hidden="true"
 >
-  {image ? (
-    <img
-      src={image}
-      alt=""
-      loading="lazy"
-      decoding="async"
-      class="absolute inset-0 h-full w-full object-cover object-center visual-media__image"
-    />
-  ) : null}
+  <img
+    src={resolvedImage}
+    alt=""
+    loading="lazy"
+    decoding="async"
+    class:list={[
+      "absolute inset-0 h-full w-full object-cover object-center visual-media__image",
+      { "visual-media__image--mark": !hasSourceImage },
+    ]}
+  />
   <div class="absolute inset-0 visual-media__grid"></div>
   <div class="absolute inset-0 visual-media__glow"></div>
   <div class="absolute inset-0 visual-media__vignette"></div>
   <div class="absolute inset-0 visual-media__scan"></div>
+  <div class="visual-media__signal"><span></span><span></span><span></span></div>
   <div class="visual-media__orb visual-media__orb--a"></div>
   <div class="visual-media__orb visual-media__orb--b"></div>
   <div class="visual-media__orb visual-media__orb--c"></div>
@@ -76,13 +80,30 @@ const glow3 = `hsla(${hue3}, ${sat - 14}%, ${light + 16}%, 0.18)`;
     transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1), filter 600ms ease;
   }
 
+  .visual-media__image--mark {
+    z-index: 1;
+    top: 9%;
+    right: 7%;
+    bottom: auto;
+    left: auto;
+    width: 58%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: contain;
+    opacity: 0.82;
+    filter: saturate(0.8) contrast(1.15) drop-shadow(0 16px 30px color-mix(in srgb, var(--vm-a) 46%, transparent));
+    transform: rotate(-9deg) scale(0.9);
+    animation: mark-float 9s ease-in-out infinite alternate;
+  }
+
   .visual-media__grid {
     background-image:
       linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
     background-size: 28px 28px;
     mask-image: radial-gradient(circle at 50% 38%, #000 18%, transparent 76%);
-    opacity: 0.18;
+    opacity: 0.24;
+    animation: grid-drift 14s linear infinite;
   }
 
   .visual-media__glow {
@@ -109,6 +130,29 @@ const glow3 = `hsla(${hue3}, ${sat - 14}%, ${light + 16}%, 0.18)`;
     transform: translateY(-100%);
     animation: scan 5.5s linear infinite;
   }
+
+  .visual-media__signal {
+    position: absolute;
+    z-index: 1;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: end;
+    gap: 3px;
+    height: 1rem;
+  }
+
+  .visual-media__signal span {
+    width: 2px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--vm-a) 78%, white);
+    box-shadow: 0 0 9px var(--vm-a);
+    animation: signal 1.5s ease-in-out infinite;
+  }
+
+  .visual-media__signal span:nth-child(1) { height: 42%; }
+  .visual-media__signal span:nth-child(2) { height: 90%; animation-delay: -0.3s; }
+  .visual-media__signal span:nth-child(3) { height: 62%; animation-delay: -0.6s; }
 
   .visual-media__orb {
     position: absolute;
@@ -218,10 +262,31 @@ const glow3 = `hsla(${hue3}, ${sat - 14}%, ${light + 16}%, 0.18)`;
     to { transform: translate3d(6px, -10px, 0) scale(1.06); }
   }
 
+  @keyframes grid-drift {
+    from { background-position: 0 0, 0 0; }
+    to { background-position: 56px 28px, 28px 56px; }
+  }
+
+  @keyframes signal {
+    0%, 100% { transform: scaleY(0.45); opacity: 0.42; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+
+  @keyframes mark-float {
+    from { transform: rotate(-9deg) translate3d(0, 0, 0) scale(0.9); }
+    to { transform: rotate(4deg) translate3d(-10px, 7px, 0) scale(1); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .visual-media__glow,
     .visual-media__scan,
     .visual-media__orb {
+      animation: none;
+    }
+
+    .visual-media__grid,
+    .visual-media__signal span,
+    .visual-media__image--mark {
       animation: none;
     }
   }
