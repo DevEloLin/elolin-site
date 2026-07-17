@@ -9,15 +9,68 @@ const langs = Array.from(new Set((projects as Project[])
   .map((p) => p.language).filter(Boolean) as string[])).sort();
 ---
 <section class="py-20" data-reveal>
-  <div class="container mx-auto px-6 rounded-[1.75rem] border border-white/[0.08] bg-white/[0.025] p-6 sm:p-8">
-    <p class="section-eyebrow">{t("home.techStack.label", locale)}</p>
-    <div class="mt-6 flex flex-wrap gap-2.5">
-      {langs.map((l) => (
-        <span class="inline-flex items-center gap-2 rounded-full border border-white/[0.1] bg-black/20 px-4 py-2 text-body-sm">
-          <span class="inline-block w-2 h-2 rounded-full" style={`background:${langColor(l)}`}></span>
-          {l}
-        </span>
-      ))}
+  <div class="tech-atlas container mx-auto px-6" data-motion-section>
+    <div class="tech-atlas__frame" data-motion-item>
+      <div class="tech-atlas__copy">
+        <p class="section-eyebrow">{t("home.techStack.label", locale)}</p>
+        <h2 class="tech-atlas__title">{locale === "zh" ? "一个栈，持续交付。" : "One stack. Continuous delivery."}</h2>
+        <p class="tech-atlas__lede">
+          {locale === "zh"
+            ? "把少量可靠的技术组合成可复用的交付系统，而不是为每个产品重新发明一套架构。"
+            : "A deliberately small, reusable system instead of a new architecture for every product."}
+        </p>
+        <div class="tech-atlas__languages">
+          {langs.map((l) => (
+            <span>
+              <i style={`background:${langColor(l)}`}></i>
+              {l}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div class="tech-atlas__visual" aria-hidden="true">
+        <div class="tech-atlas__grid"></div>
+        <img src="/illustrations/mobile-testing.svg" alt="" loading="lazy" decoding="async" />
+        <span class="tech-atlas__stamp">SYSTEM / 07</span>
+        <span class="tech-atlas__pulse tech-atlas__pulse--one"></span>
+        <span class="tech-atlas__pulse tech-atlas__pulse--two"></span>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .tech-atlas__frame {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.82fr);
+    min-height: 27rem;
+    overflow: hidden;
+    border: 1px solid rgba(191, 219, 254, 0.14);
+    border-radius: 1.75rem;
+    background: linear-gradient(125deg, rgba(11, 14, 28, 0.95), rgba(11, 12, 20, 0.88));
+    box-shadow: 0 26px 90px rgba(0, 0, 0, 0.22);
+  }
+
+  .tech-atlas__copy { position: relative; z-index: 2; align-self: center; padding: clamp(2rem, 5vw, 4.5rem); }
+  .tech-atlas__title { max-width: 12ch; margin-top: 1rem; font-size: clamp(2rem, 3.3vw, 3.35rem); font-weight: 600; letter-spacing: -0.06em; line-height: 0.98; }
+  .tech-atlas__lede { max-width: 32rem; margin-top: 1.2rem; color: var(--fg-1); font-size: 1rem; line-height: 1.65; }
+  .tech-atlas__languages { display: flex; flex-wrap: wrap; gap: 0.55rem; max-width: 33rem; margin-top: 2rem; }
+  .tech-atlas__languages span { display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; background: rgba(3,5,12,0.35); padding: 0.45rem 0.72rem; color: var(--fg-1); font-family: "Geist Mono", monospace; font-size: 0.7rem; letter-spacing: 0.02em; }
+  .tech-atlas__languages i { width: 0.42rem; height: 0.42rem; border-radius: 50%; box-shadow: 0 0 10px currentColor; }
+
+  .tech-atlas__visual { position: relative; min-height: 20rem; overflow: hidden; border-left: 1px solid rgba(191, 219, 254, 0.1); background: radial-gradient(circle at 65% 45%, rgba(96,165,250,0.28), transparent 26%), linear-gradient(145deg, rgba(7,10,24,0.6), rgba(12,9,25,0.96)); }
+  .tech-atlas__visual::after { position: absolute; inset: 0; z-index: 2; background: linear-gradient(90deg, rgba(11,14,28,0.72), transparent 30%), linear-gradient(0deg, rgba(4,6,13,0.68), transparent 42%); content: ""; }
+  .tech-atlas__grid { position: absolute; inset: -20%; background-image: linear-gradient(rgba(191,219,254,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(191,219,254,0.1) 1px, transparent 1px); background-size: 34px 34px; mask-image: radial-gradient(circle at 60% 44%, black, transparent 65%); opacity: 0.45; animation: atlas-grid 17s linear infinite; }
+  .tech-atlas__visual img { position: absolute; z-index: 1; right: -14%; bottom: -14%; width: 112%; max-width: none; color: #58a6ff; filter: saturate(0.72) contrast(1.1) drop-shadow(0 22px 28px rgba(0,0,0,0.38)); transform: rotate(-4deg) translate3d(0,0,0); animation: atlas-float 10s ease-in-out infinite alternate; }
+  .tech-atlas__stamp { position: absolute; z-index: 3; top: 1.25rem; right: 1.25rem; color: rgba(219,234,254,0.74); font-family: "Geist Mono", monospace; font-size: 0.65rem; letter-spacing: 0.16em; }
+  .tech-atlas__pulse { position: absolute; z-index: 3; border: 1px solid rgba(147,197,253,0.58); border-radius: 999px; box-shadow: 0 0 32px rgba(96,165,250,0.26); animation: atlas-pulse 4.6s ease-out infinite; }
+  .tech-atlas__pulse--one { top: 28%; left: 16%; width: 1rem; aspect-ratio: 1; }
+  .tech-atlas__pulse--two { right: 16%; bottom: 21%; width: 0.65rem; aspect-ratio: 1; animation-delay: -2.3s; }
+  @keyframes atlas-grid { to { transform: translate3d(34px, 34px, 0); } }
+  @keyframes atlas-float { to { transform: rotate(2deg) translate3d(-12px, -9px, 0) scale(1.035); } }
+  @keyframes atlas-pulse { 0% { transform: scale(0.7); opacity: 1; } 100% { transform: scale(6); opacity: 0; } }
+  @media (max-width: 760px) { .tech-atlas__frame { grid-template-columns: 1fr; } .tech-atlas__visual { min-height: 18rem; border-top: 1px solid rgba(191,219,254,0.1); border-left: 0; } .tech-atlas__visual img { right: -3%; width: 82%; } }
+  @media (prefers-reduced-motion: reduce) { .tech-atlas__grid, .tech-atlas__visual img, .tech-atlas__pulse { animation: none; } }
+</style>

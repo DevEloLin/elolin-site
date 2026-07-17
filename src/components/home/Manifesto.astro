@@ -9,16 +9,46 @@ const manifestoLines = ((locale === "zh" ? zhHome : enHome) as any).manifesto.li
 const aboutHref = localizePath("/about", locale);
 ---
 <section class="py-24 sm:py-36" data-reveal>
-  <div class="container mx-auto px-6 max-w-5xl rounded-[2rem] border border-white/[0.08] bg-[radial-gradient(circle_at_85%_10%,rgba(59,130,246,0.16),transparent_32%),rgba(255,255,255,0.025)] p-8 sm:p-14">
-    <p class="section-eyebrow">{t("home.manifesto.label", locale)}</p>
-    <div class="mt-10 space-y-3">
-      {manifestoLines.map((line) => (
-        <p class="text-h2 font-semibold tracking-[-0.05em]">{line}</p>
-      ))}
+  <div class="manifesto-stage container mx-auto px-6" data-motion-section>
+    <div class="manifesto-stage__frame" data-motion-item>
+      <div class="manifesto-stage__copy">
+        <p class="section-eyebrow">{t("home.manifesto.label", locale)}</p>
+        <div class="manifesto-stage__lines">
+          {manifestoLines.map((line, index) => (
+            <p><span>{String(index + 1).padStart(2, "0")}</span>{line}</p>
+          ))}
+        </div>
+        <a href={aboutHref} class="manifesto-stage__cta">
+          {t("home.manifesto.cta", locale)} <ArrowRight size={18} />
+        </a>
+      </div>
+      <div class="manifesto-stage__art" aria-hidden="true">
+        <div class="manifesto-stage__art-grid"></div>
+        <img src="/illustrations/modern-art.svg" alt="" loading="lazy" decoding="async" />
+        <span class="manifesto-stage__origin">ELOLIN / STUDIO</span>
+        <span class="manifesto-stage__arc"></span>
+      </div>
     </div>
-    <a href={aboutHref}
-       class="mt-10 inline-flex items-center gap-2 border-b border-white/[0.16] pb-1 text-body-lg text-fg-1 transition hover:border-blue-200/70 hover:text-fg-0">
-      {t("home.manifesto.cta", locale)} <ArrowRight size={18} />
-    </a>
   </div>
 </section>
+
+<style>
+  .manifesto-stage__frame { position: relative; display: grid; grid-template-columns: minmax(0, 1.16fr) minmax(16rem, 0.84fr); overflow: hidden; border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; background: linear-gradient(135deg, rgba(13,12,24,0.98), rgba(8,9,18,0.92)); box-shadow: 0 28px 100px rgba(0,0,0,0.26); }
+  .manifesto-stage__copy { position: relative; z-index: 3; padding: clamp(2rem, 6vw, 5rem); }
+  .manifesto-stage__lines { display: grid; gap: 0.55rem; margin-top: 3rem; }
+  .manifesto-stage__lines p { display: flex; align-items: baseline; gap: 1rem; margin: 0; font-size: clamp(1.65rem, 3vw, 3.25rem); font-weight: 600; letter-spacing: -0.065em; line-height: 1.02; }
+  .manifesto-stage__lines span { flex: none; color: rgba(191,219,254,0.42); font-family: "Geist Mono", monospace; font-size: 0.66rem; font-weight: 500; letter-spacing: 0.15em; }
+  .manifesto-stage__cta { display: inline-flex; align-items: center; gap: 0.55rem; margin-top: 3rem; border-bottom: 1px solid rgba(191,219,254,0.38); padding-bottom: 0.35rem; color: var(--fg-1); transition: color 180ms ease, border-color 180ms ease, transform 180ms ease; }
+  .manifesto-stage__cta:hover { transform: translateX(0.35rem); border-color: white; color: white; }
+  .manifesto-stage__art { position: relative; overflow: hidden; min-height: 28rem; border-left: 1px solid rgba(255,255,255,0.08); background: radial-gradient(circle at 48% 41%, rgba(139,92,246,0.3), transparent 22%), radial-gradient(circle at 78% 74%, rgba(59,130,246,0.22), transparent 26%), #090a15; }
+  .manifesto-stage__art::after { position: absolute; inset: 0; z-index: 2; background: linear-gradient(90deg, rgba(13,12,24,0.72), transparent 35%), linear-gradient(0deg, rgba(8,9,18,0.62), transparent 46%); content: ""; }
+  .manifesto-stage__art-grid { position: absolute; inset: -25%; background-image: radial-gradient(rgba(191,219,254,0.55) 1px, transparent 1px); background-size: 20px 20px; mask-image: radial-gradient(circle at 55% 47%, black, transparent 66%); opacity: 0.42; animation: manifesto-grid 18s linear infinite; }
+  .manifesto-stage__art img { position: absolute; z-index: 1; right: -30%; bottom: -6%; width: 132%; max-width: none; color: #8b5cf6; filter: saturate(0.8) contrast(1.04) drop-shadow(0 26px 32px rgba(0,0,0,0.44)); transform: rotate(-7deg); animation: manifesto-float 11s ease-in-out infinite alternate; }
+  .manifesto-stage__origin { position: absolute; z-index: 3; right: 1.3rem; bottom: 1.3rem; color: rgba(219,234,254,0.68); font-family: "Geist Mono", monospace; font-size: 0.65rem; letter-spacing: 0.18em; writing-mode: vertical-rl; }
+  .manifesto-stage__arc { position: absolute; z-index: 3; top: 1.4rem; right: 1.3rem; width: 8rem; aspect-ratio: 1; border: 1px solid rgba(191,219,254,0.3); border-left-color: transparent; border-radius: 50%; animation: manifesto-arc 12s linear infinite; }
+  @keyframes manifesto-grid { to { transform: translate3d(20px, 20px, 0); } }
+  @keyframes manifesto-float { to { transform: rotate(1deg) translate3d(-14px, -12px, 0) scale(1.04); } }
+  @keyframes manifesto-arc { to { transform: rotate(360deg); } }
+  @media (max-width: 760px) { .manifesto-stage__frame { grid-template-columns: 1fr; } .manifesto-stage__art { min-height: 21rem; border-top: 1px solid rgba(255,255,255,0.08); border-left: 0; } .manifesto-stage__art img { right: -8%; width: 96%; } }
+  @media (prefers-reduced-motion: reduce) { .manifesto-stage__art-grid, .manifesto-stage__art img, .manifesto-stage__arc { animation: none; } }
+</style>
