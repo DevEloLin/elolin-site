@@ -1,0 +1,27 @@
+---
+type Props = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  index?: string;
+  meta?: string;
+  class?: string;
+};
+
+const { eyebrow, title, description, index, meta, class: className = "" } = Astro.props;
+---
+
+<header class={`page-intro ${className}`.trim()} data-reveal>
+  <div class="page-intro__rule" aria-hidden="true"></div>
+  <div class="page-intro__copy">
+    <p class="page-intro__eyebrow">{eyebrow}</p>
+    <h1 class="page-intro__title">{title}</h1>
+    <p class="page-intro__lede">{description}</p>
+  </div>
+  {(index || meta) && (
+    <div class="page-intro__meta" aria-label={meta ? undefined : "Page index"}>
+      {index && <span class="page-intro__index">{index}</span>}
+      {meta && <span>{meta}</span>}
+    </div>
+  )}
+</header>

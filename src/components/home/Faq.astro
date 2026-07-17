@@ -1,5 +1,5 @@
 ---
-import { t, type Locale } from "@/lib/i18n";
+import { type Locale } from "@/lib/i18n";
 type Props = { locale: Locale };
 const { locale } = Astro.props;
 
@@ -27,18 +27,18 @@ const QA = locale === "zh" ? [
     a: "Yes — One person. Many products. Founder Wei Li (@DevEloLin) handles design, engineering, and operations for the whole product family." },
 ];
 ---
-<section class="py-20 sm:py-24" data-reveal>
+<section class="py-24 sm:py-32" data-reveal>
   <div class="container mx-auto px-6 max-w-3xl">
-    <header class="mb-8">
-      <p class="text-caption text-fg-2 uppercase tracking-widest">FAQ</p>
-      <h2 class="mt-2 text-h2 font-semibold">
+    <header class="mb-10">
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-title">
         {locale === "zh" ? "常见问题" : "Common questions"}
       </h2>
     </header>
-    <dl class="divide-y divide-[var(--border-1)] rounded-2xl border border-[var(--border-1)] bg-bg-2/40 backdrop-blur-sm">
+    <dl class="divide-y divide-white/[0.08] overflow-hidden rounded-[1.5rem] border border-white/[0.1] bg-white/[0.025] backdrop-blur-sm">
       {QA.map((it) => (
-        <details class="group p-5">
-          <summary class="flex items-center justify-between cursor-pointer list-none font-medium">
+        <details class="group p-5 transition hover:bg-white/[0.025] sm:p-6">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-medium tracking-[-0.02em]">
             <dt>{it.q}</dt>
             <span class="text-fg-2 transition-transform group-open:rotate-180">▾</span>
           </summary>

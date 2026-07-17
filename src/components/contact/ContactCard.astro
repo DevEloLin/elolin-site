@@ -6,12 +6,12 @@ const Icon = (Astro.props as any).icon;
 ---
 <GlassCard interactive>
   <div class="flex items-center gap-3">
-    <Icon size={20} class="text-fg-1" />
-    <p class="text-caption text-fg-2 uppercase">{label}</p>
+    <span class="grid h-10 w-10 place-items-center rounded-xl border border-blue-200/15 bg-blue-400/[0.08] text-blue-100"><Icon size={18} /></span>
+    <p class="section-eyebrow">{label}</p>
   </div>
-  <p class="mt-3 text-h3 font-medium break-all">{value}</p>
-  <div class="mt-6 flex items-center gap-3 text-body-sm">
-    <a href={href} target={href.startsWith("mailto") ? "_self" : "_blank"} rel="noopener" class="text-fg-1 hover:text-fg-0">↗ Open</a>
+  <p class="mt-5 text-body font-medium break-all">{value}</p>
+  <div class="mt-6 flex items-center gap-3 border-t border-white/[0.08] pt-4 text-body-sm">
+    <a href={href} target={href.startsWith("mailto") ? "_self" : "_blank"} rel="noopener" class="text-blue-100 transition hover:text-white">↗ Open</a>
     {copy && (
       <button class="copy-btn text-fg-1 hover:text-fg-0" data-copy={value}>Copy</button>
     )}

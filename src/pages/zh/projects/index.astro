@@ -3,6 +3,7 @@ import Layout from "@/components/layout/Layout.astro";
 import Header from "@/components/layout/Header.astro";
 import Footer from "@/components/layout/Footer.astro";
 import CategoryChips from "@/components/projects/CategoryChips.astro";
+import PageIntro from "@/components/ui/PageIntro.astro";
 import ProjectGrid from "@/components/projects/ProjectGrid.astro";
 import projects from "@/data/projects.json";
 import type { Project } from "@/lib/github";
@@ -12,15 +13,9 @@ const all = projects as Project[];
 ---
 <Layout title={t("projects.title", locale)} locale={locale}>
   <Header slot="header" />
-  <main class="pt-32 pb-24 container mx-auto px-6">
-    <div class="flex items-baseline justify-between flex-wrap gap-4">
-      <div>
-        <h1 class="text-display-2 font-semibold">{t("projects.title", locale)}</h1>
-        <p class="mt-4 text-fg-1 text-body-lg">{t("projects.subtitle", locale)}</p>
-      </div>
-      <span class="text-caption text-fg-2 uppercase">{all.length} repos</span>
-    </div>
-    <div class="mt-10"><CategoryChips locale={locale} active="all" /></div>
+  <main class="page-shell">
+    <PageIntro eyebrow="公开构建" title={t("projects.title", locale)} description={t("projects.subtitle", locale)} index="03 / 04" meta={`${all.length} 个仓库`} />
+    <div class="mt-12"><CategoryChips locale={locale} active="all" /></div>
     <ProjectGrid projects={all} {locale} />
   </main>
   <Footer slot="footer" />

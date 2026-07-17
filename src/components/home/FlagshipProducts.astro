@@ -10,14 +10,17 @@ const { locale } = Astro.props;
 ---
 <section class="py-24 sm:py-32" data-reveal>
   <div class="container mx-auto px-6">
-    <header class="mb-10 max-w-2xl">
-      <p class="text-caption text-fg-2 uppercase">{t("home.products.heading", locale)}</p>
-      <h2 class="mt-3 text-h2 sm:text-display-2 font-semibold">{t("home.products.heading", locale)}</h2>
-      <p class="mt-3 text-fg-1 text-body-lg">{t("home.products.subhead", locale)}</p>
+    <header class="section-heading">
+      <div class="max-w-2xl">
+        <p class="section-eyebrow">{t("home.products.heading", locale)}</p>
+        <h2 class="section-title">{t("home.products.heading", locale)}</h2>
+        <p class="section-copy">{t("home.products.subhead", locale)}</p>
+      </div>
+      <span class="hidden font-mono text-xs tracking-[0.18em] text-fg-2 uppercase sm:block">Selected work / 05</span>
     </header>
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <div class="grid grid-cols-1 gap-5 lg:grid-cols-12">
       {FLAGSHIP_PRODUCTS.map((p) => (
-        <GlassCard interactive class="group col-span-1 lg:col-span-4 overflow-hidden p-0">
+        <GlassCard interactive class="group col-span-1 overflow-hidden p-0 lg:col-span-4">
           <a
             href={p.url}
             target="_blank"
@@ -33,9 +36,9 @@ const { locale } = Astro.props;
             {...(p.coverImage ? { image: p.coverImage } : {})}
             class="min-h-[16rem] rounded-none border-0"
           />
-          <div class="p-5 sm:p-6">
+          <div class="relative z-10 p-5 sm:p-6">
             <div class="flex items-start justify-between gap-3">
-              <h3 class="text-h3 font-semibold">{p.name}</h3>
+              <h3 class="text-h3 font-semibold tracking-[-0.04em]">{p.name}</h3>
               <ArrowUpRight
                 size={18}
                 class="text-fg-2 transition-all group-hover:text-fg-0 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
