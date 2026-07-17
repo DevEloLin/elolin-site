@@ -8,7 +8,11 @@
     "featuredName": "TestHive",
     "featuredTagline": "顺利通过 Google Play 封闭测试。",
     "featuredDescription": "连接真实测试者，获取可用反馈，并完成 Google 要求的 12 位测试者 / 14 天测试周期。",
-    "featuredCta": "打开 TestHive"
+    "featuredCta": "打开 TestHive",
+    "kinmateEyebrow": "现已上线",
+    "kinmateName": "KinMate",
+    "kinmateTagline": "为家庭而设的私密健康保险库。",
+    "kinmateDescription": "把健康记录、报告与用药笔记放在一起；需要时，可获得清晰的 AI 解读。"
   },
   "flagship": { "label": "旗舰" },
   "products": {

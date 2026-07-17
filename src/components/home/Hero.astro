@@ -8,6 +8,22 @@ const { locale } = Astro.props;
 
 const projectsHref = localizePath("/products", locale);
 const testHiveHref = "https://testhive.elolin.com";
+const featuredProducts = [
+  {
+    href: testHiveHref,
+    eyebrow: t("home.hero.featuredEyebrow", locale),
+    name: t("home.hero.featuredName", locale),
+    tagline: t("home.hero.featuredTagline", locale),
+    description: t("home.hero.featuredDescription", locale),
+  },
+  {
+    href: "https://kinmate.elolin.com",
+    eyebrow: t("home.hero.kinmateEyebrow", locale),
+    name: t("home.hero.kinmateName", locale),
+    tagline: t("home.hero.kinmateTagline", locale),
+    description: t("home.hero.kinmateDescription", locale),
+  },
+];
 const proof =
   locale === "zh"
     ? ["7 个已上线产品", "一个账号通行", "持续公开迭代"]
@@ -76,39 +92,37 @@ const proof =
       </div>
     </div>
 
-    <a
-      href={testHiveHref}
-      target="_blank"
-      rel="noopener"
-      class="hero-featured group"
-      aria-label={`${t("home.hero.featuredEyebrow", locale)}: ${t("home.hero.featuredName", locale)}`}
-    >
-      <div class="hero-featured-glow" aria-hidden="true"></div>
-      <div class="hero-featured-content">
-        <span class="hero-featured-eyebrow">
-          <span class="hero-featured-dot" aria-hidden="true"></span>
-          {t("home.hero.featuredEyebrow", locale)}
-        </span>
-        <div class="hero-featured-row">
-          <div>
-            <p class="hero-featured-name">
-              {t("home.hero.featuredName", locale)}
-            </p>
-            <p class="hero-featured-tagline">
-              {t("home.hero.featuredTagline", locale)}
-            </p>
+    <div class="hero-launches" aria-label={locale === "zh" ? "已上线产品" : "Live products"}>
+      {featuredProducts.map((product) => (
+        <a
+          href={product.href}
+          target="_blank"
+          rel="noopener"
+          class="hero-featured group"
+          aria-label={`${product.eyebrow}: ${product.name}`}
+        >
+          <div class="hero-featured-glow" aria-hidden="true"></div>
+          <div class="hero-featured-content">
+            <span class="hero-featured-eyebrow">
+              <span class="hero-featured-dot" aria-hidden="true"></span>
+              {product.eyebrow}
+            </span>
+            <div class="hero-featured-row">
+              <div>
+                <p class="hero-featured-name">{product.name}</p>
+                <p class="hero-featured-tagline">{product.tagline}</p>
+              </div>
+              <ArrowUpRight
+                class="hero-featured-arrow"
+                size={20}
+                aria-hidden="true"
+              />
+            </div>
+            <p class="hero-featured-desc">{product.description}</p>
           </div>
-          <ArrowUpRight
-            class="hero-featured-arrow"
-            size={20}
-            aria-hidden="true"
-          />
-        </div>
-        <p class="hero-featured-desc">
-          {t("home.hero.featuredDescription", locale)}
-        </p>
-      </div>
-    </a>
+        </a>
+      ))}
+    </div>
 
     <p class="hero-index" aria-hidden="true">01 / 07</p>
   </div>
@@ -267,12 +281,17 @@ const proof =
     content: "";
   }
 
-  .hero-featured {
+  .hero-launches {
     position: absolute;
     z-index: 4;
     right: max(1.5rem, calc((100vw - 76rem) / 2));
     bottom: clamp(1.5rem, 4vw, 3.5rem);
     width: min(24rem, calc(100vw - 3rem));
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .hero-featured {
     overflow: hidden;
     border: 1px solid rgba(191, 219, 254, 0.22);
     border-radius: 1.25rem;
@@ -316,7 +335,7 @@ const proof =
   }
 
   .hero-featured:hover .hero-featured-glow {
-    opacity: 1.45;
+    opacity: 1;
   }
 
   .hero-featured-content {
@@ -379,6 +398,24 @@ const proof =
   }
 
   @media (max-width: 900px) {
+    .hero-stage,
+    .hero-content-shell {
+      min-height: auto;
+    }
+
+    .hero-content-shell {
+      padding-bottom: 1.5rem;
+    }
+
+    .hero-launches {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      width: min(100% - 3rem, 44rem);
+      margin: 0 auto 2.5rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .hero-video {
       object-position: 65% 50%;
     }
@@ -427,12 +464,13 @@ const proof =
       gap: 0.5rem 0.75rem;
     }
 
-    .hero-featured {
+    .hero-launches {
       position: relative;
       right: auto;
       bottom: auto;
-      z-index: 3;
-      margin: 0 auto 1.25rem;
+      width: min(100% - 3rem, 24rem);
+      margin-bottom: 1.25rem;
+      grid-template-columns: 1fr;
     }
 
     .hero-index {
