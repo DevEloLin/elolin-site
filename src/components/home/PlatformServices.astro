@@ -17,9 +17,9 @@ const { locale } = Astro.props;
         <p class="section-copy">{t("home.platform.subhead", locale)}</p>
       </div>
     </header>
-    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2" data-motion-section>
       {PLATFORM_SERVICES.map((s) => (
-        <GlassCard interactive class="group overflow-hidden p-0 bg-bg-1/40">
+        <GlassCard interactive class="group overflow-hidden p-0 bg-bg-1/40" data-motion-item>
           <a
             href={s.url}
             target="_blank"

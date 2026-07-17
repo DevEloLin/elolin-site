@@ -14,7 +14,7 @@ const isAi = p.tags.includes("ai");
 const desc = projectDescription(p.slug, p.description, locale);
 const coverImage = p.coverImage ?? visualPreviewFor(p.slug);
 ---
-<GlassCard interactive class="group h-full overflow-hidden p-0">
+<GlassCard interactive class="group h-full overflow-hidden p-0" data-motion-item>
   <VisualCardMedia
     seed={p.slug}
     title={p.name}
