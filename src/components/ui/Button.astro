@@ -7,10 +7,10 @@ type Props = {
   external?: boolean;
 };
 const { href, variant = "primary", class: cls = "", external = false } = Astro.props;
-const base = "inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-body font-medium transition duration-200 ease-out";
+const base = "inline-flex items-center gap-2 rounded-full px-5 py-3 text-body-sm font-semibold tracking-[-0.015em] transition duration-300 ease-out";
 const styles = variant === "primary"
-  ? "text-white bg-grad-brand shadow-glow-brand hover:brightness-110 hover:scale-[1.02]"
-  : "text-fg-0 border border-[var(--border-1)] hover:border-[var(--border-2)] hover:bg-bg-1";
+  ? "border border-blue-200/20 text-white bg-grad-brand shadow-[0_10px_35px_rgba(59,130,246,0.26)] hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_44px_rgba(59,130,246,0.36)]"
+  : "border border-white/[0.14] bg-white/[0.025] text-fg-0 hover:-translate-y-0.5 hover:border-blue-200/40 hover:bg-white/[0.08]";
 const Tag = href ? "a" : "button";
 const extra = external ? { target: "_blank", rel: "noopener" } : {};
 ---

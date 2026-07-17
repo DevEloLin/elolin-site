@@ -8,16 +8,16 @@ const { locale } = Astro.props;
 const manifestoLines = ((locale === "zh" ? zhHome : enHome) as any).manifesto.lines as string[];
 const aboutHref = localizePath("/about", locale);
 ---
-<section class="py-32 border-t border-white/5" data-reveal>
-  <div class="container mx-auto px-6 max-w-4xl">
-    <p class="text-caption text-fg-2 uppercase">{t("home.manifesto.label", locale)}</p>
-    <div class="mt-8 space-y-4">
+<section class="py-24 sm:py-36" data-reveal>
+  <div class="container mx-auto px-6 max-w-5xl rounded-[2rem] border border-white/[0.08] bg-[radial-gradient(circle_at_85%_10%,rgba(59,130,246,0.16),transparent_32%),rgba(255,255,255,0.025)] p-8 sm:p-14">
+    <p class="section-eyebrow">{t("home.manifesto.label", locale)}</p>
+    <div class="mt-10 space-y-3">
       {manifestoLines.map((line) => (
-        <p class="text-h2 font-semibold">{line}</p>
+        <p class="text-h2 font-semibold tracking-[-0.05em]">{line}</p>
       ))}
     </div>
     <a href={aboutHref}
-       class="mt-8 inline-flex items-center gap-2 text-body-lg text-fg-1 hover:text-fg-0">
+       class="mt-10 inline-flex items-center gap-2 border-b border-white/[0.16] pb-1 text-body-lg text-fg-1 transition hover:border-blue-200/70 hover:text-fg-0">
       {t("home.manifesto.cta", locale)} <ArrowRight size={18} />
     </a>
   </div>

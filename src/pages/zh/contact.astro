@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header.astro";
 import Footer from "@/components/layout/Footer.astro";
 import ContactCard from "@/components/contact/ContactCard.astro";
 import VisualCardMedia from "@/components/ui/VisualCardMedia.astro";
+import PageIntro from "@/components/ui/PageIntro.astro";
 import { Mail, Github, Twitter } from "lucide-astro";
 import { SITE } from "@/lib/site";
 import { t } from "@/lib/i18n";
@@ -12,26 +13,25 @@ const locale = "zh" as const;
 ---
 <Layout title={t("contact.title", locale)} locale={locale}>
   <Header slot="header" />
-  <main class="pt-28 pb-24 container mx-auto px-6 max-w-7xl">
-    <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+  <main class="page-shell">
+    <PageIntro eyebrow="保持联系" title={t("contact.title", locale)} description={t("contact.subtitle", locale)} index="04 / 04" meta="两天内回复" />
+    <div class="mt-14 grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
       <VisualCardMedia
         seed="contact-zh"
         title={t("contact.title", locale)}
         subtitle={t("contact.subtitle", locale)}
         kind="platform"
         image="https://elolin.com/og-default.png"
-        class="min-h-[22rem] rounded-[1.75rem]"
+        class="min-h-[30rem] rounded-[1.75rem]"
       />
       <div>
-        <p class="text-caption text-fg-2 uppercase">{t("contact.title", locale)}</p>
-        <h1 class="mt-4 text-display-2 font-semibold">{t("contact.title", locale)}</h1>
-        <p class="mt-4 text-fg-1 text-body-lg max-w-xl">{t("contact.subtitle", locale)}</p>
-        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <p class="section-eyebrow">选择一个渠道</p>
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
           <ContactCard icon={Mail} label={t("contact.channels.email.label", locale)} value={SITE.email} href={`mailto:${SITE.email}`} copy />
           <ContactCard icon={Github} label={t("contact.channels.github.label", locale)} value="@DevEloLin" href={SITE.github} />
           <ContactCard icon={Twitter} label={t("contact.channels.twitter.label", locale)} value="@DevEloLin" href={SITE.twitter} />
         </div>
-        <p class="mt-8 text-fg-2 text-body-sm">{t("contact.response", locale)}</p>
+        <p class="mt-7 border-t border-white/[0.08] pt-5 text-fg-2 text-body-sm">{t("contact.response", locale)}</p>
       </div>
     </div>
   </main>

@@ -3,6 +3,7 @@ import Layout from "@/components/layout/Layout.astro";
 import Header from "@/components/layout/Header.astro";
 import Footer from "@/components/layout/Footer.astro";
 import ProductCard from "@/components/products/ProductCard.astro";
+import PageIntro from "@/components/ui/PageIntro.astro";
 import PlatformServices from "@/components/home/PlatformServices.astro";
 import JsonLd from "@/components/seo/JsonLd.astro";
 import { FLAGSHIP_PRODUCTS } from "@/lib/site";
@@ -29,15 +30,14 @@ const locale = "zh" as const;
     ])}
   />
   <Header slot="header" />
-  <main class="pt-32 pb-24 container mx-auto px-6 max-w-4xl">
-    <h1 class="text-display-2 font-semibold">{t("products.title", locale)}</h1>
-    <p class="mt-4 text-fg-1 text-body-lg">{t("products.subtitle", locale)}</p>
-    <div class="mt-12 space-y-8">
+  <main class="page-shell">
+    <PageIntro eyebrow="产品矩阵" title={t("products.title", locale)} description={t("products.subtitle", locale)} index="02 / 04" meta={`${FLAGSHIP_PRODUCTS.length} 个已上线产品`} />
+    <div class="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-6">
       {FLAGSHIP_PRODUCTS.map((p) => (
         <ProductCard product={p} {locale} />
       ))}
-      <div class="rounded-2xl border border-dashed border-white/10 p-8 text-center text-fg-2">
-        {t("products.comingNext", locale)}…
+      <div class="relative flex min-h-[24rem] items-center justify-center overflow-hidden rounded-[1.5rem] border border-dashed border-blue-200/20 bg-[radial-gradient(circle_at_50%_20%,rgba(59,130,246,0.13),transparent_42%),rgba(255,255,255,0.025)] p-8 text-center text-fg-2">
+        <p class="section-eyebrow justify-center">{t("products.comingNext", locale)}…</p>
       </div>
     </div>
   </main>
