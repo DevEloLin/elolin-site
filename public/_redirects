@@ -1,0 +1,3 @@
+# /sitemap.xml 别名到 Astro 生成的 sitemap-index.xml
+# (robots.txt 已指向 sitemap-index.xml;此重定向兜住直接访问 /sitemap.xml 的工具/GSC 提交)
+/sitemap.xml  /sitemap-index.xml  301
