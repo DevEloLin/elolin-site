@@ -9,6 +9,7 @@ import AiBadge from "@/components/ui/AiBadge.astro";
 import Button from "@/components/ui/Button.astro";
 import type { Project } from "@/lib/github";
 import { projectDescription, t } from "@/lib/i18n";
+import JsonLd from "@/components/seo/JsonLd.astro";
 import { Github, ExternalLink, ArrowLeft } from "lucide-astro";
 
 export async function getStaticPaths() {
@@ -19,9 +20,27 @@ const { project } = Astro.props as { project: Project };
 const locale = "en" as const;
 const isAi = project.tags.includes("ai");
 const desc = projectDescription(project.slug, project.description, locale);
+
+// Per-project structured data — SoftwareSourceCode is the accurate schema for an
+// open-source repo. Gives AI crawlers / rich results a machine-readable entity:
+// what it is, where the code lives, language, and its place in the EloLin graph.
+const structuredData: Record<string, unknown> = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  name: project.name,
+  description: desc,
+  url: `https://elolin.com/projects/${project.slug}`,
+  codeRepository: project.url,
+  keywords: [project.category, ...project.tags].filter(Boolean).join(", "),
+  author: { "@type": "Person", name: "Wei Li", url: "https://github.com/DevEloLin" },
+  isPartOf: { "@type": "Organization", name: "EloLin", "@id": "https://elolin.com/#org", url: "https://elolin.com" },
+};
+if (project.language) structuredData.programmingLanguage = project.language;
+if (project.homepage) structuredData.sameAs = [project.homepage];
 ---
 <Layout title={project.name} locale={locale} {...(desc ? { description: desc } : {})}>
   <Header slot="header" />
+  <JsonLd data={structuredData} />
   <main class="page-shell">
     <a href="/projects" class="inline-flex items-center gap-2 border-b border-white/[0.12] pb-1 text-body-sm text-fg-1 transition hover:border-blue-200/60 hover:text-fg-0">
       <ArrowLeft size={14} /> {t("projects.title", locale)}
