@@ -6,6 +6,9 @@
 
 import type { APIRoute } from "astro";
 
+import projectsData from "@/data/projects.json";
+import type { Project } from "@/lib/github";
+import { projectDescription } from "@/lib/i18n";
 import { ELOLIN_CATALOG } from "@/lib/seo";
 
 const BASE = "https://elolin.com";
@@ -32,6 +35,20 @@ export const GET: APIRoute = () => {
   lines.push("## Products");
   for (const p of ELOLIN_CATALOG) {
     lines.push(`- [${p.name}](${p.url}): ${p.tagline.en} · category=${p.category}`);
+  }
+  lines.push("");
+
+  lines.push("## Open-source projects");
+  lines.push(
+    "> Solo-built repositories — the EvoClaw local-first AI-agent ecosystem (runtime, knowledge-base engines/MCP servers, messaging channel plugins) plus standalone developer tools, writing skills, and product marketing sites. Each entry links to its detail page and GitHub repo.",
+  );
+  const projects = projectsData as unknown as Project[];
+  for (const p of projects) {
+    const desc = projectDescription(p.slug, p.description ?? "", "en");
+    const tags = p.tags && p.tags.length > 0 ? ` · tags=${p.tags.join(",")}` : "";
+    lines.push(
+      `- [${p.name}](${BASE}/projects/${p.slug}): ${desc} · language=${p.language ?? "n/a"} · category=${p.category}${tags} · repo=${p.url}`,
+    );
   }
   lines.push("");
 
