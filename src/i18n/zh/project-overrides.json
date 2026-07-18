@@ -1,4 +1,19 @@
 {
-  "evoclaw": "本地自进化的 AI agent 运行时,从你的行为里学习。",
-  "kinmate-site": "私密的家庭健康保险库:医疗报告、AI 专家、提醒。"
+  "apiforge": "轻量单文件 Go 网关,复用你本机已有的 AI CLI 与订阅登录(Codex/Claude/Copilot/Gemini/Qwen/Cursor/Grok),统一暴露为 OpenAI/Anthropic 兼容 API。无前端、无数据库,镜像约 7 MB,可跑在 1 GB 树莓派上。仅供个人研究使用。",
+  "chinese-indie-vibe-coding": "面向中文、面向中国独立开发者的 Vibe Coding 项目列表,收录用 Cursor / Claude Code / Codex / Copilot 等 AI 编程做出来的独立产品,人人可投稿。只放能打开、能用的作品,不放教程、资源合集或纯代码库,让更多独立作品被看见。",
+  "evoclaw": "本地优先、自我进化的 AI Agent 运行时(Rust),跑在你自己的机器上。它拆解任务、调用工具、观察结果并不断重规划直到完成,然后复盘并把成果沉淀为可复用的 Skill,逐步长出自己的技能树。缓存、记忆与技能全部留在本地。",
+  "evoclaw-kb-core": "EvoClaw 生态的源无关 BM25 知识库引擎,基于 tantivy + jieba,中英文检索都稳。它是库 crate,不直接运行,而是 EvoClaw 知识库 MCP 服务器的检索内核。",
+  "evoclaw-mcp-kb": "EvoClaw Agent 运行时的多源统一知识库 MCP 服务器。把 Obsidian、飞书等多来源的公司知识索引进同一个 BM25 索引,给 Agent 提供跨来源的搜索与读取工具。",
+  "evoclaw-mcp-obsidian": "面向 EvoClaw Agent 运行时、基于 Obsidian markdown 库的 BM25 知识库 MCP 服务器。暴露 kb_search 与 kb_read 两个工具,让 Agent 不出循环就能查找并读取你的笔记。",
+  "evoclaw-plugin-wecom": "EvoClaw Agent 运行时的企业微信(WeCom)渠道插件,在企业内部群里自动回复。它标注了一个重要平台限制:企业微信官方 API 无法加入外部客户群,故仅面向内部群。",
+  "evoclaw-plugin-wechat": "EvoClaw Agent 运行时的微信公众号被动回复桥。当粉丝私信公众号时,通过 axum HTTPS 服务接收微信 webhook,再经 Agent 处理后生成回复。",
+  "evoclawsite": "EvoClaw 的官方静态落地页——本地优先、自我进化的 Rust AI Agent 运行时。托管在 GitHub Pages,介绍项目并链接到源码与文档。",
+  "homebrew-tap": "EvoClaw 的官方 Homebrew tap(自我进化、本地优先的个人 AI Agent)。一行安装:brew install develolin/tap/evoclaw。",
+  "kinmate-site": "KinMate 的官方营销站——本地优先的家庭私人健康档案库。把化验报告、处方、用药、健康指标和宠物记录集中管理,用双语 AI 理解它们,只在你愿意时才分享给家人。技术栈 Next.js + Tailwind CSS + next-intl + framer-motion。",
+  "mv3migrate-site": "mv3migrate 的公开落地页与 issue 入口——一个帮助把 Chrome 扩展迁移到 Manifest V3 的 CLI。本仓库只是对外站点,不含私有 CLI 源码。",
+  "dashboards-rich-filters-site": "Dashboards Rich Filters 的营销与文档站点——一款上架 Atlassian Marketplace 的 Jira Cloud 仪表盘 gadget。涵盖功能、定价与截图。",
+  "gitflowgraph": "为 Zed 编辑器打造的 Git 可视化工作区扩展。把提交图、智能 diff 和发布管理嵌入单一面板,让你不离开编辑器就能读懂仓库历史。",
+  "skill-xiaoshuo": "面向中文小说创作的完整写作 Skill。它不追求一次性写出像样段落,而是把小说创作拆成稳定、可连载、可审校的工作流——适合长篇与网文连载——通过设定维护、章节推进、风格统一和连续性检查,解决设定漂移、人物失真、时间线混乱等常见问题。",
+  "work-assistant-skill": "支持 Claude Code 和 OpenClaw 的智能工作助手 Skill。提供自动化晨报与邮件监控、任务管理与工作规划,以及基于邮件的工作总结。",
+  "atlassian-rovo-agent-mcp": "面向 Atlassian Rovo agent 工作流的开源本地 MCP facade。OpenClaw 只连接这个服务器,它暴露本地 token 校验工具,并把 Atlassian 官方 Rovo MCP 工具通过单一本地 MCP 服务器代理出来。"
 }
