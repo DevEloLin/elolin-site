@@ -7,10 +7,123 @@
     "language": "HTML",
     "stars": 0,
     "homepage": null,
+    "coverImage": "https://elolin.com/og-default.png",
     "url": "https://github.com/DevEloLin/mv3migrate-site",
-    "pushedAt": "2026-06-22T20:26:47Z",
+    "pushedAt": "2026-07-18T16:59:56Z",
     "category": "site",
     "tags": [],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1303180171,
+    "slug": "apiforge",
+    "name": "apiforge",
+    "description": "Lean single-binary Go gateway that reuses local AI CLI/subscription logins (Codex/Claude/Copilot/Gemini/Qwen/Cursor/Grok) behind one OpenAI/Anthropic-compatible API. Personal research only.",
+    "language": "Go",
+    "stars": 0,
+    "homepage": null,
+    "coverImage": null,
+    "url": "https://github.com/DevEloLin/apiforge",
+    "pushedAt": "2026-07-17T15:22:38Z",
+    "category": "tool",
+    "tags": [
+      "ai"
+    ],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1300862217,
+    "slug": "chinese-indie-vibe-coding",
+    "name": "chinese-indie-vibe-coding",
+    "description": "中国独立开发者 Vibe Coding 项目列表 · 分享大家都在做什么｜面向中文、面向中国独立开发者，收录用 AI 编程(Cursor / Claude Code / Codex / Copilot)做出来的独立产品，人人可投稿。A community-curated list of products vibe-coded by Chinese indie developers.",
+    "language": "Python",
+    "stars": 0,
+    "homepage": null,
+    "coverImage": null,
+    "url": "https://github.com/DevEloLin/chinese-indie-vibe-coding",
+    "pushedAt": "2026-07-15T10:19:50Z",
+    "category": "tool",
+    "tags": [],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1300791801,
+    "slug": "evoclaw-plugin-wecom",
+    "name": "evoclaw-plugin-wecom",
+    "description": "WeCom (企业微信) external-group auto-reply channel plugin for EvoClaw",
+    "language": "Rust",
+    "stars": 0,
+    "homepage": null,
+    "coverImage": null,
+    "url": "https://github.com/DevEloLin/evoclaw-plugin-wecom",
+    "pushedAt": "2026-07-14T19:26:03Z",
+    "category": "product",
+    "tags": [
+      "ai"
+    ],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1300667164,
+    "slug": "evoclaw-mcp-kb",
+    "name": "evoclaw-mcp-kb",
+    "description": "Unified multi-source knowledge-base MCP server (Obsidian + Feishu) for EvoClaw",
+    "language": "Rust",
+    "stars": 0,
+    "homepage": null,
+    "coverImage": null,
+    "url": "https://github.com/DevEloLin/evoclaw-mcp-kb",
+    "pushedAt": "2026-07-14T19:26:02Z",
+    "category": "product",
+    "tags": [
+      "ai"
+    ],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1300666827,
+    "slug": "evoclaw-kb-core",
+    "name": "evoclaw-kb-core",
+    "description": "Source-agnostic BM25 knowledge-base engine (tantivy + jieba) for EvoClaw",
+    "language": "Rust",
+    "stars": 0,
+    "homepage": null,
+    "coverImage": null,
+    "url": "https://github.com/DevEloLin/evoclaw-kb-core",
+    "pushedAt": "2026-07-14T19:26:01Z",
+    "category": "product",
+    "tags": [
+      "ai"
+    ],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1300401406,
+    "slug": "evoclaw-mcp-obsidian",
+    "name": "evoclaw-mcp-obsidian",
+    "description": "BM25 knowledge-base MCP server over an Obsidian vault, for the EvoClaw agent runtime",
+    "language": "Rust",
+    "stars": 0,
+    "homepage": null,
+    "coverImage": null,
+    "url": "https://github.com/DevEloLin/evoclaw-mcp-obsidian",
+    "pushedAt": "2026-07-14T11:24:25Z",
+    "category": "product",
+    "tags": [
+      "ai"
+    ],
     "owner": {
       "login": "DevEloLin"
     }
@@ -23,8 +136,9 @@
     "language": "TypeScript",
     "stars": 0,
     "homepage": null,
+    "coverImage": "https://develolin.github.io/kinmate-site/icon-512.png",
     "url": "https://github.com/DevEloLin/kinmate-site",
-    "pushedAt": "2026-06-19T14:28:34Z",
+    "pushedAt": "2026-07-06T07:13:44Z",
     "category": "product",
     "tags": [
       "ai"
@@ -41,6 +155,7 @@
     "language": "HTML",
     "stars": 0,
     "homepage": null,
+    "coverImage": null,
     "url": "https://github.com/DevEloLin/dashboards-rich-filters-site",
     "pushedAt": "2026-05-20T17:37:15Z",
     "category": "site",
@@ -57,6 +172,7 @@
     "language": "Rust",
     "stars": 0,
     "homepage": null,
+    "coverImage": null,
     "url": "https://github.com/DevEloLin/evoclaw-plugin-wechat",
     "pushedAt": "2026-05-16T12:43:42Z",
     "category": "product",
@@ -75,6 +191,7 @@
     "language": "Rust",
     "stars": 1,
     "homepage": "https://develolin.github.io/EvoClawSite/",
+    "coverImage": "https://develolin.github.io/EvoClawSite/image/EvoClaw2.png",
     "url": "https://github.com/DevEloLin/evoclaw",
     "pushedAt": "2026-05-16T12:03:13Z",
     "category": "product",
@@ -93,6 +210,7 @@
     "language": "Ruby",
     "stars": 0,
     "homepage": null,
+    "coverImage": null,
     "url": "https://github.com/DevEloLin/homebrew-tap",
     "pushedAt": "2026-05-16T09:36:42Z",
     "category": "tool",
@@ -109,6 +227,7 @@
     "language": "HTML",
     "stars": 0,
     "homepage": "https://develolin.github.io/EvoClawSite/",
+    "coverImage": null,
     "url": "https://github.com/DevEloLin/EvoClawSite",
     "pushedAt": "2026-05-16T09:16:29Z",
     "category": "site",
@@ -127,6 +246,7 @@
     "language": "Rust",
     "stars": 0,
     "homepage": null,
+    "coverImage": null,
     "url": "https://github.com/DevEloLin/GitFlowGraph",
     "pushedAt": "2026-05-12T14:01:45Z",
     "category": "tool",
@@ -143,6 +263,7 @@
     "language": null,
     "stars": 1,
     "homepage": null,
+    "coverImage": null,
     "url": "https://github.com/DevEloLin/skill-xiaoshuo",
     "pushedAt": "2026-05-01T20:17:43Z",
     "category": "skill",
@@ -159,6 +280,7 @@
     "language": "Shell",
     "stars": 0,
     "homepage": null,
+    "coverImage": null,
     "url": "https://github.com/DevEloLin/Work-assistant-skill",
     "pushedAt": "2026-05-01T08:17:39Z",
     "category": "tool",
@@ -175,6 +297,7 @@
     "language": "Python",
     "stars": 0,
     "homepage": null,
+    "coverImage": null,
     "url": "https://github.com/DevEloLin/atlassian-rovo-agent-mcp",
     "pushedAt": "2026-04-28T17:41:07Z",
     "category": "skill",
