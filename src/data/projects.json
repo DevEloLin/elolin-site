@@ -1,5 +1,41 @@
 [
   {
+    "id": 1260059575,
+    "slug": "kinmate-site",
+    "name": "kinmate-site",
+    "description": "KinMate is a private family health vault for reports, AI explanations, care check-ins, medication reminders, pet records, and BYOC backups.",
+    "language": "TypeScript",
+    "stars": 0,
+    "homepage": null,
+    "coverImage": "https://develolin.github.io/kinmate-site/icon-512.png",
+    "url": "https://github.com/DevEloLin/kinmate-site",
+    "pushedAt": "2026-07-18T18:58:25Z",
+    "category": "product",
+    "tags": [
+      "ai"
+    ],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
+    "id": 1305112242,
+    "slug": "elolin-site",
+    "name": "elolin-site",
+    "description": "elolin.com — EloLin marketing site (Astro + Cloudflare Pages). One person, many products.",
+    "language": "Astro",
+    "stars": 0,
+    "homepage": null,
+    "coverImage": null,
+    "url": "https://github.com/DevEloLin/elolin-site",
+    "pushedAt": "2026-07-18T18:03:14Z",
+    "category": "site",
+    "tags": [],
+    "owner": {
+      "login": "DevEloLin"
+    }
+  },
+  {
     "id": 1277130698,
     "slug": "mv3migrate-site",
     "name": "mv3migrate-site",
@@ -120,25 +156,6 @@
     "coverImage": null,
     "url": "https://github.com/DevEloLin/evoclaw-mcp-obsidian",
     "pushedAt": "2026-07-14T11:24:25Z",
-    "category": "product",
-    "tags": [
-      "ai"
-    ],
-    "owner": {
-      "login": "DevEloLin"
-    }
-  },
-  {
-    "id": 1260059575,
-    "slug": "kinmate-site",
-    "name": "kinmate-site",
-    "description": "KinMate is a private family health vault for reports, AI explanations, care check-ins, medication reminders, pet records, and BYOC backups.",
-    "language": "TypeScript",
-    "stars": 0,
-    "homepage": null,
-    "coverImage": "https://develolin.github.io/kinmate-site/icon-512.png",
-    "url": "https://github.com/DevEloLin/kinmate-site",
-    "pushedAt": "2026-07-06T07:13:44Z",
     "category": "product",
     "tags": [
       "ai"
