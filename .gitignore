@@ -9,3 +9,8 @@ coverage
 .DS_Store
 lighthouse.json
 brand-work/image*.png
+
+# 内部私密配置/文档 — 不上传 GitHub
+CLAUDE.md
+AGENTS.md
+docs/superpowers/
