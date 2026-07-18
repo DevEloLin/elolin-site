@@ -1,0 +1,37 @@
+---
+import Layout from "@/components/layout/Layout.astro";
+import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
+import Button from "@/components/ui/Button.astro";
+import { ArrowRight } from "lucide-astro";
+// Cloudflare Pages serves dist/404.html with a real HTTP 404 for any unmatched
+// path. Without this page every unknown URL fell through to index.html with
+// HTTP 200 (soft 404) — Google piled hundreds of junk URLs into
+// "Discovered – currently not indexed". Do not remove.
+const locale = "en" as const;
+---
+<Layout
+  title="Page not found"
+  description="The page you are looking for does not exist or has moved."
+  locale={locale}
+>
+  <Header slot="header" />
+  <section class="relative mx-auto flex min-h-[60vh] w-full max-w-3xl flex-col items-center justify-center px-6 py-24 text-center">
+    <p class="text-body-sm font-semibold uppercase tracking-[0.2em] text-fg-2">404</p>
+    <h1 class="mt-4 text-4xl font-bold tracking-tight text-fg-0 sm:text-5xl">
+      Page not found
+    </h1>
+    <p class="mt-4 max-w-xl text-body text-fg-1">
+      The page you are looking for does not exist or has moved.
+      找不到该页面——它可能不存在或已被移动。
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <Button href="/">
+        Back to home
+        <ArrowRight class="h-4 w-4" />
+      </Button>
+      <Button href="/projects/" variant="ghost">Browse projects</Button>
+    </div>
+  </section>
+  <Footer slot="footer" />
+</Layout>
