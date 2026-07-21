@@ -48,6 +48,16 @@ export const FLAGSHIP_PRODUCTS: readonly ProductEntry[] = [
     ],
   },
   {
+    slug: "photoai",
+    name: "PhotoAI",
+    url: "https://photoai.elolin.com",
+    tagline: {
+      en: "Selfie in — ID photo, avatar & pet art out. No prompts.",
+      zh: "自拍进,证件照 · 头像 · 宠物照出 · 免提示词",
+    },
+    tags: ["AI", "Next.js"],
+  },
+  {
     slug: "kinmate",
     name: "KinMate",
     url: "https://kinmate.elolin.com",
@@ -71,15 +81,15 @@ export const FLAGSHIP_PRODUCTS: readonly ProductEntry[] = [
     tags: ["Indie Dev", "Beta"],
   },
   {
-    slug: "games",
-    name: "EloGames",
-    url: "https://games.elolin.com",
+    slug: "zivoe",
+    name: "Zivoe",
+    url: "https://zivoe.elolin.com",
     tagline: {
-      en: "Indie games · play in your browser.",
-      zh: "浏览器秒玩独立游戏",
+      en: "Desktop AI for industrial design — spark ideas fast.",
+      zh: "工业设计桌面 AI · 启发灵感,快速出概念",
     },
-    coverImage: "https://games.elolin.com/og-default.png",
-    tags: ["Gaming"],
+    coverImage: "https://zivoe.elolin.com/icons/app/png/app-icon-512.png",
+    tags: ["Flutter", "Rust", "Desktop"],
   },
   {
     slug: "mv3migrate",
