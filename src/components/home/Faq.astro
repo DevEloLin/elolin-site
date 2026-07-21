@@ -5,9 +5,9 @@ const { locale } = Astro.props;
 
 const QA = locale === "zh" ? [
   { q: "EloLin 是什么?",
-    a: "EloLin 是一家一人独立工作室,旗下包含 7 个产品(EvoClaw · KinMate · TestHive · EloGames · Accounts · Domains · mv3migrate),覆盖 AI · 健康 · 开发者工具 · 游戏 · 身份 · 托管 · CLI 工具七个领域。所有产品由 Wei Li 独自打造和运营。" },
+    a: "EloLin 是一家一人独立工作室,旗下包含 8 个产品(EvoClaw · PhotoAI · KinMate · TestHive · EloGames · Zivoe · Domains · mv3migrate),覆盖 AI agent · AI 图像 · 家庭健康 · 众测 · 游戏 · 工业设计 · 域名托管 · 开发者工具,并由 Accounts 单点登录打通。所有产品由 Wei Li 独自打造和运营。" },
   { q: "EloLin 的产品收费吗?",
-    a: "全部 7 个产品当前都免费。Accounts 单点登录免费、Domains 子域名托管免费、EloGames 免费玩、TestHive 免费门槛和 Karma 经济、EvoClaw 开源、KinMate 基础功能免费、mv3migrate 免费扫描和基础迁移。" },
+    a: "大部分产品免费或有免费额度:Accounts 单点登录、Domains 子域名托管、EloGames 免费玩、TestHive 免费门槛和 Karma 经济、EvoClaw 开源、KinMate 基础功能、mv3migrate 免费扫描都免费。PhotoAI 按次计费(有 $1 起步包,失败自动退),Zivoe 是自带 key 的付费桌面工具。" },
   { q: "EloLin 的产品之间是怎么打通的?",
     a: "所有产品共用 EloLin Accounts(accounts.elolin.com)的单点登录 · 注册一次即可访问全部 SaaS 产品 · session 自动跨 .elolin.com 子域名同步。mv3migrate 是本地 CLI 工具 · 不需要登录。" },
   { q: "EloLin 开源吗?",
@@ -16,9 +16,9 @@ const QA = locale === "zh" ? [
     a: "是。EloLin 是一家一人公司(One person. Many products.)· 创始人是 Wei Li(@DevEloLin)· 所有产品的设计 · 开发 · 运营都由一个人完成。" },
 ] : [
   { q: "What is EloLin?",
-    a: "EloLin is a one-person indie studio shipping seven products: EvoClaw (AI), KinMate (health), TestHive (developer tools), EloGames (games), Accounts (identity), Domains (hosting), and mv3migrate (Chrome extension migration CLI). Everything is built and operated solo by Wei Li." },
+    a: "EloLin is a one-person indie studio shipping eight products: EvoClaw (AI agent), PhotoAI (AI images), KinMate (family health), TestHive (crowd-testing), EloGames (games), Zivoe (industrial design), EloLin Domains (hosting), and mv3migrate (Chrome extension migration CLI) — all tied together by Accounts SSO. Everything is built and operated solo by Wei Li." },
   { q: "Are EloLin products free?",
-    a: "Yes — all 7 products are currently free to use. Accounts SSO is free, Domains gives a free sub-domain, EloGames are free to play, TestHive has a free Karma economy, EvoClaw is open-source, KinMate has a free tier, and mv3migrate runs free scans plus the basic migration path." },
+    a: "Most are free or have a free tier — Accounts SSO, a free Domains sub-domain, EloGames, open-source EvoClaw, KinMate's free tier, and mv3migrate's free scans. PhotoAI is pay-per-use (with a $1 starter pack, auto-refunded on failure), and Zivoe is a paid bring-your-own-key desktop tool." },
   { q: "How are the EloLin products connected?",
     a: "All SaaS products share EloLin Accounts SSO at accounts.elolin.com — sign up once and you're signed into every product. Session cookies are scoped to .elolin.com so the experience is seamless across sub-domains. mv3migrate is a local-first CLI and doesn't require login." },
   { q: "Is EloLin open-source?",

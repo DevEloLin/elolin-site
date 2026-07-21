@@ -15,7 +15,7 @@ import { ELOLIN_CATALOG, breadcrumb, howTo, productItemList, softwareApplication
 const locale = "zh" as const;
 
 const SHIP_SOLO_STEPS_ZH = [
-  { name: "一人 · 多产品", text: "EloLin 由 Wei Li 一人运营。同时在线 7 个产品(EvoClaw / KinMate / TestHive / EloGames / Accounts / Domains / mv3migrate)· 没团队 · 没外部投资 · 没企业流程。" },
+  { name: "一人 · 多产品", text: "EloLin 由 Wei Li 一人运营。同时在线 8 个产品(EvoClaw / PhotoAI / KinMate / TestHive / EloGames / Zivoe / Domains / mv3migrate)· 没团队 · 没外部投资 · 没企业流程。" },
   { name: "共享身份", text: "所有 SaaS 产品复用 EloLin Accounts 单点登录。一次登录通行全家族 · 省去每个产品重复造 auth 代码 · 用户跨产品体验顺滑。" },
   { name: "共享平台服务", text: "子域名托管(EloLin Domains)和游戏 CDN 是共享基础设施。新产品接入现有平台 · 不必重造 identity / DNS / billing。" },
   { name: "刻意用无聊技术栈", text: "所有产品同栈(Next.js · Astro · Supabase · Cloudflare)。一个人能从头到尾 debug 任何产品 · 不必切换心智模型。" },
@@ -25,7 +25,7 @@ const SHIP_SOLO_STEPS_ZH = [
 <Layout title={t("home.hero.title", locale)} locale={locale}>
   <JsonLd slot="head" data={breadcrumb([{ name: "首页", url: "https://elolin.com/zh/" }])} />
   <JsonLd slot="head" data={productItemList(ELOLIN_CATALOG, locale, "https://elolin.com/zh/")} />
-  <JsonLd slot="head" data={howTo("EloLin 一人维护 7 个产品的运营方法", "让一个开发者同时维护和发布七个产品的五条原则。", SHIP_SOLO_STEPS_ZH)} />
+  <JsonLd slot="head" data={howTo("EloLin 一人维护 8 个产品的运营方法", "让一个开发者同时维护和发布八个产品的五条原则。", SHIP_SOLO_STEPS_ZH)} />
   {ELOLIN_CATALOG.map((p) => (
     <JsonLd slot="head" data={softwareApplication(p, locale)} />
   ))}

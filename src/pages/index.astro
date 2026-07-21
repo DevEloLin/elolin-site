@@ -15,7 +15,7 @@ import { ELOLIN_CATALOG, breadcrumb, howTo, productItemList, softwareApplication
 const locale = "en" as const;
 
 const SHIP_SOLO_STEPS = [
-  { name: "One person · many products", text: "EloLin is operated by Wei Li alone. Seven live products (EvoClaw · KinMate · TestHive · EloGames · Accounts · Domains · mv3migrate) without a team, without external investors, without enterprise process." },
+  { name: "One person · many products", text: "EloLin is operated by Wei Li alone. Eight live products (EvoClaw · PhotoAI · KinMate · TestHive · EloGames · Zivoe · Domains · mv3migrate) without a team, without external investors, without enterprise process." },
   { name: "Shared identity", text: "Every SaaS product reuses EloLin Accounts SSO. One sign-in unlocks the entire family. Saves duplicate auth code across products and gives users seamless cross-product flow." },
   { name: "Shared platform services", text: "Sub-domain hosting (EloLin Domains) and the games CDN are shared infrastructure. New products plug into the existing platform instead of rebuilding identity / DNS / billing each time." },
   { name: "Boring stack on purpose", text: "Same stack across products (Next.js · Astro · Supabase · Cloudflare). Lets one person debug any product end-to-end without switching mental models." },
@@ -25,7 +25,7 @@ const SHIP_SOLO_STEPS = [
 <Layout title={t("home.hero.title", locale)} locale={locale}>
   <JsonLd slot="head" data={breadcrumb([{ name: "Home", url: "https://elolin.com/" }])} />
   <JsonLd slot="head" data={productItemList(ELOLIN_CATALOG, locale, "https://elolin.com/")} />
-  <JsonLd slot="head" data={howTo("How EloLin ships seven products solo", "Five operating principles that let a single developer maintain and ship a seven-product family.", SHIP_SOLO_STEPS)} />
+  <JsonLd slot="head" data={howTo("How EloLin ships eight products solo", "Five operating principles that let a single developer maintain and ship an eight-product family.", SHIP_SOLO_STEPS)} />
   {ELOLIN_CATALOG.map((p) => (
     <JsonLd slot="head" data={softwareApplication(p, locale)} />
   ))}
