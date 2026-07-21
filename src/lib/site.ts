@@ -81,6 +81,17 @@ export const FLAGSHIP_PRODUCTS: readonly ProductEntry[] = [
     tags: ["Indie Dev", "Beta"],
   },
   {
+    slug: "games",
+    name: "EloGames",
+    url: "https://games.elolin.com",
+    tagline: {
+      en: "Indie games · play in your browser.",
+      zh: "浏览器秒玩独立游戏",
+    },
+    coverImage: "https://games.elolin.com/og-default.png",
+    tags: ["Gaming"],
+  },
+  {
     slug: "zivoe",
     name: "Zivoe",
     url: "https://zivoe.elolin.com",
